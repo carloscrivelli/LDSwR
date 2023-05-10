@@ -1,0 +1,27 @@
+bookdown::gitbook:
+  highlight: tango
+  split_by: section
+  css:
+      - style.css
+  config:
+    toc:
+      toc: true
+      toc_float: true
+      toc_depth: 2
+      before: |
+        <li class="toc-logo"><a href="./"><img src="images/psyc3012_hex.png"></a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+    download:
+    - pdf
+    - epub
+  includes:
+  md_extensions: -smart
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default

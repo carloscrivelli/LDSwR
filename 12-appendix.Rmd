@@ -1,0 +1,68 @@
+# (APPENDIX) Appendices {-}
+ 
+# Software {#appenA}
+
+## Installation of R and RStudio {#appenA1}
+
+kkfdslf kdlfkdslkf
+
+\newpage
+
+## Installation of R packages {#appenA2}
+
+Although there are different ways to install packages, we will describe two of them below: using RStudio's GUI and running a line of code.
+
+  - **RStudio's GUI**: First, we must click on the button **Install** in the *package* tab. Then, we need to enter the name of the package in the CRAN repository to install it locally on the library directory. It is important to enable the option **install dependencies** because many packages depend on the installation of others to be correctly loaded and work properly.
+
+  - **Running a line of code**: This is the recommended option. It can be done directly on the console. The function `install.packages()` uses the first argument of the function to install the designated package. The name of the package must be written in quotes and the argument *dependencies* should be set to *TRUE* (or *T*). We can combine several packages with the function `c()` and install them at the same time.
+  
+```{r, install.packages(), results = 'hide', eval = FALSE}
+
+install.packages('binom', dependencies = TRUE)
+
+install.packages(c('tidyverse', 'car', 'lavaan', 'rio', 'magrittr', 'psych',
+                   'likert'), dependencies = TRUE)
+
+```
+
+
+Some packages include a lot of functions and/or require the installation of several dependencies. If this is the case, expect a long installation process. Always check that the prompt (`>`) symbol is displayed on the console as a confirmation that the installation process has ended.
+
+The information provided on the console during the installation process informs you of potential problems that were encountered when installing the target packages and their dependencies. For example, you may end up experiencing a very common problem when reading the following warning message on the console:
+
+> `Warning in install.packages : installation of package ‘ZZZ’ had non-zero exit status`
+
+The above warning message informs about the need to install or to update (i.e., reinstall) the **ZZZ** package because R couldn't install it. Restart your R session and install the latest version of the package. It is convenient to update from time to time the packages previously installed. R is a dynamic, collaborative, and open-source computing environment. Thus, R is constantly evolving while being updated by the developers of the packages. The function `update.packages()` will update all the packages already installed on our computer.
+
+
+```{r, update.packages(), results = 'hide', eval = FALSE}
+
+update.packages()
+
+```
+
+
+
+
+\pagebreak
+
+## Packages used in this book {#appenA3}
+
+
+fewkfklew kewlfklew fewkfklew kewlfklew 
+
+
+\pagebreak
+
+
+# Stylistic Conventions {#appenB}
+
+kjgkjdfg kgldskglkg
+sdklgdslg
+kldsglj
+
+\newpage
+
+# Universal Design for Learning {#appenC}
+
+fsdfdsfds fdsfsdf fdsfdsfs

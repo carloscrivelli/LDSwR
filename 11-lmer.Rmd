@@ -1,0 +1,32 @@
+# Linear Mixed Models
+
+
+```{r setup11, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60),
+                      warning=FALSE, message=FALSE, tidy=F)
+```
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+><left>**LEARNING OUTCOMES**</left>
+><div style="margin-bottom:30px;">
+></div>
+>- Identify the capabilities of R and RStudio's environment and appraise their functionality.
+>- Distinguish between R functions, objects, and diverse data wrangling approaches.
+>- Apply basic programming skills to import and organize the data using classic data wrangling approaches and the **tidyverse** grammar.
+>- Evaluate the R code and appraise the outputs to demonstrate a satisfactory level of basic programming skills in R.
+
+
+
+<div style="margin-bottom:60px;">
+</div>
+
+
+The purpose of a statistical model is to help understand what variables might best predict a phenomenon of interest, which ones have more or less influence, define a predictive equation with coefficients for each of the variables, and then apply that equation to predict values using the same input variables for other areas. This process requires samples with observations of the explanatory (or independent) and response (or dependent) variables in question.
+
+t-tests, one way anovas
+
+
