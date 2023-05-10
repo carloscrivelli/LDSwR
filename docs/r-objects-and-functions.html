@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.4 R objects and functions | Data Science with R (PSYC3012)</title>
+  <meta name="description" content="2.4 R objects and functions | Data Science with R (PSYC3012)" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.4 R objects and functions | Data Science with R (PSYC3012)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.4 R objects and functions | Data Science with R (PSYC3012)" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="starting-a-session-in-rstudio.html"/>
+<link rel="next" href="packages.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/psyc3012_hex.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="what-is-open-science.html"><a href="what-is-open-science.html"><i class="fa fa-check"></i><b>1</b> What is Open Science?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="the-credibility-of-science.html"><a href="the-credibility-of-science.html"><i class="fa fa-check"></i><b>1.1</b> The credibility of Science</a></li>
+<li class="chapter" data-level="1.2" data-path="questionable-scientific-practices.html"><a href="questionable-scientific-practices.html"><i class="fa fa-check"></i><b>1.2</b> Questionable scientific practices</a></li>
+<li class="chapter" data-level="1.3" data-path="the-credibility-crisis.html"><a href="the-credibility-crisis.html"><i class="fa fa-check"></i><b>1.3</b> The credibility crisis</a></li>
+<li class="chapter" data-level="1.4" data-path="threats-to-the-quality-of-the-scientific-process.html"><a href="threats-to-the-quality-of-the-scientific-process.html"><i class="fa fa-check"></i><b>1.4</b> Threats to the quality of the scientific process</a></li>
+<li class="chapter" data-level="1.5" data-path="open-data.html"><a href="open-data.html"><i class="fa fa-check"></i><b>1.5</b> Open Data</a></li>
+<li class="chapter" data-level="1.6" data-path="fair-data.html"><a href="fair-data.html"><i class="fa fa-check"></i><b>1.6</b> FAIR Data</a></li>
+<li class="chapter" data-level="1.7" data-path="contributorship-credit.html"><a href="contributorship-credit.html"><i class="fa fa-check"></i><b>1.7</b> Contributorship (CRediT)</a></li>
+<li class="chapter" data-level="1.8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-rstudio.html"><a href="what-is-rstudio.html"><i class="fa fa-check"></i><b>2.1</b> What is RStudio?</a></li>
+<li class="chapter" data-level="2.2" data-path="lets-get-started.html"><a href="lets-get-started.html"><i class="fa fa-check"></i><b>2.2</b> Let's get started!</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="lets-get-started.html"><a href="lets-get-started.html#running-a-line-of-code"><i class="fa fa-check"></i><b>2.2.1</b> Running a line of code</a></li>
+<li class="chapter" data-level="2.2.2" data-path="lets-get-started.html"><a href="lets-get-started.html#adding-comments-on-r-scripts"><i class="fa fa-check"></i><b>2.2.2</b> Adding comments on R scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html"><i class="fa fa-check"></i><b>2.3</b> Starting a session in RStudio</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-global-options"><i class="fa fa-check"></i><b>2.3.1</b> Setting the global options</a></li>
+<li class="chapter" data-level="2.3.2" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#first-lines-of-code"><i class="fa fa-check"></i><b>2.3.2</b> First lines of code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-working-directory"><i class="fa fa-check"></i><b>2.3.3</b> Setting the working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html"><i class="fa fa-check"></i><b>2.4</b> R objects and functions</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#functions"><i class="fa fa-check"></i><b>2.4.1</b> Functions</a></li>
+<li class="chapter" data-level="2.4.2" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#r-objects"><i class="fa fa-check"></i><b>2.4.2</b> R objects</a></li>
+<li class="chapter" data-level="2.4.3" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#applying-functions-to-objects"><i class="fa fa-check"></i><b>2.4.3</b> Applying functions to objects</a></li>
+<li class="chapter" data-level="2.4.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#getting-help"><i class="fa fa-check"></i><b>2.4.4</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2.5</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="packages.html"><a href="packages.html#loading-r-packages"><i class="fa fa-check"></i><b>2.5.1</b> Loading R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html"><i class="fa fa-check"></i><b>2.6</b> Importing and exporting data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#loading-data"><i class="fa fa-check"></i><b>2.6.1</b> Loading data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exporting-data"><i class="fa fa-check"></i><b>2.6.2</b> Exporting data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>2.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics and Data Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="footnotes.html"><a href="footnotes.html"><i class="fa fa-check"></i><b>4.1</b> Footnotes</a></li>
+<li class="chapter" data-level="4.2" data-path="citations.html"><a href="citations.html"><i class="fa fa-check"></i><b>4.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modeling-in-r.html"><a href="modeling-in-r.html"><i class="fa fa-check"></i><b>5</b> Modeling in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="some-common-statistical-models.html"><a href="some-common-statistical-models.html"><i class="fa fa-check"></i><b>5.1</b> Some common statistical models</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-models-i.html"><a href="linear-models-i.html"><i class="fa fa-check"></i><b>6</b> Linear Models I</a></li>
+<li class="chapter" data-level="7" data-path="linear-models-ii.html"><a href="linear-models-ii.html"><i class="fa fa-check"></i><b>7</b> Linear Models II</a></li>
+<li class="chapter" data-level="8" data-path="linear-models-iii.html"><a href="linear-models-iii.html"><i class="fa fa-check"></i><b>8</b> Linear Models III</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="10" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>10</b> Categorical Data Analysis</a></li>
+<li class="chapter" data-level="11" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>11</b> Linear Mixed Models</a></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="appenA.html"><a href="appenA.html"><i class="fa fa-check"></i><b>A</b> Software</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="appenA1.html"><a href="appenA1.html"><i class="fa fa-check"></i><b>A.1</b> Installation of R and RStudio</a></li>
+<li class="chapter" data-level="A.2" data-path="appenA2.html"><a href="appenA2.html"><i class="fa fa-check"></i><b>A.2</b> Installation of R packages</a></li>
+<li class="chapter" data-level="A.3" data-path="appenA3.html"><a href="appenA3.html"><i class="fa fa-check"></i><b>A.3</b> Packages used in this book</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="appenB.html"><a href="appenB.html"><i class="fa fa-check"></i><b>B</b> Stylistic Conventions</a></li>
+<li class="chapter" data-level="C" data-path="appenC.html"><a href="appenC.html"><i class="fa fa-check"></i><b>C</b> Universal Design for Learning</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science with R (PSYC3012)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-objects-and-functions" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> R objects and functions<a href="r-objects-and-functions.html#r-objects-and-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are different kinds of entities that we identify as objects. Here, we will distinguish between R objects of different data structures (e.g., matrices, vectors, data frames, lists) and "recursive" objects such as those of mode <em>function</em> (Lander, 2017; Venables et al., 2009). We will refer to the latter as functions and to the former as R objects. In sum, we will use functions (e.g., <code>mean()</code>, <code>boxplot()</code>) to execute commands on R objects (e.g., atomic vectors, data frames, matrices).</p>
+<div id="functions" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Functions<a href="r-objects-and-functions.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let's imagine that we would like to command a robot to do something for us. We simply need to learn the robot's language (i.e., rules of grammar, syntax, vocabulary, code), so it can decode our commands and execute our orders. Any programming language will work in a similar way. For instance, we will need to read data from files (e.g., text file, CSV file, SPSS file) or to simulate our own data. These data should be appropriately stored and saved into R's <em>global environment</em> to be able to manipulate and organize our data (e.g., merge, subset, select, rename), to model and visualize the data, and to publish the results. To complete those tasks, we must use appropriate functions on data structures of the same mode.</p>
+<div id="the-c-function" class="section level4 hasAnchor" number="2.4.1.1">
+<h4><span class="header-section-number">2.4.1.1</span> The <code>c()</code> function<a href="r-objects-and-functions.html#the-c-function" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The <code>c()</code> function is usually referred as the concatenate or combine function. It combines two or more elements of the same mode (e.g., numerical values, character strings, logical values) to create vectors.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-objects-and-functions.html#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="r-objects-and-functions.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">71</span>, <span class="dv">172</span>, <span class="dv">53</span>, <span class="dv">77</span>)</span>
+<span id="cb4-3"><a href="r-objects-and-functions.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  16  71 172  53  77</span></span>
+<span id="cb4-4"><a href="r-objects-and-functions.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="r-objects-and-functions.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&#39;Hylobates&#39;</span>, <span class="st">&#39;Pongo&#39;</span>, <span class="st">&#39;Gorilla&#39;</span>, <span class="st">&#39;Pan&#39;</span>, <span class="st">&#39;Homo&#39;</span>)</span>
+<span id="cb4-6"><a href="r-objects-and-functions.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Hylobates&quot; &quot;Pongo&quot;     &quot;Gorilla&quot;   &quot;Pan&quot;       &quot;Homo&quot;</span></span>
+<span id="cb4-7"><a href="r-objects-and-functions.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="r-objects-and-functions.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb4-9"><a href="r-objects-and-functions.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE  TRUE  TRUE  TRUE  TRUE</span></span></code></pre></div>
+</div>
+</div>
+<div id="r-objects" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> R objects<a href="r-objects-and-functions.html#r-objects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R objects such as character strings and numeric vectors, data frames, matrices or lists are saved and stored in R's <em>global environment</em> when we assign them to a name using the assignment operator (<code>name</code> <span class="math inline">\(\gets\)</span> <code>data</code>). The <em>console</em> shows the object only if it is recalled. To produce the assignment operator in Windows/Linux operating systems press <strong>Alt</strong> + <strong>-</strong>. Alternatively, press <strong>Option</strong> + <strong>-</strong> if using MacOS.</p>
+<p>As a computing programming language, R executes our commands to produce certain outcomes. Sometimes those outcomes will appear on the <em>console</em> (e.g., estimating the arithmetic mean on a numerical vector). Other times, however, these commands won't produce effects on the <em>console</em>. For example, when we create a vector, it will only appear in the <em>global environment</em> tab unless it will be recalled in the same line of code preceded by a semicolon (<code>;</code>) or plaxed on a line of code below.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-objects-and-functions.html#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="r-objects-and-functions.html#cb5-2" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">71</span>, <span class="dv">172</span>, <span class="dv">53</span>, <span class="dv">77</span>); weight</span>
+<span id="cb5-3"><a href="r-objects-and-functions.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  16  71 172  53  77</span></span>
+<span id="cb5-4"><a href="r-objects-and-functions.html#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="r-objects-and-functions.html#cb5-5" aria-hidden="true" tabindex="-1"></a>apes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Hylobates&#39;</span>, <span class="st">&#39;Pongo&#39;</span>, <span class="st">&#39;Gorilla&#39;</span>, <span class="st">&#39;Pan&#39;</span>, <span class="st">&#39;Homo&#39;</span>)</span>
+<span id="cb5-6"><a href="r-objects-and-functions.html#cb5-6" aria-hidden="true" tabindex="-1"></a>apes</span>
+<span id="cb5-7"><a href="r-objects-and-functions.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Hylobates&quot; &quot;Pongo&quot;     &quot;Gorilla&quot;   &quot;Pan&quot;       &quot;Homo&quot;</span></span></code></pre></div>
+<p>If we don't assign a set of values to any given name to create an R object, these values won't be saved into the <em>global environment</em>. Therefore, we won't be able to recall the object for future computations.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r-objects-and-functions.html#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="r-objects-and-functions.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">71</span>, <span class="dv">172</span>, <span class="dv">53</span>, <span class="dv">77</span>)</span>
+<span id="cb6-3"><a href="r-objects-and-functions.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  16  71 172  53  77</span></span></code></pre></div>
+<p>Instead of creating an R object first, we could be tempted to paste a vector into a function. This approach is not efficient---specially with large data structures---and it should be avoided. Given the outstanding possibilities that R offers, we should create R objects and use functions on them to model and visualize the data.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-objects-and-functions.html#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="r-objects-and-functions.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">71</span>, <span class="dv">172</span>, <span class="dv">53</span>, <span class="dv">77</span>))</span>
+<span id="cb7-3"><a href="r-objects-and-functions.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 77.8</span></span>
+<span id="cb7-4"><a href="r-objects-and-functions.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="r-objects-and-functions.html#cb7-5" aria-hidden="true" tabindex="-1"></a>weight.apes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">71</span>, <span class="dv">172</span>, <span class="dv">53</span>, <span class="dv">77</span>)</span>
+<span id="cb7-6"><a href="r-objects-and-functions.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="r-objects-and-functions.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weight.apes)</span>
+<span id="cb7-8"><a href="r-objects-and-functions.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 77.8</span></span>
+<span id="cb7-9"><a href="r-objects-and-functions.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(weight.apes, <span class="at">trim =</span> .<span class="dv">20</span>)</span>
+<span id="cb7-10"><a href="r-objects-and-functions.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 67</span></span>
+<span id="cb7-11"><a href="r-objects-and-functions.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(weight.apes)</span>
+<span id="cb7-12"><a href="r-objects-and-functions.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 71</span></span>
+<span id="cb7-13"><a href="r-objects-and-functions.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(weight.apes)</span>
+<span id="cb7-14"><a href="r-objects-and-functions.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 57.78148</span></span>
+<span id="cb7-15"><a href="r-objects-and-functions.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(weight.apes)</span>
+<span id="cb7-16"><a href="r-objects-and-functions.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 5</span></span>
+<span id="cb7-17"><a href="r-objects-and-functions.html#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="r-objects-and-functions.html#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(weight.apes, <span class="at">ylab =</span> <span class="st">&#39;Weight (Kg)&#39;</span>, <span class="at">xlab =</span> <span class="st">&#39;Apes&#39;</span>,</span>
+<span id="cb7-19"><a href="r-objects-and-functions.html#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&#39;coral3&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">200</span>),</span>
+<span id="cb7-20"><a href="r-objects-and-functions.html#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">c</span>(<span class="st">&#39;Hylobates&#39;</span>, <span class="st">&#39;Pongo&#39;</span>, <span class="st">&#39;Gorilla&#39;</span>, <span class="st">&#39;Pan&#39;</span>, <span class="st">&#39;Homo&#39;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/assignment_3-1.png" width="672" /></p>
+<div style="margin-bottom:40px;">
+
+</div>
+<div class="alert alert-info hints-alert">
+<div class="hints-icon">
+<i class="fa fa-info-circle fa-2x fa-pull-right fa-border" aria-hidden="true"></i>
+</div>
+<h4 class="alert-heading">
+<strong>Naming objects</strong>
+</h4>
+<ul>
+<ul type = 'square' style="color: Black">
+<li>
+R is case sensitive (e.g., the R object <em>weight</em> differs from <em>Weight</em>)
+</li>
+<li>
+Do not start with a number or special characters (e.g., +, -, &amp;, *, ?)
+</li>
+<li>
+Using lower (e.g., <em>weight.apes</em>, <em>x</em>, <em>m2spr34</em>) rather than an upper case letters (e.g., <em>Weight.Apes</em>, <em>X</em>, <em>M2spr34</em>) facilitates the programming flow
+</li>
+<li>
+Do not use names of functions to name R objects (e.g., <code>data()</code>, <code>mean()</code>, <code>plot()</code>, <code>factor()</code>)
+</li>
+<li>
+When using several words, do not leave spaces. Alternatively, use the full stop, underscore, or a combination of UPPER and lower case letters (e.g., <em>g.spatial.males</em>, <em>g_fluid_females</em>, <em>gCrystallized</em>)
+</li>
+<li>
+Use short, but informative names (e.g., <em>g.spatial.m</em>, <em>g_fluid_f</em>, <em>gCrystal</em>)
+</li>
+<ul>
+</ul>
+</div>
+<div style="margin-bottom:60px;">
+
+</div>
+</div>
+<div id="applying-functions-to-objects" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Applying functions to objects<a href="r-objects-and-functions.html#applying-functions-to-objects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Functions work on data stored in R objects and saved in the <em>global environment</em>. We will place the name of the R object within the parentheses of functions, executing the command of the function on R objects. Below, we will compute the arithmetic mean (<em>M</em> = 52.1) and estimate the length (<em>N</em> = 10) of one numeric vector named <em>age</em>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-objects-and-functions.html#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="r-objects-and-functions.html#cb8-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">37</span>, <span class="dv">19</span>, <span class="dv">74</span>, <span class="dv">62</span>, <span class="dv">51</span>, <span class="dv">56</span>, <span class="dv">58</span>, <span class="dv">76</span>, <span class="dv">45</span>, <span class="dv">43</span>)</span>
+<span id="cb8-3"><a href="r-objects-and-functions.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age)</span>
+<span id="cb8-4"><a href="r-objects-and-functions.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 52.1</span></span>
+<span id="cb8-5"><a href="r-objects-and-functions.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(age)</span>
+<span id="cb8-6"><a href="r-objects-and-functions.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10</span></span></code></pre></div>
+<p>Functions usually include arguments that allow us to modify their default settings. For example, the function <code>mean()</code> computes the arithmetic mean on the R object placed within parentheses. In the previous example, some outliers (e.g., 19, 76) might be distorting the estimation of the <em>age</em> distribution's central tendency. Luckily, the argument <code>trim</code> can be set from 0 (no trimming) to 0.5 (maximum trimming) to compute robust estimators of central tendency. By trimming 20% of the observations from each tail of the distribution (<code>trim = .20</code>), we will compute 20% trimmed means---a robust estimator of central tendency (Wilcox, 2016). The maximum trimming (<code>trim = .50</code>) computes the median as it only considers the central value of the distribution.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-objects-and-functions.html#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="r-objects-and-functions.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age, <span class="at">trim =</span> <span class="dv">0</span>)</span>
+<span id="cb9-3"><a href="r-objects-and-functions.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 52.1</span></span>
+<span id="cb9-4"><a href="r-objects-and-functions.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age, <span class="at">trim =</span> .<span class="dv">20</span>)</span>
+<span id="cb9-5"><a href="r-objects-and-functions.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 52.5</span></span>
+<span id="cb9-6"><a href="r-objects-and-functions.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age, <span class="at">trim =</span> .<span class="dv">50</span>)</span>
+<span id="cb9-7"><a href="r-objects-and-functions.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 53.5</span></span>
+<span id="cb9-8"><a href="r-objects-and-functions.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(age)</span>
+<span id="cb9-9"><a href="r-objects-and-functions.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 53.5</span></span></code></pre></div>
+</div>
+<div id="getting-help" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Getting help<a href="r-objects-and-functions.html#getting-help" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>All R functions are included in packages that are created and maintained by their authors (e.g., statisticians, psychologists, biologists, sociologists). R packages are freely available on the Internet at the <a href="https://cran.r-project.org/web/packages/" target="_blank"><em>Comprehensive R Archive Network</em></a> or CRAN. Every package has its own documentation that describes and explains how to use the functions of each package. We can also access to cheat sheets, on-line learning tools, forums and on-line communities, blogs, or even open-access books created in R using <a href="https://bookdown.org/yihui/bookdown/" target="_blank"><strong>bookdown</strong></a> (Xie, 2017; Xie, Allaire, &amp; Grolemund, 2019).</p>
+<p>RStudio includes the documentation of functions and packages in the <em>Help</em> tab. For example, if we search for the function <code>mean()</code>, we will find the documentation for this function included in R's package <strong>base</strong>. Another way to access to the documentation of packages and functions when help is required is to use the function <code>help()</code> or the question mark (<code>?</code>) followed by the name of the function.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-objects-and-functions.html#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="r-objects-and-functions.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mean)</span>
+<span id="cb10-3"><a href="r-objects-and-functions.html#cb10-3" aria-hidden="true" tabindex="-1"></a>?mean</span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="starting-a-session-in-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-introR.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"toc": true,
+"toc_float": true,
+"toc_depth": 2
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

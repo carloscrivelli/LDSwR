@@ -1,0 +1,50 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+
+
+
+/*--- LOGO ---*/
+
+.toc-logo {
+  width: 170px !important;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+.toc-logo img {
+  max-width: 95%;
+  margin-bottom: 5px;
+}
+
+.summary > li:first-child {
+  height: auto !important; 
+}
+
+
+
+/*------------ TOC --------------*/
+
+.book .book-summary {
+  background: #fdbb84;
+  border-right: none;
+  border-right: 5px #5699cc solid;
+}
+
+
+
+
+
