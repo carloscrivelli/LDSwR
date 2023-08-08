@@ -1,7 +1,7 @@
 --- 
-title: "Data Science with R (PSYC3012)"
+title: "Learning Data Science with R"
 subtitle: |
-  ![](images/psyc3012_hex.png){width=3in}
+  ![](images/LDSwR.png){width=3in}
 author:
 - name: Dr Carlos Crivelli
 - name: Associate Professsor/Reader in Affective Science and Social Interaction
@@ -19,15 +19,15 @@ split_by: section
 
 # Introduction {-}
 
-**Data Science with R** (PSYC3012) is a 15-credit optional module that aims to develop students’ research skills relying on three main themes: Open Science, digital literacy, and science communication.
+**Learning Data Science with R** is a book that aims to develop psychology students’ research skills relying on three main themes: Open Science, digital literacy, and science communication.
 
-The module covers data wrangling, data visualization, categorical data analysis, general linear models, and robust statistics using R—a free software environment for statistical computing and graphics. Each session is grounded in Open Science best practices to favor reproducibility and transparency in science, following the guidelines of the 2019 Concordat to Support Research Integrity, the UK Reproducibility Network, and the 2016 Concordat on Open Research Data.
+The book covers Open Science principles, an introduction to R programming and data wrangling, descriptive statistics and data visualization, categorical data analysis, general and generalized linear models, and an introduction to psychometrics using R—a free software environment for statistical computing and graphics. Each chapter promotes the use of Open Science best practices to favor reproducibility and transparency at different stages of research data management process, along with learning key digital literacy skills and science communication competencies.
 
 
-Upon successful completion of this module, students should be able to:
+Upon successful completion of this book, students should be able to:
 
-  * Recognize, explain, and apply open science best practices following the Concordat on Open Research Data and the UK Reproducibility Network guidelines.
-  * Identify and describe the appropriate analytical procedures required to answer research questions related to categorical data analysis and general linear models.
+  * Recognize, explain, and apply Open Science best practices following the 2016 Concordat on Open Research Data and the UK Reproducibility Network guidelines.
+  * Identify and describe the appropriate analytical procedures required to answer research questions related to categorical data analysis, general and generalized linear models, and some psychometric models.
   * Apply R to organize and tidy the data, to model the data, and to generate appropriate data visualizations.
   * Inspect and appraise the outputs generated with R to produce with Rmarkdown a reproducible research report that will communicate the results relying on the principles of transparency and reproducibility in science.
 
@@ -35,9 +35,9 @@ Upon successful completion of this module, students should be able to:
 
 ## How to use this book {-}
 
-This book is intended to be the handbook of the optional module **Data Science with R** (PSYC3012); a module delivered for the Psychology undergraduate provisions at De Montfort University (Leicester, United Kingdom). This book includes all the content and reproducible examples that will be delivered in the 2-hour weekly sessions (Term 1, Academic Year 2023-24).
+This book is intended to be a handbook used in psychology undergraduate (e.g., in 3rd-year optional modules) and postgraduate (e.g., MRes, MSc Psychological Research Methods) provisions interested in teaching data science with R for psychologists. Each chapter could be delivered in 1-2 hour sessions, with most of the content of the book aligned with a 13-week term delivery.
 
-It is recommended to read in advance the corresponding chapters and sections that will be explained in class. Similarly, it is recommended to install **R**, **RStudio**, and the required R packages to work on the examples of this book before attending the first lecture and workshop. Please, read the software installation guidelines before reading the book (Appendix \@ref(appenA)).
+It is recommended to install **R**, **RStudio**, and the required R packages to work on the examples of this book. Please, read the software installation guidelines before reading the book (Appendix \@ref(appenA)).
 
 
 ## About the Author {-}
@@ -46,7 +46,7 @@ It is recommended to read in advance the corresponding chapters and sections tha
 
 After completing a BSc (Hons) Psychology, Dr Crivelli received his MSc and PhD in Methodology of Behavioral and Health Sciences from Universidad Autónoma de Madrid (Madrid, Spain). His research interests focus on three main areas: social influence and emotion science, cross-cultural psychology, and data science. He has published on these topics in journals like [*Trends in the Cognitive Sciences*](https://www.cell.com/trends/cognitive-sciences/fulltext/S1364-6613(18)30029-9){target="_blank"}, [*Proceedings of the National Academy of Sciences, U.S.A.*](https://www.pnas.org/doi/full/10.1073/pnas.1611622113){target="_blank"}, [*Perspectives on Psychological Science*](https://journals.sagepub.com/doi/10.1177/17456916221148142){target="_blank"}, and [*Current Directions in Psychological Science*](https://journals.sagepub.com/doi/full/10.1177/0963721417746794){target="_blank"}.
  
-Dr. Crivelli is an Honorary Fellow of the University of Melbourne (Australia), a Fellow of the Higher Education Academy, and a member of the editorial board of [*Nature–Scientific Data*](https://www.nature.com/sdata/){target="_blank"}. He teaches undergraduate and postgraduate courses in Psychometrics and Data Science in R, Personality and Intelligence, and Conceptual Issues and Critical Debates in Psychology, embedding the intercultural dimension, and open and reproducible research into the curriculum. 
+Dr. Crivelli is an Honorary Fellow of the University of Melbourne (Australia), a Fellow of the Higher Education Academy, and a member of the editorial board of [*Nature–Scientific Data*](https://www.nature.com/sdata/){target="_blank"}. He teaches undergraduate and postgraduate courses in Psychometrics and Data Science with R, Personality and Intelligence, and Conceptual Issues and Critical Debates in Psychology, embedding the intercultural dimension, and open and reproducible research into the curriculum. 
 
 
 

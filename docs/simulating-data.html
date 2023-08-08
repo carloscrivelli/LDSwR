@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Introduction to R | Learning Data Science with R</title>
-  <meta name="description" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <title>3.1 Simulating data | Learning Data Science with R</title>
+  <meta name="description" content="3.1 Simulating data | Learning Data Science with R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <meta property="og:title" content="3.1 Simulating data | Learning Data Science with R" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <meta name="twitter:title" content="3.1 Simulating data | Learning Data Science with R" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="references.html"/>
-<link rel="next" href="what-is-rstudio.html"/>
+<link rel="prev" href="data-wrangling.html"/>
+<link rel="next" href="indexing-and-subsetting.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -275,84 +275,48 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-r" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Introduction to R<a href="introduction-to-r.html#introduction-to-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div style="margin-bottom:40px;">
-
-</div>
-<blockquote>
-<left><strong>LEARNING OUTCOMES</strong></left>
-<div style="margin-bottom:30px;">
-
-</div>
-<ul>
-<li>Identify the capabilities of R and RStudio's environment and appraise their functionality.</li>
-<li>Distinguish between R functions, objects, and diverse data wrangling approaches.</li>
-<li>Apply basic programming skills to import and organize the data using classic data wrangling approaches and the <strong>tidyverse</strong> grammar.</li>
-<li>Evaluate the R code and appraise the outputs to demonstrate a satisfactory level of basic programming skills in R.</li>
-</ul>
-</blockquote>
-<div style="margin-bottom:60px;">
-
-</div>
-<p><strong>R</strong> is a programming language and an open-source software environment for statistical computing and graphics available for Windows, MacOS, and Linux operating systems (R Core Team, 2023). R is an interactive environment for data science that enables us to import, manipulate, model, and visualize data to effectively communicate our results (Wickham &amp; Grolemund, 2017). The use of R also promotes transparency and open research, with a clear focus on supporting reproducibility policies (Gandrud, 2015).</p>
-<p>R, in its most basic form, is composed by (1) a <em>script</em> in which we write the lines of R code that we run, and (2) the <em>console</em> that displays the results and debugging (Figure 2.1). If we generate a plot, it will emerge as a pop-up window, showing one plot at a time. For more details on what is R, click <a href="http://www.r-project.org" target="_blank">here</a>.</p>
-<div style="margin-bottom:30px;">
-
-</div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Rpanels"></span>
-<img src="images/R_panels.jpg" alt="R displayed in two panels: Script (left) and Console (right)." width="100%" />
-<p class="caption">
-Figure 2.1: R displayed in two panels: Script (left) and Console (right).
-</p>
-</div>
-<div style="margin-bottom:40px;">
-
-</div>
-<div class="alert alert-success" role="alert">
-<h4 class="alert-heading" style="text-align: center; color: DarkRed">
-<strong>Why Use R?</strong>
-</h4>
-<ul>
-<ul type = 'square' style="color: Black">
-<li>
-It is a free and open-access programming environment for data science
-</li>
-<li>
-Reproducible and transparent research in psychological science
-</li>
-<li>
-Unlimited capabilities for data science (e.g., analysis, modelling, visualization)
-</li>
-<li>
-It is dynamic. R is constantly evolving. It provides state-of-the-art solutions for any imaginable field (e.g., economics, psychology, genetics, medicine, ecology, sociology, computational physics, geography, psychometrics)
-</li>
-<li>
-R has the biggest global community providing all sorts of free resources to support learners (e.g., <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html" target="_blank">reference manuals</a>, <a href="https://bookdown.org" target="_blank">books</a>, <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-r-and-rstudio" target="_blank">on-line tutorials</a>, <a href="https://debruine.github.io/lmem_sim/" target="_blank">R code and notebooks</a>, <a href="https://github.com/rstudio/cheatsheets/blob/main/base-r.pdf" target="_blank">cheat sheets</a>, <a href="https://community.rstudio.com" target="_blank">Internet forums</a>)
-</li>
-<li>
-R is more efficient than any other commercial software
-</li>
-<li>
-UK universities teaching 21st century data science with R: <a href="https://psyteachr.github.io" target="_blank">University of Glasgow</a>, Lancaster University, <a href="https://www.ntu.ac.uk/about-us/events/events/2022/6/teaching-statistics-with-r-in-psychology" target="_blank">Nottingham Trent University</a>, <a href="https://bookdown.org/animestina/dapr1_labs/" target="_blank">University of Edinburgh</a>, University of Lincoln, University of Manchester, University of Plymouth, University of Sussex, Queen Mary University of London, University of Sheffield, University of Essex, Oxford University, King's College, University of Warwick...
-</li>
-<li>
-Employability
-</li>
-<ul>
-</ul>
-</div>
-<div style="margin-bottom:60px;">
-
-</div>
+<div id="simulating-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Simulating data<a href="simulating-data.html#simulating-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We are going to create a data frame by simulating a data set. Data frames are data structures that include vector columns (i.e., variables) containing different modes of data (e.g., numeric, factor, character). The observations, participants, or cases are usually displayed as rows. Using the assignment operator (<code>&lt;-</code>) we will store the data that we will simulate into R objects that will be named accordingly to the variables they intend to simulate (e.g., <em>id</em>, <em>treatment</em>, <em>life.satis</em>).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="simulating-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="simulating-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb19-3"><a href="simulating-data.html#cb19-3" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">12</span>)</span>
+<span id="cb19-4"><a href="simulating-data.html#cb19-4" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">2020</span>, <span class="at">times =</span> <span class="dv">36</span>)</span>
+<span id="cb19-5"><a href="simulating-data.html#cb19-5" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&#39;male&#39;</span>, <span class="st">&#39;female&#39;</span>), <span class="at">times =</span> <span class="dv">18</span>)</span>
+<span id="cb19-6"><a href="simulating-data.html#cb19-6" aria-hidden="true" tabindex="-1"></a>depression <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">14</span>, <span class="dv">23</span>, <span class="dv">16</span>, <span class="dv">11</span>, <span class="dv">29</span>, <span class="dv">19</span>,</span>
+<span id="cb19-7"><a href="simulating-data.html#cb19-7" aria-hidden="true" tabindex="-1"></a>                <span class="dv">17</span>, <span class="dv">14</span>, <span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">13</span>,</span>
+<span id="cb19-8"><a href="simulating-data.html#cb19-8" aria-hidden="true" tabindex="-1"></a>                <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">14</span>, <span class="dv">8</span>, <span class="dv">12</span>,</span>
+<span id="cb19-9"><a href="simulating-data.html#cb19-9" aria-hidden="true" tabindex="-1"></a>                <span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">14</span>, <span class="dv">4</span>)</span>
+<span id="cb19-10"><a href="simulating-data.html#cb19-10" aria-hidden="true" tabindex="-1"></a>life.satis <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">36</span>, <span class="at">mean =</span> <span class="dv">40</span>, <span class="at">sd =</span> <span class="fl">12.3</span>)</span>
+<span id="cb19-11"><a href="simulating-data.html#cb19-11" aria-hidden="true" tabindex="-1"></a>alone <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">36</span>, <span class="dv">1</span>, .<span class="dv">29</span>)</span></code></pre></div>
+<p>The function <code>data.frame()</code> allows us to include different column vectors as arguments. The function <code>names()</code> shows the variables' names.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="simulating-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-2"><a href="simulating-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="simulating-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a>affective.dis <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(id, treatment, year, sex,</span>
+<span id="cb20-4"><a href="simulating-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                            depression, life.satis, alone)</span>
+<span id="cb20-5"><a href="simulating-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(affective.dis, <span class="dv">8</span>)</span>
+<span id="cb20-6"><a href="simulating-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex depression life.satis alone</span></span>
+<span id="cb20-7"><a href="simulating-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1         1 2020   male         22   30.69752     0</span></span>
+<span id="cb20-8"><a href="simulating-data.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2         1 2020 female         19   43.74754     1</span></span>
+<span id="cb20-9"><a href="simulating-data.html#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3         1 2020   male         14   43.65387     0</span></span>
+<span id="cb20-10"><a href="simulating-data.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4         1 2020 female         23   37.05222     0</span></span>
+<span id="cb20-11"><a href="simulating-data.html#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5         1 2020   male         16   28.00531     0</span></span>
+<span id="cb20-12"><a href="simulating-data.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6         1 2020 female         11   34.74806     0</span></span>
+<span id="cb20-13"><a href="simulating-data.html#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  7         1 2020   male         29   33.06981     1</span></span>
+<span id="cb20-14"><a href="simulating-data.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  8         1 2020 female         19   60.85200     0</span></span>
+<span id="cb20-15"><a href="simulating-data.html#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="simulating-data.html#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(affective.dis)</span>
+<span id="cb20-17"><a href="simulating-data.html#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;id&quot;         &quot;treatment&quot;  &quot;year&quot;       &quot;sex&quot;        &quot;depression&quot;</span></span>
+<span id="cb20-18"><a href="simulating-data.html#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [6] &quot;life.satis&quot; &quot;alone&quot;</span></span></code></pre></div>
+<p>In the following sections, we will apply basic data wrangling functions to reorganize and tidy the data frame called <code>affective.dis</code> (i.e., <em>affective disorders</em>); a data set that includes the vector columns that we have recently simulated and inspected: <em>id</em>, <em>treatment</em>, <em>year</em>, <em>sex</em>, <em>depression</em>, <em>life.satis</em>, and <em>alone</em>.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="references.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-wrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="indexing-and-subsetting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -383,7 +347,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-introR.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-dataWrangling.Rmd",
 "text": "Edit"
 },
 "history": {

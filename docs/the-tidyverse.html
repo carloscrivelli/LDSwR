@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.5 The tidyverse | Learning Data Science with R</title>
+  <meta name="description" content="3.5 The tidyverse | Learning Data Science with R" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.5 The tidyverse | Learning Data Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.5 The tidyverse | Learning Data Science with R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="renaming-recoding-and-sorting-data.html"/>
+<link rel="next" href="references-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/LDSwR.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="what-is-open-science.html"><a href="what-is-open-science.html"><i class="fa fa-check"></i><b>1</b> What is Open Science?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="the-credibility-of-science.html"><a href="the-credibility-of-science.html"><i class="fa fa-check"></i><b>1.1</b> The credibility of Science</a></li>
+<li class="chapter" data-level="1.2" data-path="questionable-scientific-practices.html"><a href="questionable-scientific-practices.html"><i class="fa fa-check"></i><b>1.2</b> Questionable scientific practices</a></li>
+<li class="chapter" data-level="1.3" data-path="the-credibility-crisis.html"><a href="the-credibility-crisis.html"><i class="fa fa-check"></i><b>1.3</b> The credibility crisis</a></li>
+<li class="chapter" data-level="1.4" data-path="threats-to-the-quality-of-the-scientific-process.html"><a href="threats-to-the-quality-of-the-scientific-process.html"><i class="fa fa-check"></i><b>1.4</b> Threats to the quality of the scientific process</a></li>
+<li class="chapter" data-level="1.5" data-path="open-data.html"><a href="open-data.html"><i class="fa fa-check"></i><b>1.5</b> Open Data</a></li>
+<li class="chapter" data-level="1.6" data-path="fair-data.html"><a href="fair-data.html"><i class="fa fa-check"></i><b>1.6</b> FAIR Data</a></li>
+<li class="chapter" data-level="1.7" data-path="contributorship-credit.html"><a href="contributorship-credit.html"><i class="fa fa-check"></i><b>1.7</b> Contributorship (CRediT)</a></li>
+<li class="chapter" data-level="1.8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-rstudio.html"><a href="what-is-rstudio.html"><i class="fa fa-check"></i><b>2.1</b> What is RStudio?</a></li>
+<li class="chapter" data-level="2.2" data-path="lets-get-started.html"><a href="lets-get-started.html"><i class="fa fa-check"></i><b>2.2</b> Let's get started!</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="lets-get-started.html"><a href="lets-get-started.html#running-a-line-of-code"><i class="fa fa-check"></i><b>2.2.1</b> Running a line of code</a></li>
+<li class="chapter" data-level="2.2.2" data-path="lets-get-started.html"><a href="lets-get-started.html#adding-comments-on-r-scripts"><i class="fa fa-check"></i><b>2.2.2</b> Adding comments on R scripts</a></li>
+<li class="chapter" data-level="2.2.3" data-path="lets-get-started.html"><a href="lets-get-started.html#getting-help"><i class="fa fa-check"></i><b>2.2.3</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html"><i class="fa fa-check"></i><b>2.3</b> Starting a session in RStudio</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-global-options"><i class="fa fa-check"></i><b>2.3.1</b> Setting the global options</a></li>
+<li class="chapter" data-level="2.3.2" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#first-lines-of-code"><i class="fa fa-check"></i><b>2.3.2</b> First lines of code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-working-directory"><i class="fa fa-check"></i><b>2.3.3</b> Setting the working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html"><i class="fa fa-check"></i><b>2.4</b> R objects and functions</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#functions"><i class="fa fa-check"></i><b>2.4.1</b> Functions</a></li>
+<li class="chapter" data-level="2.4.2" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#r-objects"><i class="fa fa-check"></i><b>2.4.2</b> R objects</a></li>
+<li class="chapter" data-level="2.4.3" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#applying-functions-to-objects"><i class="fa fa-check"></i><b>2.4.3</b> Applying functions to objects</a></li>
+<li class="chapter" data-level="2.4.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#getting-help-1"><i class="fa fa-check"></i><b>2.4.4</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2.5</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="packages.html"><a href="packages.html#loading-r-packages"><i class="fa fa-check"></i><b>2.5.1</b> Loading R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html"><i class="fa fa-check"></i><b>2.6</b> Importing and exporting data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#loading-data"><i class="fa fa-check"></i><b>2.6.1</b> Loading data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exporting-data"><i class="fa fa-check"></i><b>2.6.2</b> Exporting data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>2.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="simulating-data.html"><a href="simulating-data.html"><i class="fa fa-check"></i><b>3.1</b> Simulating data</a></li>
+<li class="chapter" data-level="3.2" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html"><i class="fa fa-check"></i><b>3.2</b> Indexing and subsetting</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-columns-variables"><i class="fa fa-check"></i><b>3.2.1</b> Selecting columns (variables)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-rows-observations"><i class="fa fa-check"></i><b>3.2.2</b> Selecting rows (observations)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-rows-and-columns-conditional-subsetting"><i class="fa fa-check"></i><b>3.2.3</b> Selecting rows and columns (conditional subsetting)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="adding-new-data-to-a-data-frame.html"><a href="adding-new-data-to-a-data-frame.html"><i class="fa fa-check"></i><b>3.3</b> Adding new data to a data frame</a></li>
+<li class="chapter" data-level="3.4" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html"><i class="fa fa-check"></i><b>3.4</b> Renaming, recoding, and sorting data</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#renaming"><i class="fa fa-check"></i><b>3.4.1</b> Renaming</a></li>
+<li class="chapter" data-level="3.4.2" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#recoding"><i class="fa fa-check"></i><b>3.4.2</b> Recoding</a></li>
+<li class="chapter" data-level="3.4.3" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#sorting"><i class="fa fa-check"></i><b>3.4.3</b> Sorting</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>3.5</b> The <strong>tidyverse</strong></a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-pipe"><i class="fa fa-check"></i><b>3.5.1</b> The pipe (%&gt;%)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-dplyr"><i class="fa fa-check"></i><b>3.5.2</b> The package <strong>dplyr</strong></a></li>
+<li class="chapter" data-level="3.5.3" data-path="the-tidyverse.html"><a href="the-tidyverse.html#data-wrangling-with-dplyr"><i class="fa fa-check"></i><b>3.5.3</b> Data wrangling with <em>dplyr</em></a></li>
+<li class="chapter" data-level="3.5.4" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-tidyr"><i class="fa fa-check"></i><b>3.5.4</b> The package <strong>tidyr</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>3.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics and Data Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="footnotes.html"><a href="footnotes.html"><i class="fa fa-check"></i><b>4.1</b> Footnotes</a></li>
+<li class="chapter" data-level="4.2" data-path="citations.html"><a href="citations.html"><i class="fa fa-check"></i><b>4.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modeling-in-r.html"><a href="modeling-in-r.html"><i class="fa fa-check"></i><b>5</b> Modeling in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="some-common-statistical-models.html"><a href="some-common-statistical-models.html"><i class="fa fa-check"></i><b>5.1</b> Some common statistical models</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-models-i.html"><a href="linear-models-i.html"><i class="fa fa-check"></i><b>6</b> Linear Models I</a></li>
+<li class="chapter" data-level="7" data-path="linear-models-ii.html"><a href="linear-models-ii.html"><i class="fa fa-check"></i><b>7</b> Linear Models II</a></li>
+<li class="chapter" data-level="8" data-path="linear-models-iii.html"><a href="linear-models-iii.html"><i class="fa fa-check"></i><b>8</b> Linear Models III</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="10" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>10</b> Categorical Data Analysis</a></li>
+<li class="chapter" data-level="11" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>11</b> Linear Mixed Models</a></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="appenA.html"><a href="appenA.html"><i class="fa fa-check"></i><b>A</b> Software</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="appenA1.html"><a href="appenA1.html"><i class="fa fa-check"></i><b>A.1</b> Installation of R and RStudio</a></li>
+<li class="chapter" data-level="A.2" data-path="appenA2.html"><a href="appenA2.html"><i class="fa fa-check"></i><b>A.2</b> Installation of R packages</a></li>
+<li class="chapter" data-level="A.3" data-path="appenA3.html"><a href="appenA3.html"><i class="fa fa-check"></i><b>A.3</b> Packages used in this book</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="appenB.html"><a href="appenB.html"><i class="fa fa-check"></i><b>B</b> Stylistic Conventions</a></li>
+<li class="chapter" data-level="C" data-path="appenC.html"><a href="appenC.html"><i class="fa fa-check"></i><b>C</b> Universal Design for Learning</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning Data Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-tidyverse" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> The <strong>tidyverse</strong><a href="the-tidyverse.html#the-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <a href="https://tidyverse.tidyverse.org" target="_blank"><strong>tidyverse</strong></a> is a collection of packages developed by a team of programmers led by Hadley Wickham that share the same philosophy and grammar (<a href="http://r4ds.had.co.nz" target="_blank">Wickham &amp; Grolemund, 2017</a>). The main goal of the <strong>tidyverse</strong> is to favor an easy and comprehensive approach to data science by solving the challenges that programmers usually face when coding in R (<a href="http://www.tidyverse.org" target="_blank">Wickham et al., 2019</a>). Some of the core packages of the <strong>tidyverse</strong> (e.g., <a href="https://readr.tidyverse.org" target="_blank"><strong>readr</strong></a>, <a href="https://tidyr.tidyverse.org" target="_blank"><strong>tidyr</strong></a>, <a href="https://dplyr.tidyverse.org" target="_blank"><strong>dplyr</strong></a>, <a href="https://ggplot2.tidyverse.org" target="_blank"><strong>ggplot2</strong></a>) provide clear insights on their functionality as they will provide solutions to import, tidy, manipulate, and visualize data.</p>
+<div id="the-pipe" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> The pipe (%&gt;%)<a href="the-tidyverse.html#the-pipe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The “pipe” operator is used to connect multiple verb actions into a pipeline. In sum, we can chain or pipe functions to perform a sequence of operations (e.g., data wrangling). The package <a href="https://magrittr.tidyverse.org" target="_blank"><strong>magrittr</strong></a> offers a set of operators which make your R code more readable by:</p>
+<ul>
+<li>structuring sequences of data operations left-to-right (as opposed to from the inside and out).</li>
+<li>avoiding nested function calls.</li>
+<li>minimizing the need for local variables and function definitions.</li>
+<li>making it easy to add steps anywhere in the sequence of operations.</li>
+</ul>
+<p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side; i.e., one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code>%&gt;%</code> is the (main) pipe-operator. The flow of the R code will be as follows:</p>
+<p><code>data</code> %&gt;%
+<code>function 1</code> %&gt;%
+<code>function 2</code> %&gt;%
+<code>function 3</code> ...</p>
+<div style="margin-bottom:30px;">
+
+</div>
+<div class="infobox">
+<p style="text-align: center; color: DarkRed; font-size: large">
+<strong>Keyboard shortcut for the pipe operator</strong>
+</p>
+<ul>
+<li><strong>Windows</strong>: Press <strong>Ctrl</strong> + <strong>Shift</strong> + <strong>M</strong>.</li>
+<li><strong>MacOS</strong>: Press <strong>Cmd</strong> + <strong>Shift</strong> + <strong>M</strong>.</li>
+</ul>
+</div>
+<div style="margin-bottom:40px;">
+
+</div>
+</div>
+<div id="the-package-dplyr" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> The package <strong>dplyr</strong><a href="the-tidyverse.html#the-package-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The package <a href="https://dplyr.tidyverse.org" target="_blank"><strong>dplyr</strong></a> was developed by Hadley Wickham and colleagues. It is an optimized and distilled version of an old package named <strong>plyr</strong>. The package <strong>dplyr</strong> does not provide any “new” functionality to R per se. Everything <strong>dplyr</strong> does could already be done with base R, but it greatly simplifies existing functionality in R (<a href="https://github.com/tidyverse/dplyr" target="_blank">Wickham et al., 2022</a>).</p>
+<p>One important contribution of the package <strong>dplyr</strong> is that it provides a “grammar” (in particular, verbs) for data manipulation and for operating on data frames. Other people can understand what we are doing to a data frame with this "grammar." This new approach is very useful because it provides an abstraction for data manipulation that it did not exist before. Another useful contribution of the package <strong>dplyr</strong> is that their functions are very fast, because many key operations are coded in C++.</p>
+<div style="margin-bottom:40px;">
+
+</div>
+<div class="alert alert-success" role="alert">
+<h4 class="alert-heading" style="text-align: center; color: DarkRed">
+<strong><em>dplyr</em> verbs</strong>
+</h4>
+<ul>
+<ul type = 'square' style="color: Black">
+<li>
+<strong>select</strong>: It returns a subset of the columns of a data frame, using a flexible notation
+</li>
+<li>
+<strong>filter</strong>: It extracts a subset of rows from a data frame based on logical conditions
+</li>
+<li>
+<strong>relocate</strong>: It reorders the columns of a data frame
+</li>
+<li>
+<strong>arrange</strong>: It reorders the rows of a data frame
+</li>
+<li>
+<strong>rename</strong>: It renames variables in a data frame
+</li>
+<li>
+<strong>mutate</strong>: It adds new variables/columns or transform existing variables
+</li>
+<li>
+<strong>summarize</strong>: It generates a summary statistics of different variables in the data frame
+</li>
+<ul>
+</ul>
+</div>
+<div style="margin-bottom:60px;">
+
+</div>
+</div>
+<div id="data-wrangling-with-dplyr" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Data wrangling with <em>dplyr</em><a href="the-tidyverse.html#data-wrangling-with-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First of all, we need to load the <strong>tidyverse</strong> that includes a suite of packages such as <strong>dplyr</strong>, <strong>tidyr</strong>, or <strong>ggplot2</strong>. If we are not loading the <strong>tidyverse</strong> or any of its packages, we will need to upload the package <strong>magrittr</strong> to use the pipe operator.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="the-tidyverse.html#cb34-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-2"><a href="the-tidyverse.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>We are going to use the simulated data set <code>affective.dis</code> to perform several operations that will end with the estimation of two descriptive statistics (<em>M</em> and <em>SD</em>) of the variables <em>depression</em> and <em>life.satis</em> for the female participants only and split by the three experimental conditions of the variable <em>treatment</em>.</p>
+<p>First, the data set <code>affective.dis</code> will be piped to the first operation: to select the variables <em>id</em>, <em>treatment</em>, <em>sex</em>, <em>depression</em>, and <em>life.satis</em>. Second, the resulting data set will be piped to the second operation: to filter a subset of rows based on the logical condition <code>sex == 'female'</code> (i.e., selecting only the rows/participants that are females). Third, we will split the following operations by the three experimental groups of the variable <em>treatment</em>. Last, we will compute the means and standard deviations of the variables <em>depression</em> and <em>life.satis</em>.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="the-tidyverse.html#cb35-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-2"><a href="the-tidyverse.html#cb35-2" aria-hidden="true" tabindex="-1"></a>affective.dis <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="the-tidyverse.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, treatment, sex, depression, life.satis) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-4"><a href="the-tidyverse.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&#39;female&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-5"><a href="the-tidyverse.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-6"><a href="the-tidyverse.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_depression =</span> <span class="fu">mean</span>(depression),</span>
+<span id="cb35-7"><a href="the-tidyverse.html#cb35-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_depression =</span> <span class="fu">sd</span>(depression),</span>
+<span id="cb35-8"><a href="the-tidyverse.html#cb35-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_life.satis =</span> <span class="fu">mean</span>(life.satis),</span>
+<span id="cb35-9"><a href="the-tidyverse.html#cb35-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_life.satis =</span> <span class="fu">sd</span>(life.satis))</span>
+<span id="cb35-10"><a href="the-tidyverse.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 5</span></span>
+<span id="cb35-11"><a href="the-tidyverse.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   treatment mean_depression sd_depression mean_life.satis sd_life.satis</span></span>
+<span id="cb35-12"><a href="the-tidyverse.html#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="do">##       &lt;int&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;         &lt;dbl&gt;</span></span>
+<span id="cb35-13"><a href="the-tidyverse.html#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1         1           18             4.65            38.9         12.2 </span></span>
+<span id="cb35-14"><a href="the-tidyverse.html#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2         2            9.83          3.06            42.0          7.53</span></span>
+<span id="cb35-15"><a href="the-tidyverse.html#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3         3            6.5           3.51            35.0         10.8</span></span></code></pre></div>
+<p>Sometimes, we are interested in using pipes to make sequential operations in our data sets, but the final goal is not to produce an output, but to modify a data set and to keep those changes. In these cases, we will use the assignment operator to save these changes into the same R object or into a different one. For example, in the following R code, (1) we will drop the variable <em>year</em> because it is a constant, (2) we will transform the variable <em>treatment</em> into a factor---assigning labels to its three experimental conditions, (3) we will move the variables <em>sex</em> and <em>age</em> to the second and third column respectively and the variable <em>satis</em> after the variable <em>life.satis</em>, (4) instead of overwriting the new data set on the former R object <code>affective.dis</code>, we will assign the new data set to the R object <code>affective.dis2</code>, and (5) we will reorder the rows of the new data set from the first (<code>id = 1</code>) to the last (<code>id = 36</code>) participant.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="the-tidyverse.html#cb36-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-2"><a href="the-tidyverse.html#cb36-2" aria-hidden="true" tabindex="-1"></a>affective.dis2 <span class="ot">&lt;-</span> affective.dis <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="the-tidyverse.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="the-tidyverse.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">factor</span>(treatment,</span>
+<span id="cb36-5"><a href="the-tidyverse.html#cb36-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;Exercise&#39;</span>,</span>
+<span id="cb36-6"><a href="the-tidyverse.html#cb36-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&#39;Mindfulness&#39;</span>,</span>
+<span id="cb36-7"><a href="the-tidyverse.html#cb36-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&#39;CBT&#39;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb36-8"><a href="the-tidyverse.html#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(sex, age, <span class="at">.after =</span> id) <span class="sc">%&gt;%</span></span>
+<span id="cb36-9"><a href="the-tidyverse.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(satis, <span class="at">.after =</span> life.satis) <span class="sc">%&gt;%</span></span>
+<span id="cb36-10"><a href="the-tidyverse.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id)</span>
+<span id="cb36-11"><a href="the-tidyverse.html#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="the-tidyverse.html#cb36-12" aria-hidden="true" tabindex="-1"></a>affective.dis2</span>
+<span id="cb36-13"><a href="the-tidyverse.html#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="do">##    id    sex age   treatment depression life.satis  satis friends alone</span></span>
+<span id="cb36-14"><a href="the-tidyverse.html#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   1   male  24    Exercise         22   30.69752 Medium       3     0</span></span>
+<span id="cb36-15"><a href="the-tidyverse.html#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 2   2 female  29    Exercise         19   43.74754 Medium      17     1</span></span>
+<span id="cb36-16"><a href="the-tidyverse.html#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 3   3   male  28    Exercise         14   43.65387 Medium       0     0</span></span>
+<span id="cb36-17"><a href="the-tidyverse.html#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   4 female  23    Exercise         23   37.05222 Medium      20     0</span></span>
+<span id="cb36-18"><a href="the-tidyverse.html#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   5   male  19    Exercise         16   28.00531 Medium       9     0</span></span>
+<span id="cb36-19"><a href="the-tidyverse.html#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 6   6 female  25    Exercise         11   34.74806 Medium       6     0</span></span>
+<span id="cb36-20"><a href="the-tidyverse.html#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 7   7   male  20    Exercise         29   33.06981 Medium       8     1</span></span>
+<span id="cb36-21"><a href="the-tidyverse.html#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   8 female  18    Exercise         19   60.85200   High      17     0</span></span>
+<span id="cb36-22"><a href="the-tidyverse.html#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   9   male  24    Exercise         17   37.34274 Medium       1     0</span></span>
+<span id="cb36-23"><a href="the-tidyverse.html#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 10 female  26    Exercise         14   27.76533 Medium      15     1</span></span>
+<span id="cb36-24"><a href="the-tidyverse.html#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 11   male  29    Exercise         20   26.73336 Medium       8     1</span></span>
+<span id="cb36-25"><a href="the-tidyverse.html#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 12 female  22    Exercise         22   29.01475 Medium      11     1</span></span>
+<span id="cb36-26"><a href="the-tidyverse.html#cb36-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 13   male  19 Mindfulness         11   37.83148 Medium      17     1</span></span>
+<span id="cb36-27"><a href="the-tidyverse.html#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 14 female  18 Mindfulness          8   49.18545   High      19     0</span></span>
+<span id="cb36-28"><a href="the-tidyverse.html#cb36-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 15   male  28 Mindfulness          5   39.33784 Medium       7     0</span></span>
+<span id="cb36-29"><a href="the-tidyverse.html#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 16 16 female  18 Mindfulness          7   46.93855 Medium      11     1</span></span>
+<span id="cb36-30"><a href="the-tidyverse.html#cb36-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 17   male  28 Mindfulness         13   36.58583 Medium       7     1</span></span>
+<span id="cb36-31"><a href="the-tidyverse.html#cb36-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 18 female  24 Mindfulness         10   43.12886 Medium      14     0</span></span>
+<span id="cb36-32"><a href="the-tidyverse.html#cb36-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 19 19   male  23 Mindfulness          9   41.26988 Medium       8     0</span></span>
+<span id="cb36-33"><a href="the-tidyverse.html#cb36-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 20 20 female  22 Mindfulness          7   43.73859 Medium       1     0</span></span>
+<span id="cb36-34"><a href="the-tidyverse.html#cb36-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 21 21   male  28 Mindfulness         16   34.80599 Medium       5     1</span></span>
+<span id="cb36-35"><a href="the-tidyverse.html#cb36-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 22 22 female  20 Mindfulness         13   27.74791 Medium       1     0</span></span>
+<span id="cb36-36"><a href="the-tidyverse.html#cb36-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 23 23   male  20 Mindfulness         11   58.95706   High       7     1</span></span>
+<span id="cb36-37"><a href="the-tidyverse.html#cb36-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 24 24 female  21 Mindfulness         14   41.41475 Medium       1     0</span></span>
+<span id="cb36-38"><a href="the-tidyverse.html#cb36-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 25 25   male  19         CBT          8   34.54767 Medium      10     1</span></span>
+<span id="cb36-39"><a href="the-tidyverse.html#cb36-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 26 26 female  24         CBT         12   24.67535    Low       7     0</span></span>
+<span id="cb36-40"><a href="the-tidyverse.html#cb36-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 27 27   male  18         CBT          7   51.73469   High       7     0</span></span>
+<span id="cb36-41"><a href="the-tidyverse.html#cb36-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 28 28 female  20         CBT          4   38.94087 Medium      16     0</span></span>
+<span id="cb36-42"><a href="the-tidyverse.html#cb36-42" aria-hidden="true" tabindex="-1"></a><span class="do">## 29 29   male  22         CBT          9   24.36868    Low       8     1</span></span>
+<span id="cb36-43"><a href="the-tidyverse.html#cb36-43" aria-hidden="true" tabindex="-1"></a><span class="do">## 30 30 female  20         CBT          7   39.86843 Medium      16     0</span></span>
+<span id="cb36-44"><a href="the-tidyverse.html#cb36-44" aria-hidden="true" tabindex="-1"></a><span class="do">## 31 31   male  20         CBT         11   36.68327 Medium      17     0</span></span>
+<span id="cb36-45"><a href="the-tidyverse.html#cb36-45" aria-hidden="true" tabindex="-1"></a><span class="do">## 32 32 female  23         CBT          3   36.66050 Medium       6     1</span></span>
+<span id="cb36-46"><a href="the-tidyverse.html#cb36-46" aria-hidden="true" tabindex="-1"></a><span class="do">## 33 33   male  29         CBT          5   38.97431 Medium       7     1</span></span>
+<span id="cb36-47"><a href="the-tidyverse.html#cb36-47" aria-hidden="true" tabindex="-1"></a><span class="do">## 34 34 female  27         CBT          9   49.63719   High       1     0</span></span>
+<span id="cb36-48"><a href="the-tidyverse.html#cb36-48" aria-hidden="true" tabindex="-1"></a><span class="do">## 35 35   male  27         CBT         14   52.31847   High      10     1</span></span>
+<span id="cb36-49"><a href="the-tidyverse.html#cb36-49" aria-hidden="true" tabindex="-1"></a><span class="do">## 36 36 female  27         CBT          4   20.07089    Low       8     0</span></span></code></pre></div>
+<div style="margin-bottom:50px;">
+
+</div>
+</div>
+<div id="the-package-tidyr" class="section level3 hasAnchor" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> The package <strong>tidyr</strong><a href="the-tidyverse.html#the-package-tidyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The package <a href="https://tidyr.tidyverse.org" target="_blank"><strong>tidyr</strong></a> was also developed by Hadley Wickham and colleagues. The package <strong>tidyr</strong> was created to tidy data; i.e., every vector column represents a variable, every row includes information of one participant/observation, and cells include a single value. The package <strong>tidyr</strong> is widely used to transform data frames from wide to long format and viceversa. This process involving the reshaping of data relies on pivoting the data set to collapse several columns into fewer columns (<code>pivot_longer()</code>) to generate a long-format data set, or to expand a few columns into more columns (<code>pivot_wider()</code>) to create a wide-format data set.</p>
+<p>Let's select the first four observations of the simulated data set <code>affective.dis</code>, a wide-format data set in which participant's responses were entered in a single row and multiple columns. We will use the function <code>slice_sample()</code> from the package <strong>dplyr</strong> to subset <em>n</em> random rows, rather than using the function <code>filter()</code> that requires setting conditions to keep some rows while dropping others (e.g., <code>filter(sex == 'female')</code>).</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="the-tidyverse.html#cb37-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-2"><a href="the-tidyverse.html#cb37-2" aria-hidden="true" tabindex="-1"></a>affective.wide1 <span class="ot">&lt;-</span> affective.dis <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="the-tidyverse.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb37-4"><a href="the-tidyverse.html#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="the-tidyverse.html#cb37-5" aria-hidden="true" tabindex="-1"></a>affective.wide1</span>
+<span id="cb37-6"><a href="the-tidyverse.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex age depression life.satis  satis friends alone</span></span>
+<span id="cb37-7"><a href="the-tidyverse.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 30         3 2020 female  20          7   39.86843 Medium      16     0</span></span>
+<span id="cb37-8"><a href="the-tidyverse.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 24         2 2020 female  21         14   41.41475 Medium       1     0</span></span>
+<span id="cb37-9"><a href="the-tidyverse.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 22         2 2020 female  20         13   27.74791 Medium       1     0</span></span>
+<span id="cb37-10"><a href="the-tidyverse.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 21         2 2020   male  28         16   34.80599 Medium       5     1</span></span>
+<span id="cb37-11"><a href="the-tidyverse.html#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 35         3 2020   male  27         14   52.31847   High      10     1</span></span></code></pre></div>
+<div style="margin-bottom:50px;">
+
+</div>
+<p>XXXXXX</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="renaming-recoding-and-sorting-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-dataWrangling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["LDSwR.pdf", "LDSwR.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"toc": true,
+"toc_float": true,
+"toc_depth": 2
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

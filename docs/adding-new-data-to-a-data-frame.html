@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Introduction to R | Learning Data Science with R</title>
-  <meta name="description" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <title>3.3 Adding new data to a data frame | Learning Data Science with R</title>
+  <meta name="description" content="3.3 Adding new data to a data frame | Learning Data Science with R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <meta property="og:title" content="3.3 Adding new data to a data frame | Learning Data Science with R" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <meta name="twitter:title" content="3.3 Adding new data to a data frame | Learning Data Science with R" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="references.html"/>
-<link rel="next" href="what-is-rstudio.html"/>
+<link rel="prev" href="indexing-and-subsetting.html"/>
+<link rel="next" href="renaming-recoding-and-sorting-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -275,84 +275,51 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-r" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Introduction to R<a href="introduction-to-r.html#introduction-to-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div style="margin-bottom:40px;">
-
-</div>
-<blockquote>
-<left><strong>LEARNING OUTCOMES</strong></left>
-<div style="margin-bottom:30px;">
-
-</div>
-<ul>
-<li>Identify the capabilities of R and RStudio's environment and appraise their functionality.</li>
-<li>Distinguish between R functions, objects, and diverse data wrangling approaches.</li>
-<li>Apply basic programming skills to import and organize the data using classic data wrangling approaches and the <strong>tidyverse</strong> grammar.</li>
-<li>Evaluate the R code and appraise the outputs to demonstrate a satisfactory level of basic programming skills in R.</li>
-</ul>
-</blockquote>
-<div style="margin-bottom:60px;">
-
-</div>
-<p><strong>R</strong> is a programming language and an open-source software environment for statistical computing and graphics available for Windows, MacOS, and Linux operating systems (R Core Team, 2023). R is an interactive environment for data science that enables us to import, manipulate, model, and visualize data to effectively communicate our results (Wickham &amp; Grolemund, 2017). The use of R also promotes transparency and open research, with a clear focus on supporting reproducibility policies (Gandrud, 2015).</p>
-<p>R, in its most basic form, is composed by (1) a <em>script</em> in which we write the lines of R code that we run, and (2) the <em>console</em> that displays the results and debugging (Figure 2.1). If we generate a plot, it will emerge as a pop-up window, showing one plot at a time. For more details on what is R, click <a href="http://www.r-project.org" target="_blank">here</a>.</p>
-<div style="margin-bottom:30px;">
-
-</div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Rpanels"></span>
-<img src="images/R_panels.jpg" alt="R displayed in two panels: Script (left) and Console (right)." width="100%" />
-<p class="caption">
-Figure 2.1: R displayed in two panels: Script (left) and Console (right).
-</p>
-</div>
-<div style="margin-bottom:40px;">
-
-</div>
-<div class="alert alert-success" role="alert">
-<h4 class="alert-heading" style="text-align: center; color: DarkRed">
-<strong>Why Use R?</strong>
-</h4>
-<ul>
-<ul type = 'square' style="color: Black">
-<li>
-It is a free and open-access programming environment for data science
-</li>
-<li>
-Reproducible and transparent research in psychological science
-</li>
-<li>
-Unlimited capabilities for data science (e.g., analysis, modelling, visualization)
-</li>
-<li>
-It is dynamic. R is constantly evolving. It provides state-of-the-art solutions for any imaginable field (e.g., economics, psychology, genetics, medicine, ecology, sociology, computational physics, geography, psychometrics)
-</li>
-<li>
-R has the biggest global community providing all sorts of free resources to support learners (e.g., <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html" target="_blank">reference manuals</a>, <a href="https://bookdown.org" target="_blank">books</a>, <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-r-and-rstudio" target="_blank">on-line tutorials</a>, <a href="https://debruine.github.io/lmem_sim/" target="_blank">R code and notebooks</a>, <a href="https://github.com/rstudio/cheatsheets/blob/main/base-r.pdf" target="_blank">cheat sheets</a>, <a href="https://community.rstudio.com" target="_blank">Internet forums</a>)
-</li>
-<li>
-R is more efficient than any other commercial software
-</li>
-<li>
-UK universities teaching 21st century data science with R: <a href="https://psyteachr.github.io" target="_blank">University of Glasgow</a>, Lancaster University, <a href="https://www.ntu.ac.uk/about-us/events/events/2022/6/teaching-statistics-with-r-in-psychology" target="_blank">Nottingham Trent University</a>, <a href="https://bookdown.org/animestina/dapr1_labs/" target="_blank">University of Edinburgh</a>, University of Lincoln, University of Manchester, University of Plymouth, University of Sussex, Queen Mary University of London, University of Sheffield, University of Essex, Oxford University, King's College, University of Warwick...
-</li>
-<li>
-Employability
-</li>
-<ul>
-</ul>
-</div>
-<div style="margin-bottom:60px;">
-
-</div>
+<div id="adding-new-data-to-a-data-frame" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Adding new data to a data frame<a href="adding-new-data-to-a-data-frame.html#adding-new-data-to-a-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The first approach is very straightforward. We will add the name of the new variable (<em>age</em>) after the data frame (e.g., <code>affective.dis</code>) followed by the <code>$</code> symbol. Then, we will assign the set of values of the newly-created variable to the data frame.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="adding-new-data-to-a-data-frame.html#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-2"><a href="adding-new-data-to-a-data-frame.html#cb26-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">36</span>, <span class="at">replace =</span> T)</span>
+<span id="cb26-3"><a href="adding-new-data-to-a-data-frame.html#cb26-3" aria-hidden="true" tabindex="-1"></a>affective.dis<span class="sc">$</span>age <span class="ot">&lt;-</span> age</span>
+<span id="cb26-4"><a href="adding-new-data-to-a-data-frame.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(affective.dis)</span>
+<span id="cb26-5"><a href="adding-new-data-to-a-data-frame.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex depression life.satis alone age</span></span>
+<span id="cb26-6"><a href="adding-new-data-to-a-data-frame.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1         1 2020   male         22   30.69752     0  24</span></span>
+<span id="cb26-7"><a href="adding-new-data-to-a-data-frame.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2         1 2020 female         19   43.74754     1  29</span></span>
+<span id="cb26-8"><a href="adding-new-data-to-a-data-frame.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3         1 2020   male         14   43.65387     0  28</span></span>
+<span id="cb26-9"><a href="adding-new-data-to-a-data-frame.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4         1 2020 female         23   37.05222     0  23</span></span>
+<span id="cb26-10"><a href="adding-new-data-to-a-data-frame.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5         1 2020   male         16   28.00531     0  19</span></span>
+<span id="cb26-11"><a href="adding-new-data-to-a-data-frame.html#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6         1 2020 female         11   34.74806     0  25</span></span></code></pre></div>
+<p>With the second approach, we can merge variables (i.e., columns) and observations (i.e., rows) using the functions <code>cbind()</code> and <code>rbind()</code>. The function <code>cbind()</code> binds columns (i.e., variables), whereas <code>rbind()</code> binds rows (i.e., observations, cases, participants).</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="adding-new-data-to-a-data-frame.html#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="adding-new-data-to-a-data-frame.html#cb27-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">36</span>, <span class="at">replace =</span> T)</span>
+<span id="cb27-3"><a href="adding-new-data-to-a-data-frame.html#cb27-3" aria-hidden="true" tabindex="-1"></a>affective.dis <span class="ot">&lt;-</span> <span class="fu">cbind</span>(affective.dis, y)</span>
+<span id="cb27-4"><a href="adding-new-data-to-a-data-frame.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(affective.dis)</span>
+<span id="cb27-5"><a href="adding-new-data-to-a-data-frame.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex depression life.satis alone age  y</span></span>
+<span id="cb27-6"><a href="adding-new-data-to-a-data-frame.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1         1 2020   male         22   30.69752     0  24  3</span></span>
+<span id="cb27-7"><a href="adding-new-data-to-a-data-frame.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2         1 2020 female         19   43.74754     1  29 17</span></span>
+<span id="cb27-8"><a href="adding-new-data-to-a-data-frame.html#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3         1 2020   male         14   43.65387     0  28  0</span></span>
+<span id="cb27-9"><a href="adding-new-data-to-a-data-frame.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4         1 2020 female         23   37.05222     0  23 20</span></span>
+<span id="cb27-10"><a href="adding-new-data-to-a-data-frame.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5         1 2020   male         16   28.00531     0  19  9</span></span>
+<span id="cb27-11"><a href="adding-new-data-to-a-data-frame.html#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6         1 2020 female         11   34.74806     0  25  6</span></span></code></pre></div>
+<p>To rearrange the order of the variables after adding new ones (e.g., placing <em>age</em> after <em>sex</em>), we can use indexing approaches to vectors.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="adding-new-data-to-a-data-frame.html#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2"><a href="adding-new-data-to-a-data-frame.html#cb28-2" aria-hidden="true" tabindex="-1"></a>affective.dis <span class="ot">&lt;-</span> affective.dis[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">9</span>)]</span>
+<span id="cb28-3"><a href="adding-new-data-to-a-data-frame.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(affective.dis)</span>
+<span id="cb28-4"><a href="adding-new-data-to-a-data-frame.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex age depression life.satis alone  y</span></span>
+<span id="cb28-5"><a href="adding-new-data-to-a-data-frame.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1         1 2020   male  24         22   30.69752     0  3</span></span>
+<span id="cb28-6"><a href="adding-new-data-to-a-data-frame.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2         1 2020 female  29         19   43.74754     1 17</span></span>
+<span id="cb28-7"><a href="adding-new-data-to-a-data-frame.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3         1 2020   male  28         14   43.65387     0  0</span></span>
+<span id="cb28-8"><a href="adding-new-data-to-a-data-frame.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4         1 2020 female  23         23   37.05222     0 20</span></span>
+<span id="cb28-9"><a href="adding-new-data-to-a-data-frame.html#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5         1 2020   male  19         16   28.00531     0  9</span></span>
+<span id="cb28-10"><a href="adding-new-data-to-a-data-frame.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6         1 2020 female  25         11   34.74806     0  6</span></span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="references.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="indexing-and-subsetting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="renaming-recoding-and-sorting-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -383,7 +350,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-introR.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-dataWrangling.Rmd",
 "text": "Edit"
 },
 "history": {

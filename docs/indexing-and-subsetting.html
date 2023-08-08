@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Introduction to R | Learning Data Science with R</title>
-  <meta name="description" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <title>3.2 Indexing and subsetting | Learning Data Science with R</title>
+  <meta name="description" content="3.2 Indexing and subsetting | Learning Data Science with R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <meta property="og:title" content="3.2 Indexing and subsetting | Learning Data Science with R" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Introduction to R | Learning Data Science with R" />
+  <meta name="twitter:title" content="3.2 Indexing and subsetting | Learning Data Science with R" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="references.html"/>
-<link rel="next" href="what-is-rstudio.html"/>
+<link rel="prev" href="simulating-data.html"/>
+<link rel="next" href="adding-new-data-to-a-data-frame.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -275,75 +275,116 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-r" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Introduction to R<a href="introduction-to-r.html#introduction-to-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div style="margin-bottom:40px;">
-
-</div>
-<blockquote>
-<left><strong>LEARNING OUTCOMES</strong></left>
-<div style="margin-bottom:30px;">
-
-</div>
+<div id="indexing-and-subsetting" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Indexing and subsetting<a href="indexing-and-subsetting.html#indexing-and-subsetting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can use numeric indexes and the function <code>subset()</code> in order to extract parts of a vector, matrix, or data frame, generating a different version of the original data set. For instance, we could be interested in analyzing the psychometric properties of an ability test, focusing only on the specific items of a scale. Likewise, we could be interested in plotting and modeling the data of a subgroup of participants. Sometimes, it is recommended to rename variables or to transform them into new ones by recoding them. In all these operations, we need to specify which rows (observations, cases, participants) and columns (the variables of interest) will be selected, deleted, transformed, renamed, or recoded.</p>
+<div id="selecting-columns-variables" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Selecting columns (variables)<a href="indexing-and-subsetting.html#selecting-columns-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are different ways to select one vector column or variable.</p>
 <ul>
-<li>Identify the capabilities of R and RStudio's environment and appraise their functionality.</li>
-<li>Distinguish between R functions, objects, and diverse data wrangling approaches.</li>
-<li>Apply basic programming skills to import and organize the data using classic data wrangling approaches and the <strong>tidyverse</strong> grammar.</li>
-<li>Evaluate the R code and appraise the outputs to demonstrate a satisfactory level of basic programming skills in R.</li>
+<li>We can use the dollar symbol (<code>$</code>) between the data set (placed before the dollar symbol) and the name of the variable that we want to select (placed after the dollar symbol).</li>
+<li>We can use square brackets after the data set's name. Inside of the brackets we can either include the numerical value showing in which location that particular variable is placed in the data set (e.g., a number <code>4</code> will mean that we want to select the fourth variable from the data set) or the name of the variable within quotation marks (e.g., <code>'sex'</code>).</li>
+<li>We can use the classic indexing approach to matrices with square brackets. We will select all rows (i.e., in the first dimension or rows, we will leave a blank space before the comma) and the specific vector column after the comma (e.g., in the second dimension or columns, a <code>4</code> will select the data from the fourth column; i.e., the variable <em>sex</em>).</li>
 </ul>
-</blockquote>
-<div style="margin-bottom:60px;">
-
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="indexing-and-subsetting.html#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-2"><a href="indexing-and-subsetting.html#cb21-2" aria-hidden="true" tabindex="-1"></a>affective.dis<span class="sc">$</span>sex</span>
+<span id="cb21-3"><a href="indexing-and-subsetting.html#cb21-3" aria-hidden="true" tabindex="-1"></a>affective.dis[<span class="dv">4</span>]</span>
+<span id="cb21-4"><a href="indexing-and-subsetting.html#cb21-4" aria-hidden="true" tabindex="-1"></a>affective.dis[<span class="st">&#39;sex&#39;</span>]</span>
+<span id="cb21-5"><a href="indexing-and-subsetting.html#cb21-5" aria-hidden="true" tabindex="-1"></a>affective.dis[ , <span class="dv">4</span>]</span></code></pre></div>
+<p>Sometimes, we are interested in selecting more than one variable. To do so, we can use the function <code>c()</code> with the indexes or names of the variables. To drop one or more variables we can use the minus sign before the indexes.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="indexing-and-subsetting.html#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="indexing-and-subsetting.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(affective.dis[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>)])</span>
+<span id="cb22-3"><a href="indexing-and-subsetting.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment    sex depression alone</span></span>
+<span id="cb22-4"><a href="indexing-and-subsetting.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1         1   male         22     0</span></span>
+<span id="cb22-5"><a href="indexing-and-subsetting.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2         1 female         19     1</span></span>
+<span id="cb22-6"><a href="indexing-and-subsetting.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3         1   male         14     0</span></span>
+<span id="cb22-7"><a href="indexing-and-subsetting.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4         1 female         23     0</span></span>
+<span id="cb22-8"><a href="indexing-and-subsetting.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5         1   male         16     0</span></span>
+<span id="cb22-9"><a href="indexing-and-subsetting.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6         1 female         11     0</span></span>
+<span id="cb22-10"><a href="indexing-and-subsetting.html#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="indexing-and-subsetting.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(affective.dis[ , <span class="sc">-</span><span class="dv">7</span>])</span>
+<span id="cb22-12"><a href="indexing-and-subsetting.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex depression life.satis</span></span>
+<span id="cb22-13"><a href="indexing-and-subsetting.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1         1 2020   male         22   30.69752</span></span>
+<span id="cb22-14"><a href="indexing-and-subsetting.html#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2         1 2020 female         19   43.74754</span></span>
+<span id="cb22-15"><a href="indexing-and-subsetting.html#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3         1 2020   male         14   43.65387</span></span>
+<span id="cb22-16"><a href="indexing-and-subsetting.html#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4         1 2020 female         23   37.05222</span></span>
+<span id="cb22-17"><a href="indexing-and-subsetting.html#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5         1 2020   male         16   28.00531</span></span>
+<span id="cb22-18"><a href="indexing-and-subsetting.html#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6         1 2020 female         11   34.74806</span></span></code></pre></div>
 </div>
-<p><strong>R</strong> is a programming language and an open-source software environment for statistical computing and graphics available for Windows, MacOS, and Linux operating systems (R Core Team, 2023). R is an interactive environment for data science that enables us to import, manipulate, model, and visualize data to effectively communicate our results (Wickham &amp; Grolemund, 2017). The use of R also promotes transparency and open research, with a clear focus on supporting reproducibility policies (Gandrud, 2015).</p>
-<p>R, in its most basic form, is composed by (1) a <em>script</em> in which we write the lines of R code that we run, and (2) the <em>console</em> that displays the results and debugging (Figure 2.1). If we generate a plot, it will emerge as a pop-up window, showing one plot at a time. For more details on what is R, click <a href="http://www.r-project.org" target="_blank">here</a>.</p>
-<div style="margin-bottom:30px;">
-
+<div id="selecting-rows-observations" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Selecting rows (observations)<a href="indexing-and-subsetting.html#selecting-rows-observations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To select observations, cases, or participants (i.e., rows) we will use the approach for indexing matrices. This time, the blank space will be left after the comma (i.e., columns) and we will select the observations by indexing the space before the comma (i.e., rows).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="indexing-and-subsetting.html#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-2"><a href="indexing-and-subsetting.html#cb23-2" aria-hidden="true" tabindex="-1"></a>affective.dis[<span class="dv">12</span><span class="sc">:</span><span class="dv">15</span>, ]</span>
+<span id="cb23-3"><a href="indexing-and-subsetting.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    id treatment year    sex depression life.satis alone</span></span>
+<span id="cb23-4"><a href="indexing-and-subsetting.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 12         1 2020 female         22   29.01475     1</span></span>
+<span id="cb23-5"><a href="indexing-and-subsetting.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 13         2 2020   male         11   37.83148     1</span></span>
+<span id="cb23-6"><a href="indexing-and-subsetting.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 14         2 2020 female          8   49.18545     0</span></span>
+<span id="cb23-7"><a href="indexing-and-subsetting.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 15         2 2020   male          5   39.33784     0</span></span>
+<span id="cb23-8"><a href="indexing-and-subsetting.html#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="indexing-and-subsetting.html#cb23-9" aria-hidden="true" tabindex="-1"></a>affective.dis[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">18</span>, <span class="dv">36</span>), ]</span>
+<span id="cb23-10"><a href="indexing-and-subsetting.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    id treatment year    sex depression life.satis alone</span></span>
+<span id="cb23-11"><a href="indexing-and-subsetting.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   1         1 2020   male         22   30.69752     0</span></span>
+<span id="cb23-12"><a href="indexing-and-subsetting.html#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 18         2 2020 female         10   43.12886     0</span></span>
+<span id="cb23-13"><a href="indexing-and-subsetting.html#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 36 36         3 2020 female          4   20.07089     0</span></span></code></pre></div>
 </div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Rpanels"></span>
-<img src="images/R_panels.jpg" alt="R displayed in two panels: Script (left) and Console (right)." width="100%" />
-<p class="caption">
-Figure 2.1: R displayed in two panels: Script (left) and Console (right).
-</p>
-</div>
+<div id="selecting-rows-and-columns-conditional-subsetting" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Selecting rows and columns (conditional subsetting)<a href="indexing-and-subsetting.html#selecting-rows-and-columns-conditional-subsetting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Although we could use a matrix indexing procedure to select both observations and variables, the use of logical operators is a more efficient approach. For instance, we could be interested in selecting a subset of subjects that were told to exercise daily to treat their depression (<code>treatment = 1</code>).</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="indexing-and-subsetting.html#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="indexing-and-subsetting.html#cb24-2" aria-hidden="true" tabindex="-1"></a>affective.dis[affective.dis<span class="sc">$</span>treatment <span class="sc">==</span> <span class="dv">1</span>, ]</span>
+<span id="cb24-3"><a href="indexing-and-subsetting.html#cb24-3" aria-hidden="true" tabindex="-1"></a>affective.dis[affective.dis[<span class="st">&#39;treatment&#39;</span>] <span class="sc">==</span> <span class="dv">1</span>, ]</span></code></pre></div>
+<p>We could complicate things further by selecting a subset of participants scoring 42 or more in the scale <em>Satisfaction with life</em> (<code>life.satis</code> <span class="math inline">\(\geq\)</span> <code>42</code>) and living alone (<code>alone = 1</code>).</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="indexing-and-subsetting.html#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-2"><a href="indexing-and-subsetting.html#cb25-2" aria-hidden="true" tabindex="-1"></a>affective.dis[affective.dis<span class="sc">$</span>life.satis <span class="sc">&gt;=</span> <span class="dv">42</span></span>
+<span id="cb25-3"><a href="indexing-and-subsetting.html#cb25-3" aria-hidden="true" tabindex="-1"></a>             <span class="sc">&amp;</span> affective.dis<span class="sc">$</span>alone <span class="sc">==</span> <span class="dv">1</span>, ]</span>
+<span id="cb25-4"><a href="indexing-and-subsetting.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    id treatment year    sex depression life.satis alone</span></span>
+<span id="cb25-5"><a href="indexing-and-subsetting.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2   2         1 2020 female         19   43.74754     1</span></span>
+<span id="cb25-6"><a href="indexing-and-subsetting.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 16 16         2 2020 female          7   46.93855     1</span></span>
+<span id="cb25-7"><a href="indexing-and-subsetting.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 23 23         2 2020   male         11   58.95706     1</span></span>
+<span id="cb25-8"><a href="indexing-and-subsetting.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 35 35         3 2020   male         14   52.31847     1</span></span></code></pre></div>
 <div style="margin-bottom:40px;">
 
 </div>
 <div class="alert alert-success" role="alert">
 <h4 class="alert-heading" style="text-align: center; color: DarkRed">
-<strong>Why Use R?</strong>
+<strong>Logical operators</strong>
 </h4>
 <ul>
 <ul type = 'square' style="color: Black">
 <li>
-It is a free and open-access programming environment for data science
+<strong>x is less than y</strong>: <code>x &lt; y</code>
 </li>
 <li>
-Reproducible and transparent research in psychological science
+<strong>x is less than or equal to y</strong>: <code>x &lt;= y</code>
 </li>
 <li>
-Unlimited capabilities for data science (e.g., analysis, modelling, visualization)
+<strong>x is greater than y</strong>: <code>x &gt; y</code>
 </li>
 <li>
-It is dynamic. R is constantly evolving. It provides state-of-the-art solutions for any imaginable field (e.g., economics, psychology, genetics, medicine, ecology, sociology, computational physics, geography, psychometrics)
+<strong>x is greater than or equal to y</strong>: <code>x &gt;= y</code>
 </li>
 <li>
-R has the biggest global community providing all sorts of free resources to support learners (e.g., <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html" target="_blank">reference manuals</a>, <a href="https://bookdown.org" target="_blank">books</a>, <a href="http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-r-and-rstudio" target="_blank">on-line tutorials</a>, <a href="https://debruine.github.io/lmem_sim/" target="_blank">R code and notebooks</a>, <a href="https://github.com/rstudio/cheatsheets/blob/main/base-r.pdf" target="_blank">cheat sheets</a>, <a href="https://community.rstudio.com" target="_blank">Internet forums</a>)
+<strong>x is equal to y</strong>: <code>x == y</code>
 </li>
 <li>
-R is more efficient than any other commercial software
+<strong>Not equal to</strong>: <code>!=</code>
 </li>
 <li>
-UK universities teaching 21st century data science with R: <a href="https://psyteachr.github.io" target="_blank">University of Glasgow</a>, Lancaster University, <a href="https://www.ntu.ac.uk/about-us/events/events/2022/6/teaching-statistics-with-r-in-psychology" target="_blank">Nottingham Trent University</a>, <a href="https://bookdown.org/animestina/dapr1_labs/" target="_blank">University of Edinburgh</a>, University of Lincoln, University of Manchester, University of Plymouth, University of Sussex, Queen Mary University of London, University of Sheffield, University of Essex, Oxford University, King's College, University of Warwick...
+<strong>Not x</strong>: <code>!x</code>
 </li>
 <li>
-Employability
+<strong>x AND y</strong>: <code>x &amp; y</code>
+</li>
+<li>
+<strong>x OR y</strong>: <code>x | y</code>
 </li>
 <ul>
 </ul>
 </div>
 <div style="margin-bottom:60px;">
 
+</div>
 </div>
 </div>
             </section>
@@ -351,8 +392,8 @@ Employability
           </div>
         </div>
       </div>
-<a href="references.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simulating-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="adding-new-data-to-a-data-frame.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -383,7 +424,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-introR.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-dataWrangling.Rmd",
 "text": "Edit"
 },
 "history": {

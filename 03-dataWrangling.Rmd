@@ -27,5 +27,441 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 
 
 
-**R** is a programming language
+
+## Simulating data
+
+We are going to create a data frame by simulating a data set. Data frames are data structures that include vector columns (i.e., variables) containing different modes of data (e.g., numeric, factor, character). The observations, participants, or cases are usually displayed as rows. Using the assignment operator (`<-`) we will store the data that we will simulate into R objects that will be named accordingly to the variables they intend to simulate (e.g., *id*, *treatment*, *life.satis*).
+
+  
+```{r, dataframes1}
+
+id <- 1:36
+treatment <- rep(1:3, each = 12)
+year <- rep(2020, times = 36)
+sex <- rep(c('male', 'female'), times = 18)
+depression <- c(22, 19, 14, 23, 16, 11, 29, 19,
+                17, 14, 20, 22, 11, 8, 5, 7, 13,
+                10, 9, 7, 16, 13, 11, 14, 8, 12,
+                7, 4, 9, 7, 11, 3, 5, 9, 14, 4)
+life.satis <- rnorm(36, mean = 40, sd = 12.3)
+alone <- rbinom(36, 1, .29)
+
+```
+
+
+
+The function `data.frame()` allows us to include different column vectors as arguments. The function `names()` shows the variables' names.
+
+
+```{r, dataframes2}
+
+
+affective.dis <- data.frame(id, treatment, year, sex,
+                            depression, life.satis, alone)
+head(affective.dis, 8)
+
+names(affective.dis)
+
+```
+
+
+
+In the following sections, we will apply basic data wrangling functions to reorganize and tidy the data frame called `affective.dis` (i.e., *affective disorders*); a data set that includes the vector columns that we have recently simulated and inspected: *id*, *treatment*, *year*, *sex*, *depression*, *life.satis*, and *alone*.
+
+
+## Indexing and subsetting
+
+We can use numeric indexes and the function `subset()` in order to extract parts of a vector, matrix, or data frame, generating a different version of the original data set. For instance, we could be interested in analyzing the psychometric properties of an ability test, focusing only on the specific items of a scale. Likewise, we could be interested in plotting and modeling the data of a subgroup of participants. Sometimes, it is recommended to rename variables or to transform them into new ones by recoding them. In all these operations, we need to specify which rows (observations, cases, participants) and columns (the variables of interest) will be selected, deleted, transformed, renamed, or recoded.
+
+
+### Selecting columns (variables)
+
+There are different ways to select one vector column or variable.
+
+  - We can use the dollar symbol (`$`) between the data set (placed before the dollar symbol) and the name of the variable that we want to select (placed after the dollar symbol).
+  - We can use square brackets after the data set's name. Inside of the brackets we can either include the numerical value showing in which location that particular variable is placed in the data set (e.g., a number `4` will mean that we want to select the fourth variable from the data set) or the name of the variable within quotation marks (e.g., `'sex'`).
+  - We can use the classic indexing approach to matrices with square brackets. We will select all rows (i.e., in the first dimension or rows, we will leave a blank space before the comma) and the specific vector column after the comma (e.g., in the second dimension or columns, a `4` will select the data from the fourth column; i.e., the variable *sex*).
+
+```{r, select.columns1, results = 'hide', eval = FALSE}
+
+affective.dis$sex
+affective.dis[4]
+affective.dis['sex']
+affective.dis[ , 4]
+
+```
+
+Sometimes, we are interested in selecting more than one variable. To do so, we can use the function `c()` with the indexes or names of the variables. To drop one or more variables we can use the minus sign before the indexes.
+
+```{r, select.columns2}
+
+head(affective.dis[ , c(1, 2, 4, 5, 7)])
+
+head(affective.dis[ , -7])
+
+```
+
+
+### Selecting rows (observations)
+
+To select observations, cases, or participants (i.e., rows) we will use the approach for indexing matrices. This time, the blank space will be left after the comma (i.e., columns) and we will select the observations by indexing the space before the comma (i.e., rows).
+
+
+```{r, select.rows}
+
+affective.dis[12:15, ]
+
+affective.dis[c(1, 18, 36), ]
+
+```
+
+
+### Selecting rows and columns (conditional subsetting)
+
+Although we could use a matrix indexing procedure to select both observations and variables, the use of logical operators is a more efficient approach. For instance, we could be interested in selecting a subset of subjects that were told to exercise daily to treat their depression (`treatment = 1`). 
+
+
+```{r, subsetting1, results = 'hide', eval = FALSE}
+
+affective.dis[affective.dis$treatment == 1, ]
+affective.dis[affective.dis['treatment'] == 1, ]
+
+```
+
+
+We could complicate things further by selecting a subset of participants scoring 42 or more in the scale *Satisfaction with life* (`life.satis` $\geq$ `42`) and living alone (`alone = 1`).
+
+```{r, subsetting2}
+
+affective.dis[affective.dis$life.satis >= 42
+             & affective.dis$alone == 1, ]
+
+```
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading" style="text-align: center; color: DarkRed">**Logical operators**</h4>
+  <ul><ul type = 'square' style="color: Black">
+<li>**x is less than y**: `x < y`</li>
+<li>**x is less than or equal to y**: `x <= y`</li>
+<li>**x is greater than y**: `x > y`</li>
+<li>**x is greater than or equal to y**: `x >= y`</li>
+<li>**x is equal to y**: `x == y`</li>
+<li>**Not equal to**: `!=`</li>
+<li>**Not x**: `!x`</li>
+<li>**x AND y**: `x & y`</li>
+<li>**x OR y**: `x | y`</li>
+  <ul></ul>
+</div>
+
+
+<div style="margin-bottom:60px;">
+</div>
+
+
+
+## Adding new data to a data frame
+
+The first approach is very straightforward. We will add the name of the new variable (*age*) after the data frame (e.g., `affective.dis`) followed by the `$` symbol. Then, we will assign the set of values of the newly-created variable to the data frame.
+
+
+```{r, adding.variables1}
+
+age <- sample(18:30, 36, replace = T)
+affective.dis$age <- age
+head(affective.dis)
+
+```
+
+
+With the second approach, we can merge variables (i.e., columns) and observations (i.e., rows) using the functions `cbind()` and `rbind()`. The function `cbind()` binds columns (i.e., variables), whereas `rbind()` binds rows (i.e., observations, cases, participants).
+
+```{r, adding_variables2}
+
+y <- sample(0:20, 36, replace = T)
+affective.dis <- cbind(affective.dis, y)
+head(affective.dis)
+
+```
+
+
+To rearrange the order of the variables after adding new ones (e.g., placing *age* after *sex*), we can use indexing approaches to vectors.
+
+```{r, adding_variables3}
+
+affective.dis <- affective.dis[c(1:4, 8, 5:7, 9)]
+head(affective.dis)
+
+```
+
+
+
+## Renaming, recoding, and sorting data
+
+### Renaming
+
+To rename variables, we will use the indexing approach (i.e., square brackets) with the function `names()`. The assignment operator will assign the new names to the variables of our data set. For example, to rename *y* (the number of friends) and use a more appropriate name (i.e., *friends*), we will assign the new variable name to the 9th column of the data set (i.e., *y*).
+
+```{r, rename}
+
+names(affective.dis) [9] <- 'friends'
+head(affective.dis)
+
+```
+
+
+### Recoding
+
+We can recode variables in different columns (i.e., creating a new variable with the new codes and keep the old variable) or in the same column (i.e., overwriting the existing variable). In the following example, we are creating a new variable called *satis*. This new ordinal variable displays three ordered bands of the scale Satisfaction with life (e.g., `Low`, `Medium`, `High`) with cut-off points set at `26` and `47`. We have to recode the values of *life.satis* into the new variable *satis* using conditional subsetting with logical operators.
+
+
+```{r, recode}
+  
+affective.dis$satis [affective.dis$life.satis < 26] <- 'Low'
+affective.dis$satis [affective.dis$life.satis >= 26 &
+                          affective.dis$life.satis < 47] <- 'Medium'
+affective.dis$satis [affective.dis$life.satis >= 47] <- 'High'
+
+affective.dis <- affective.dis[c(1:7, 10, 9, 8)]
+head(affective.dis)
+
+```
+
+
+### Sorting
+
+If we are interested in sorting our data set for a visual inspection we will use the function `order()`. The argument `decreasing` set as `FALSE` shows the lowest values first, whereas the argument `decreasing` set as `TRUE` displays the highest values first.
+
+```{r, sort1}
+  
+affective.dis <- affective.dis[order(affective.dis$depression,
+                                   decreasing = T), ]
+head(affective.dis)
+
+```
+
+
+We might be also interested in inspecting depression scores as a function of two or more variables. For instance, to inspect *depression* by *age* groups, we will include two arguments in the function `order()`. First, we will order the observations by *age*. Then, within every year, we will order our observations by *depression*.
+
+```{r, sort2}
+
+affective.dis <- affective.dis[order(affective.dis$age,
+                                   affective.dis$depression), ]
+head(affective.dis)
+
+```
+
+
+When we use the function `order()`, we change the original order of the rows of our data set. It is always convenient to restore the original order by using the variable *id* (`1:n`). Remember to leave a blank space after the comma located within the square brackets (i.e., [rows , columns]) to sort the rows by *id*.
+
+```{r, sort3, results = 'hide', eval = FALSE}
+
+affective.dis <- affective.dis[order(affective.dis$id), ]
+
+```
+
+
+
+## The **tidyverse**
+
+
+The [**tidyverse**](https://tidyverse.tidyverse.org){target='_blank'} is a collection of packages developed by a team of programmers led by Hadley Wickham that share the same philosophy and grammar ([Wickham & Grolemund, 2017](http://r4ds.had.co.nz){target='_blank'}). The main goal of the **tidyverse** is to favor an easy and comprehensive approach to data science by solving the challenges that programmers usually face when coding in R ([Wickham et al., 2019](http://www.tidyverse.org){target='_blank'}). Some of the core packages of the **tidyverse** (e.g., [**readr**](https://readr.tidyverse.org){target='_blank'}, [**tidyr**](https://tidyr.tidyverse.org){target='_blank'}, [**dplyr**](https://dplyr.tidyverse.org){target='_blank'}, [**ggplot2**](https://ggplot2.tidyverse.org){target='_blank'}) provide clear insights on their functionality as they will provide solutions to import, tidy, manipulate, and visualize data.
+
+
+
+### The pipe (%>%)
+
+The “pipe” operator is used to connect multiple verb actions into a pipeline. In sum, we can chain or pipe functions to perform a sequence of operations (e.g., data wrangling). The package [**magrittr**](https://magrittr.tidyverse.org){target='_blank'} offers a set of operators which make your R code more readable by:
+
+  - structuring sequences of data operations left-to-right (as opposed to from the inside and out).
+  - avoiding nested function calls.
+  - minimizing the need for local variables and function definitions.
+  - making it easy to add steps anywhere in the sequence of operations.
+
+The operators pipe their left-hand side values forward into expressions that appear on the right-hand side; i.e., one can replace `f(x)` with `x %>% f()`, where `%>%` is the (main) pipe-operator. The flow of the R code will be as follows:
+
+`data` %>%
+    `function 1` %>%
+    `function 2` %>%
+    `function 3` ...
+
+<div style="margin-bottom:30px;">
+</div>
+
+:::: {.infobox}
+<p style="text-align: center; color: DarkRed; font-size: large">**Keyboard shortcut for the pipe operator**</p>
+
+  - **Windows**: Press **Ctrl** + **Shift** + **M**.
+  - **MacOS**: Press **Cmd** + **Shift** + **M**.
+::::
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+### The package **dplyr**
+
+
+The package [**dplyr**](https://dplyr.tidyverse.org){target='_blank'} was developed by Hadley Wickham and colleagues. It is an optimized and distilled version of an old package named **plyr**. The package **dplyr** does not provide any “new” functionality to R per se. Everything **dplyr** does could already be done with base R, but it greatly simplifies existing functionality in R ([Wickham et al., 2022](https://github.com/tidyverse/dplyr){target='_blank'}).
+
+One important contribution of the package **dplyr** is that it provides a “grammar” (in particular, verbs) for data manipulation and for operating on data frames. Other people can understand what we are doing to a data frame with this "grammar." This new approach is very useful because it provides an abstraction for data manipulation that it did not exist before. Another useful contribution of the package **dplyr** is that their functions are very fast, because many key operations are coded in C++.
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading" style="text-align: center; color: DarkRed">**_dplyr_ verbs**</h4>
+  <ul><ul type = 'square' style="color: Black">
+<li>**select**: It returns a subset of the columns of a data frame, using a flexible notation</li>
+<li>**filter**: It extracts a subset of rows from a data frame based on logical conditions</li>
+<li>**relocate**: It reorders the columns of a data frame</li>
+<li>**arrange**: It reorders the rows of a data frame</li>
+<li>**rename**: It renames variables in a data frame</li>
+<li>**mutate**: It adds new variables/columns or transform existing variables</li>
+<li>**summarize**: It generates a summary statistics of different variables in the data frame</li>
+  <ul></ul>
+</div>
+
+
+<div style="margin-bottom:60px;">
+</div>
+
+
+
+
+### Data wrangling with *dplyr*
+
+
+First of all, we need to load the **tidyverse** that includes a suite of packages such as **dplyr**, **tidyr**, or **ggplot2**. If we are not loading the **tidyverse** or any of its packages, we will need to upload the package **magrittr** to use the pipe operator.
+
+
+```{r, tidyverse1}
+
+library(tidyverse)
+
+```
+
+
+
+We are going to use the simulated data set `affective.dis` to perform several operations that will end with the estimation of two descriptive statistics (*M* and *SD*) of the variables *depression* and *life.satis* for the female participants only and split by the three experimental conditions of the variable *treatment*.
+
+First, the data set `affective.dis` will be piped to the first operation: to select the variables *id*, *treatment*, *sex*, *depression*, and *life.satis*. Second, the resulting data set will be piped to the second operation: to filter a subset of rows based on the logical condition `sex == 'female'` (i.e., selecting only the rows/participants that are females). Third, we will split the following operations by the three experimental groups of the variable *treatment*. Last, we will compute the means and standard deviations of the variables *depression* and *life.satis*.
+
+
+```{r, tidyverse2}
+
+affective.dis %>% 
+  select(id, treatment, sex, depression, life.satis) %>% 
+  filter(sex == 'female') %>%
+  group_by(treatment) %>% 
+  summarise(mean_depression = mean(depression),
+            sd_depression = sd(depression),
+            mean_life.satis = mean(life.satis),
+            sd_life.satis = sd(life.satis))
+
+```
+
+
+
+Sometimes, we are interested in using pipes to make sequential operations in our data sets, but the final goal is not to produce an output, but to modify a data set and to keep those changes. In these cases, we will use the assignment operator to save these changes into the same R object or into a different one. For example, in the following R code, (1) we will drop the variable *year* because it is a constant, (2) we will transform the variable *treatment* into a factor---assigning labels to its three experimental conditions, (3) we will move the variables *sex* and *age* to the second and third column respectively and the variable *satis* after the variable *life.satis*, (4) instead of overwriting the new data set on the former R object `affective.dis`, we will assign the new data set to the R object `affective.dis2`, and (5) we will reorder the rows of the new data set from the first (`id = 1`) to the last (`id = 36`) participant.
+
+
+```{r, tidyverse3}
+
+affective.dis2 <- affective.dis %>% 
+  select(-year) %>% 
+  mutate(treatment = factor(treatment,
+                            labels = c('Exercise',
+                                      'Mindfulness',
+                                      'CBT'))) %>%
+  relocate(sex, age, .after = id) %>%
+  relocate(satis, .after = life.satis) %>%
+  arrange(id)
+
+affective.dis2
+
+```
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+
+
+### The package **tidyr**
+
+
+The package [**tidyr**](https://tidyr.tidyverse.org){target='_blank'} was also developed by Hadley Wickham and colleagues. The package **tidyr** was created to tidy data; i.e., every vector column represents a variable, every row includes information of one participant/observation, and cells include a single value. The package **tidyr** is widely used to transform data frames from wide to long format and viceversa. This process involving the reshaping of data relies on pivoting the data set to collapse several columns into fewer columns (`pivot_longer()`) to generate a long-format data set, or to expand a few columns into more columns (`pivot_wider()`) to create a wide-format data set.
+
+Let's select the first four observations of the simulated data set `affective.dis`, a wide-format data set in which participant's responses were entered in a single row and multiple columns. We will use the function `slice_sample()` from the package **dplyr** to subset *n* random rows, rather than using the function `filter()` that requires setting conditions to keep some rows while dropping others (e.g., `filter(sex == 'female')`).
+
+
+```{r, tidyr1}
+
+affective.wide1 <- affective.dis %>% 
+  slice_sample(n = 5)
+
+affective.wide1
+
+```
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+XXXXXX
+
+
+
+## References
+
+
+<div style="margin-bottom:20px;">
+</div>
+
+
+Gandrud, C. (2015). [*Reproducible Research with R and RStudio*](https://prism.librarymanagementcloud.co.uk/dmu/items/1039503){target='_blank'} (2nd ed.). Chapman and Hall/CRC.
+
+Lander, J. P. (2017). [*R for everyone*](https://prism.librarymanagementcloud.co.uk/dmu/items/1039492){target='_blank'} (2nd ed.). Addison-Wesley.
+
+R Core Team (2023). [*R: A language and environment for statistical computing*.](https://www.r-project.org){target='_blank'} R Foundation for Statistical Computing.
+
+Venables, W. N., Smith, D. M., & the R Development Core Team. (2009). [*An Introduction to R*.](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf){target='_blank'} Network Theory Limited.
+
+Wickham, H., & Grolemund, G. (2017). [*R for data science: Import, tidy, transform, visualize, and model data*.](http://r4ds.had.co.nz){target='_blank'} O'Reilly.
+
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., Takahashi, K., Vaughan, D., Wilke, C., Woo, K., & Yutani, H. (2019). Welcome to the Tidyverse. *Journal of Open Source Software*, *4*(43), 1686. Retrieved at [https://joss.theoj.org/papers/10.21105/joss.01686](https://joss.theoj.org/papers/10.21105/joss.01686){target='_blank'}
+
+Wickham, H., François, R., Henry, L., & Müller, K. (2022). *dplyr: A grammar of data manipulation*. Retrieved at [https://dplyr.tidyverse.org](https://dplyr.tidyverse.org){target='_blank'}
+
+Xie, Y. (2015). [*Dynamic documents with R and knitr*](https://prism.librarymanagementcloud.co.uk/dmu/items/1039504){target='_blank'} (2nd ed.). Chapman and Hall/CRC.
+
+Xie, Y., Allaire, J. J., & Grolemund, G. (2019). [*R Markdown: The definite guide*.](http://bookdown.org/yihui/rmarkdown/){target='_blank'} Chapman and Hall/CRC.
+
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+<h2>
+  <div style="text-align: center;">
+  <span style="color:DarkRed">END OF SESSION 1</span>
+  </h2>
+
+<div style="margin-bottom:50px;">
+</div>
+
+
+
+
+
+
+
+
 

@@ -85,7 +85,7 @@ knitr::include_graphics('./images/RStudio_panels.png')
 <div class="alert alert-success" role="alert">
   <h4 class="alert-heading" style="text-align: center; color: DarkRed">**Why Use RStudio?**</h4>
   <ul><ul type = 'square' style="color: Black">
-<li>RStudio's main components are integrated into a four-pane layout: the *code editor*  (the script), the *console* (the results and debugging), the *global environment* (the R objects, history of our session), and a *notebook*  to hold tabs for the files/plots/packages/help/viewer</li>
+<li>RStudio's main components are integrated into a four-pane layout: the *code editor* (the script), the *console* (the results and debugging), the *global environment* (the R objects, history of our session), and a *notebook*  to hold tabs for the files/plots/packages/help/viewer</li>
 <li>The code editor is feature-rich and integrated with the built-in console</li>
 <li>The code editor and console are efficiently linked to the files/plots/packages/help/viewer panels</li>
 <li>RStudio is available for Windows, MacOS, and Linux</li>
@@ -101,6 +101,9 @@ knitr::include_graphics('./images/RStudio_panels.png')
 
 
 ## Let's get started!
+
+In the first place, **R** and **RStudio** should be installed in your machine. To learn how to install **R** and **RStudio** in your computer, please read carefully Appendix \@ref(appenA1). 
+
 
 ### Running a line of code
 
@@ -131,6 +134,24 @@ It is useful to add comments before chunks of R code to organize the session and
 sqrt(25)  # sqrt(x) returns the square root of x
 
 ```
+
+
+
+### Getting help
+
+All R functions are included in packages that are created and maintained by their authors (e.g., statisticians, psychologists, biologists, sociologists). R packages are freely available on the Internet at the [*Comprehensive R Archive Network*](https://cran.r-project.org/web/packages/){target='_blank'} or CRAN. Every package has its own documentation that describes and explains how to use the functions of each package. We can also access to cheat sheets, on-line learning tools, forums and on-line communities, blogs, or even open-access books created in R using [**bookdown**](https://bookdown.org/yihui/bookdown/){target='_blank'} (Xie, 2017; Xie, Allaire, & Grolemund, 2019).
+
+
+RStudio includes the documentation of functions and packages in the *Help* tab. For example, if we search for the function `mean()`, we will find the documentation for this function included in R's package **base**. Another way to access to the documentation of packages and functions when help is required is to use the function `help()` or the question mark (`?`) followed by the name of the function.
+
+```{r, help_2}
+
+help(mean)
+?mean
+
+```
+
+
 
 
 ## Starting a session in RStudio
