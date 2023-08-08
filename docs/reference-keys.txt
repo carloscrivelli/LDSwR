@@ -20,7 +20,6 @@ what-is-rstudio
 lets-get-started
 running-a-line-of-code
 adding-comments-on-r-scripts
-getting-help
 starting-a-session-in-rstudio
 setting-the-global-options
 first-lines-of-code
@@ -30,7 +29,7 @@ functions
 the-c-function
 r-objects
 applying-functions-to-objects
-getting-help-1
+getting-help
 packages
 loading-r-packages
 importing-and-exporting-data
@@ -38,7 +37,6 @@ loading-data
 exporting-data
 references-1
 data-wrangling
-simulating-data
 indexing-and-subsetting
 selecting-columns-variables
 selecting-rows-observations

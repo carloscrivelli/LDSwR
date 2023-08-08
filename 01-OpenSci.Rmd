@@ -418,9 +418,10 @@ knitr::kable(my.table1.3,
 <div style="margin-bottom:40px;">
 </div>
 
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading" style="text-align: center; color: DarkRed">**The Contributor Roles Taxonomy (CRediT)**</h4>
-  <ol type = '1' style="color: Black">
+<div class="alert alert-info hints-alert">
+  <div class="hints-icon"><i class="fa fa-info-circle fa-2x fa-pull-right fa-border" aria-hidden="true"></i></div>
+  <h4 class="alert-heading">**The Contributor Roles Taxonomy (CRediT)**</h4>
+  <ul><ul type = 'square' style="color: Black">
 <li>Conceptualization</li>
 <li>Data curation</li>
 <li>Formal analysis</li>
@@ -435,7 +436,7 @@ knitr::kable(my.table1.3,
 <li>Visualization</li>
 <li>Writing—original draft</li>
 <li>Writing—review and editing</li>
-  </ol>
+  <ul></ul>
 </div>
 
 

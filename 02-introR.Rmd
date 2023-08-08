@@ -137,22 +137,6 @@ sqrt(25)  # sqrt(x) returns the square root of x
 
 
 
-### Getting help
-
-All R functions are included in packages that are created and maintained by their authors (e.g., statisticians, psychologists, biologists, sociologists). R packages are freely available on the Internet at the [*Comprehensive R Archive Network*](https://cran.r-project.org/web/packages/){target='_blank'} or CRAN. Every package has its own documentation that describes and explains how to use the functions of each package. We can also access to cheat sheets, on-line learning tools, forums and on-line communities, blogs, or even open-access books created in R using [**bookdown**](https://bookdown.org/yihui/bookdown/){target='_blank'} (Xie, 2017; Xie, Allaire, & Grolemund, 2019).
-
-
-RStudio includes the documentation of functions and packages in the *Help* tab. For example, if we search for the function `mean()`, we will find the documentation for this function included in R's package **base**. Another way to access to the documentation of packages and functions when help is required is to use the function `help()` or the question mark (`?`) followed by the name of the function.
-
-```{r, help_2}
-
-help(mean)
-?mean
-
-```
-
-
-
 
 ## Starting a session in RStudio
 

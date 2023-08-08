@@ -28,8 +28,6 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 
 
 
-## Simulating data
-
 We are going to create a data frame by simulating a data set. Data frames are data structures that include vector columns (i.e., variables) containing different modes of data (e.g., numeric, factor, character). The observations, participants, or cases are usually displayed as rows. Using the assignment operator (`<-`) we will store the data that we will simulate into R objects that will be named accordingly to the variables they intend to simulate (e.g., *id*, *treatment*, *life.satis*).
 
   
@@ -143,8 +141,9 @@ affective.dis[affective.dis$life.satis >= 42
 <div style="margin-bottom:40px;">
 </div>
 
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading" style="text-align: center; color: DarkRed">**Logical operators**</h4>
+<div class="alert alert-info hints-alert">
+  <div class="hints-icon"><i class="fa fa-info-circle fa-2x fa-pull-right fa-border" aria-hidden="true"></i></div>
+  <h4 class="alert-heading">**Logical operators**</h4>
   <ul><ul type = 'square' style="color: Black">
 <li>**x is less than y**: `x < y`</li>
 <li>**x is less than or equal to y**: `x <= y`</li>
@@ -289,17 +288,22 @@ The operators pipe their left-hand side values forward into expressions that app
     `function 2` %>%
     `function 3` ...
 
-<div style="margin-bottom:30px;">
-</div>
 
-:::: {.infobox}
-<p style="text-align: center; color: DarkRed; font-size: large">**Keyboard shortcut for the pipe operator**</p>
-
-  - **Windows**: Press **Ctrl** + **Shift** + **M**.
-  - **MacOS**: Press **Cmd** + **Shift** + **M**.
-::::
 
 <div style="margin-bottom:40px;">
+</div>
+
+<div class="alert alert-info hints-alert">
+  <div class="hints-icon"><i class="fa fa-info-circle fa-2x fa-pull-right fa-border" aria-hidden="true"></i></div>
+  <h4 class="alert-heading">**Keyboard shortcut for the pipe operator**</h4>
+  <ul><ul type = 'square' style="color: Black">
+<li>**Windows**: Press **Ctrl** + **Shift** + **M**</li>
+<li>**MacOS**: Press **Cmd** + **Shift** + **M**</li>
+  <ul></ul>
+</div>
+
+
+<div style="margin-bottom:60px;">
 </div>
 
 
@@ -315,8 +319,9 @@ One important contribution of the package **dplyr** is that it provides a “gra
 <div style="margin-bottom:40px;">
 </div>
 
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading" style="text-align: center; color: DarkRed">**_dplyr_ verbs**</h4>
+<div class="alert alert-info hints-alert">
+  <div class="hints-icon"><i class="fa fa-info-circle fa-2x fa-pull-right fa-border" aria-hidden="true"></i></div>
+  <h4 class="alert-heading">**_dplyr_ verbs**</h4>
   <ul><ul type = 'square' style="color: Black">
 <li>**select**: It returns a subset of the columns of a data frame, using a flexible notation</li>
 <li>**filter**: It extracts a subset of rows from a data frame based on logical conditions</li>
@@ -331,8 +336,6 @@ One important contribution of the package **dplyr** is that it provides a “gra
 
 <div style="margin-bottom:60px;">
 </div>
-
-
 
 
 ### Data wrangling with *dplyr*
