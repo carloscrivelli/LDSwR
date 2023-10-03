@@ -52,6 +52,10 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.9000/grViz.js"></script>
 
 
 <style type="text/css">
@@ -118,28 +122,6 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -154,7 +136,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li class="toc-logo"><a href="./"><img src="images/LDSwR.png"></a></li>
+<li class="toc-logo"><a href="./"><img src="images/LDSwR_transp.png"></a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
@@ -162,6 +144,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i>How to use this book</a></li>
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
 </ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
 <li class="chapter" data-level="1" data-path="what-is-open-science.html"><a href="what-is-open-science.html"><i class="fa fa-check"></i><b>1</b> What is Open Science?</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="the-credibility-of-science.html"><a href="the-credibility-of-science.html"><i class="fa fa-check"></i><b>1.1</b> The credibility of Science</a></li>
@@ -224,16 +207,13 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-pipe"><i class="fa fa-check"></i><b>3.4.1</b> The pipe (%&gt;%)</a></li>
 <li class="chapter" data-level="3.4.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-dplyr"><i class="fa fa-check"></i><b>3.4.2</b> The package <strong>dplyr</strong></a></li>
-<li class="chapter" data-level="3.4.3" data-path="the-tidyverse.html"><a href="the-tidyverse.html#data-wrangling-with-dplyr"><i class="fa fa-check"></i><b>3.4.3</b> Data wrangling with <em>dplyr</em></a></li>
-<li class="chapter" data-level="3.4.4" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-tidyr"><i class="fa fa-check"></i><b>3.4.4</b> The package <strong>tidyr</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-tidyr"><i class="fa fa-check"></i><b>3.4.3</b> The package <strong>tidyr</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling-with-the-tidyverse.html"><a href="data-wrangling-with-the-tidyverse.html"><i class="fa fa-check"></i><b>3.5</b> Data wrangling with the <strong>tidyverse</strong></a></li>
+<li class="chapter" data-level="3.6" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>3.6</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics and Data Visualization</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="footnotes.html"><a href="footnotes.html"><i class="fa fa-check"></i><b>4.1</b> Footnotes</a></li>
-<li class="chapter" data-level="4.2" data-path="citations.html"><a href="citations.html"><i class="fa fa-check"></i><b>4.2</b> Citations</a></li>
-</ul></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics and Data Visualization</a></li>
+<li class="part"><span><b>II Modeling</b></span></li>
 <li class="chapter" data-level="5" data-path="modeling-in-r.html"><a href="modeling-in-r.html"><i class="fa fa-check"></i><b>5</b> Modeling in R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="some-common-statistical-models.html"><a href="some-common-statistical-models.html"><i class="fa fa-check"></i><b>5.1</b> Some common statistical models</a></li>
@@ -242,8 +222,116 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="linear-models-ii.html"><a href="linear-models-ii.html"><i class="fa fa-check"></i><b>7</b> Linear Models II</a></li>
 <li class="chapter" data-level="8" data-path="linear-models-iii.html"><a href="linear-models-iii.html"><i class="fa fa-check"></i><b>8</b> Linear Models III</a></li>
 <li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a></li>
-<li class="chapter" data-level="10" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>10</b> Categorical Data Analysis</a></li>
+<li class="chapter" data-level="10" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>10</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>10.1</b> Categorical data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="categorical-data.html"><a href="categorical-data.html#binomial-and-multinomial-data"><i class="fa fa-check"></i><b>10.1.1</b> Binomial and multinomial data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="categorical-data.html"><a href="categorical-data.html#ordinal-data"><i class="fa fa-check"></i><b>10.1.2</b> Ordinal data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="dealing-with-categorical-variables-in-r.html"><a href="dealing-with-categorical-variables-in-r.html"><i class="fa fa-check"></i><b>10.2</b> Dealing with categorical variables in R</a></li>
+<li class="chapter" data-level="10.3" data-path="research-questions-with-categorical-data.html"><a href="research-questions-with-categorical-data.html"><i class="fa fa-check"></i><b>10.3</b> Research questions with categorical data</a></li>
+<li class="chapter" data-level="10.4" data-path="references-3.html"><a href="references-3.html"><i class="fa fa-check"></i><b>10.4</b> References</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>11</b> Linear Mixed Models</a></li>
+<li class="part"><span><b>III Psychometrics</b></span></li>
+<li class="chapter" data-level="12" data-path="scale-development.html"><a href="scale-development.html"><i class="fa fa-check"></i><b>12</b> Scale Development</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="reflective-and-formative-indicators.html"><a href="reflective-and-formative-indicators.html"><i class="fa fa-check"></i><b>12.1</b> Reflective and formative indicators</a></li>
+<li class="chapter" data-level="12.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html"><i class="fa fa-check"></i><b>12.2</b> Classification of scales of measurement</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#nominal-scale"><i class="fa fa-check"></i><b>12.2.1</b> Nominal scale</a></li>
+<li class="chapter" data-level="12.2.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ordinal-scale"><i class="fa fa-check"></i><b>12.2.2</b> Ordinal scale</a></li>
+<li class="chapter" data-level="12.2.3" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#interval-scale"><i class="fa fa-check"></i><b>12.2.3</b> Interval scale</a></li>
+<li class="chapter" data-level="12.2.4" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ratio-scale"><i class="fa fa-check"></i><b>12.2.4</b> Ratio scale</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="test-theory.html"><a href="test-theory.html"><i class="fa fa-check"></i><b>12.3</b> Test theory</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="test-theory.html"><a href="test-theory.html#what-is-a-test"><i class="fa fa-check"></i><b>12.3.1</b> What is a test?</a></li>
+<li class="chapter" data-level="12.3.2" data-path="test-theory.html"><a href="test-theory.html#classification-of-psychological-tests"><i class="fa fa-check"></i><b>12.3.2</b> Classification of psychological tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="test-theory.html"><a href="test-theory.html#measurement-error"><i class="fa fa-check"></i><b>12.3.3</b> Measurement error</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="scale-development-1.html"><a href="scale-development-1.html"><i class="fa fa-check"></i><b>12.4</b> Scale development</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="scale-development-1.html"><a href="scale-development-1.html#purpose-of-the-test"><i class="fa fa-check"></i><b>12.4.1</b> Purpose of the test</a></li>
+<li class="chapter" data-level="12.4.2" data-path="scale-development-1.html"><a href="scale-development-1.html#administration-restrictions"><i class="fa fa-check"></i><b>12.4.2</b> Administration restrictions</a></li>
+<li class="chapter" data-level="12.4.3" data-path="scale-development-1.html"><a href="scale-development-1.html#defining-the-domain"><i class="fa fa-check"></i><b>12.4.3</b> Defining the domain</a></li>
+<li class="chapter" data-level="12.4.4" data-path="scale-development-1.html"><a href="scale-development-1.html#test-specification-blueprint"><i class="fa fa-check"></i><b>12.4.4</b> Test specification (blueprint)</a></li>
+<li class="chapter" data-level="12.4.5" data-path="scale-development-1.html"><a href="scale-development-1.html#draft-the-initial-pool-of-items-review-them-and-pilot-them"><i class="fa fa-check"></i><b>12.4.5</b> Draft the initial pool of items, review them, and pilot them</a></li>
+<li class="chapter" data-level="12.4.6" data-path="scale-development-1.html"><a href="scale-development-1.html#psychometric-principles-reliability-validity-comparability-and-fairness"><i class="fa fa-check"></i><b>12.4.6</b> Psychometric principles: Reliability, validity, comparability, and fairness</a></li>
+<li class="chapter" data-level="12.4.7" data-path="scale-development-1.html"><a href="scale-development-1.html#field-test-and-the-development-of-guidelines-for-administration-scoring-and-interpretation-of-test-scores"><i class="fa fa-check"></i><b>12.4.7</b> Field test and the development of guidelines for administration, scoring, and interpretation of test scores</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i><b>12.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="exploratory-factor-analysis.html"><a href="exploratory-factor-analysis.html"><i class="fa fa-check"></i><b>13</b> Exploratory Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html"><i class="fa fa-check"></i><b>13.1</b> Data reduction techniques</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html#principal-components-analysis-pca"><i class="fa fa-check"></i><b>13.1.1</b> Principal Components Analysis (PCA)</a></li>
+<li class="chapter" data-level="13.1.2" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html#factor-analysis-fa"><i class="fa fa-check"></i><b>13.1.2</b> Factor Analysis (FA)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html"><i class="fa fa-check"></i><b>13.2</b> Exploratory Factor Analysis (EFA)</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html#the-basic-efa-model"><i class="fa fa-check"></i><b>13.2.1</b> The basic EFA model</a></li>
+<li class="chapter" data-level="13.2.2" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html#steps-to-conduct-an-exploratory-factor-analysis-efa"><i class="fa fa-check"></i><b>13.2.2</b> Steps to conduct an Exploratory Factor Analysis (EFA)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="initial-considerations.html"><a href="initial-considerations.html"><i class="fa fa-check"></i><b>13.3</b> Initial considerations</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="initial-considerations.html"><a href="initial-considerations.html#tidying-the-data-set"><i class="fa fa-check"></i><b>13.3.1</b> Tidying the data set</a></li>
+<li class="chapter" data-level="13.3.2" data-path="initial-considerations.html"><a href="initial-considerations.html#generating-the-correlation-matrix"><i class="fa fa-check"></i><b>13.3.2</b> Generating the correlation matrix</a></li>
+<li class="chapter" data-level="13.3.3" data-path="initial-considerations.html"><a href="initial-considerations.html#exploring-the-data-using-descriptive-statistics-and-data-visualizations"><i class="fa fa-check"></i><b>13.3.3</b> Exploring the data using descriptive statistics and data visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="factor-extraction.html"><a href="factor-extraction.html"><i class="fa fa-check"></i><b>13.4</b> Factor extraction</a></li>
+<li class="chapter" data-level="13.5" data-path="factor-rotation-and-interpretation-of-efa.html"><a href="factor-rotation-and-interpretation-of-efa.html"><i class="fa fa-check"></i><b>13.5</b> Factor rotation and interpretation of EFA</a></li>
+<li class="chapter" data-level="13.6" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i><b>13.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="reliability-1.html"><a href="reliability-1.html"><i class="fa fa-check"></i><b>14</b> Reliability</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="approaches-to-reliability.html"><a href="approaches-to-reliability.html"><i class="fa fa-check"></i><b>14.1</b> Approaches to reliability</a></li>
+<li class="chapter" data-level="14.2" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html"><i class="fa fa-check"></i><b>14.2</b> Reliability methods requiring several administrations of a test</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html#test-retest"><i class="fa fa-check"></i><b>14.2.1</b> Test-retest</a></li>
+<li class="chapter" data-level="14.2.2" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html#parallel-forms"><i class="fa fa-check"></i><b>14.2.2</b> Parallel forms</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html"><i class="fa fa-check"></i><b>14.3</b> Inter-rater reliability</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html#cohens-kappa"><i class="fa fa-check"></i><b>14.3.1</b> Cohen's Kappa</a></li>
+<li class="chapter" data-level="14.3.2" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html#cohens-kappa-in-r"><i class="fa fa-check"></i><b>14.3.2</b> Cohen's Kappa in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="internal-consistency.html"><a href="internal-consistency.html"><i class="fa fa-check"></i><b>14.4</b> Internal consistency</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="internal-consistency.html"><a href="internal-consistency.html#split-half-tests"><i class="fa fa-check"></i><b>14.4.1</b> Split half tests</a></li>
+<li class="chapter" data-level="14.4.2" data-path="internal-consistency.html"><a href="internal-consistency.html#item-covariance-tests"><i class="fa fa-check"></i><b>14.4.2</b> Item covariance tests</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="internal-consistency-in-r.html"><a href="internal-consistency-in-r.html"><i class="fa fa-check"></i><b>14.5</b> Internal consistency in R</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="internal-consistency-in-r.html"><a href="internal-consistency-in-r.html#data-wrangling-1"><i class="fa fa-check"></i><b>14.5.1</b> Data wrangling</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="cronbachs-alpha-alpha-1.html"><a href="cronbachs-alpha-alpha-1.html"><i class="fa fa-check"></i><b>14.6</b> Cronbach's alpha (<span class="math inline">\(\alpha\)</span>)</a></li>
+<li class="chapter" data-level="14.7" data-path="other-reliability-coefficients-1.html"><a href="other-reliability-coefficients-1.html"><i class="fa fa-check"></i><b>14.7</b> Other reliability coefficients</a></li>
+<li class="chapter" data-level="14.8" data-path="references-6.html"><a href="references-6.html"><i class="fa fa-check"></i><b>14.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="introduction-to-item-response-theory.html"><a href="introduction-to-item-response-theory.html"><i class="fa fa-check"></i><b>15</b> Introduction to Item Response Theory</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="item-response-theory-irt.html"><a href="item-response-theory-irt.html"><i class="fa fa-check"></i><b>15.1</b> Item Response Theory (IRT)</a></li>
+<li class="chapter" data-level="15.2" data-path="item-characteristic-curve-icc.html"><a href="item-characteristic-curve-icc.html"><i class="fa fa-check"></i><b>15.2</b> Item Characteristic Curve (ICC)</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="item-characteristic-curve-icc.html"><a href="item-characteristic-curve-icc.html#example-depression-scores"><i class="fa fa-check"></i><b>15.2.1</b> Example: Depression scores</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="irt-models.html"><a href="irt-models.html"><i class="fa fa-check"></i><b>15.3</b> IRT Models</a></li>
+<li class="chapter" data-level="15.4" data-path="parameters.html"><a href="parameters.html"><i class="fa fa-check"></i><b>15.4</b> Parameters</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="parameters.html"><a href="parameters.html#item-difficulty-b_j"><i class="fa fa-check"></i><b>15.4.1</b> Item difficulty (<span class="math inline">\(b_{j}\)</span>)</a></li>
+<li class="chapter" data-level="15.4.2" data-path="parameters.html"><a href="parameters.html#item-discrimination-a_j"><i class="fa fa-check"></i><b>15.4.2</b> Item discrimination (<span class="math inline">\(a_{j}\)</span>)</a></li>
+<li class="chapter" data-level="15.4.3" data-path="parameters.html"><a href="parameters.html#guessing-c_j"><i class="fa fa-check"></i><b>15.4.3</b> Guessing (<span class="math inline">\(c_{j}\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="the-information-function.html"><a href="the-information-function.html"><i class="fa fa-check"></i><b>15.5</b> The Information Function</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="the-information-function.html"><a href="the-information-function.html#item-information-function"><i class="fa fa-check"></i><b>15.5.1</b> Item Information Function</a></li>
+<li class="chapter" data-level="15.5.2" data-path="the-information-function.html"><a href="the-information-function.html#test-information-function"><i class="fa fa-check"></i><b>15.5.2</b> Test Information Function</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="references-7.html"><a href="references-7.html"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
 <li class="chapter" data-level="A" data-path="appenA.html"><a href="appenA.html"><i class="fa fa-check"></i><b>A</b> Software</a>
 <ul>
@@ -279,7 +367,11 @@ div.csl-indent {
 
 </div>
 <blockquote>
-<left><strong>LEARNING OUTCOMES</strong></left>
+<center>
+<h1 style="font-size:160%; color: #000000">
+<strong>LEARNING OUTCOMES</strong>
+</h1>
+</center>
 <div style="margin-bottom:30px;">
 
 </div>
@@ -293,6 +385,9 @@ div.csl-indent {
 <div style="margin-bottom:60px;">
 
 </div>
+<p>XXXXX</p>
+<p>TODO!!! XXXX</p>
+<p>XXXXXXX</p>
 <p>The purpose of a statistical model is to help understand what variables might best predict a phenomenon of interest, which ones have more or less influence, define a predictive equation with coefficients for each of the variables, and then apply that equation to predict values using the same input variables for other areas. This process requires samples with observations of the explanatory (or independent) and response (or dependent) variables in question.</p>
 <p>t-tests, one way anova</p>
 

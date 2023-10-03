@@ -1,12 +1,24 @@
+# (PART) Introduction {-} 
+
 # What is Open Science?
 
+
+
+
+
+
+```{r setup01, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60),
+                      warning=FALSE, message=FALSE, tidy=F)
+```
 
 
 
 <div style="margin-bottom:40px;">
 </div>
 
-><left>**LEARNING OUTCOMES**</left>
+
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
 ><div style="margin-bottom:30px;">
 ></div>
 >- Identify and explain Open Science's principles.
@@ -17,7 +29,7 @@
 
 
 
-<div style="margin-bottom:60px;">
+<div style="margin-bottom:70px;">
 </div>
 
 
@@ -62,9 +74,9 @@ In December 2021, [Loughborough University](https://repository.lboro.ac.uk/artic
 
 
 
-```{r, Table11a, eval = TRUE, include = F, echo = F}
+```{r, Table0101a, eval = TRUE, include = F, echo = F}
 
-my.table1.1 <- data.frame(skills = c('Digital content creation',
+Tab0101 <- data.frame(skills = c('Digital content creation',
                                    '', '', '', '', '' , '',
                                    'Science communication',
                                    '', '', '', '', '',
@@ -92,29 +104,26 @@ my.table1.1 <- data.frame(skills = c('Digital content creation',
                                  'Transparency',
                                  'Research integrity'))
 
-names(my.table1.1) <- c('Skills', 'Training')
+names(Tab0101) <- c('Skills', 'Training')
 
 ```
 
 
 
-
-```{r, Table11b, eval = TRUE, include = T, echo = F, message=FALSE}
+```{r, Table0101b, eval = TRUE, include = T, echo = F, message=FALSE}
 
 library(kableExtra)
 library(dplyr)
-knitr::kable(my.table1.1,
+knitr::kable(Tab0101,
              booktabs = T, align = 'l',
              escape = F, linesep = '',
              caption = 'Open Science Skills and Required Training') %>%
-  kableExtra::kable_styling(font_size = 14,
-                            bootstrap_options = c('striped',
-                                                  'responsive'),
-                            latex_options = 'scale_down') %>%
+  kable_styling(font_size = 14, bootstrap_options = c('striped',
+                                                  'responsive')) %>%
   row_spec(0, background = '#EFEFEF') %>%
   row_spec(c(1:7), background = '#E1FAFF') %>%
   row_spec(c(8:13), background = '#D1FFEC') %>%
-  row_spec(14:21, background = '#FFF4D1') 
+  row_spec(14:21, background = '#FFF4D1')
 
 ```
 
@@ -244,9 +253,9 @@ Kovacs and colleagues (2021) conducted a research project to elucidate the origi
 </div>
 
 
-```{r, Table12a, eval = TRUE, include = F, echo = F}
+```{r, Table0102a, eval = TRUE, include = F, echo = F}
 
-my.table1.2 <- data.frame(Metagroup = c('Poor project preparation or management',
+Tab0102 <- data.frame(Metagroup = c('Poor project preparation or management',
                                      '', '', '', '', '' ,
                                      'External difficulties', '',
                                      'Lack of knowledge',
@@ -267,30 +276,30 @@ my.table1.2 <- data.frame(Metagroup = c('Poor project preparation or management'
                                  'Overconfidence',
                                  'Physical or cognitive constraints'))
 
-names(my.table1.2) <- c('Metagroup', 'Cause group')
+names(Tab0102) <- c('Metagroup', 'Cause group')
 
 ```
 
 
 
-```{r, Table12b, eval = TRUE, include = T, echo = F, message=FALSE}
+```{r, Table0102b, eval = TRUE, include = T, echo = F, message=FALSE}
 
 library(kableExtra)
 library(dplyr)
-knitr::kable(my.table1.2,
-             booktabs = T, align = 'l',
-             escape = F, linesep = '',
+knitr::kable(Tab0102,
+             booktabs = T, align = 'l', escape = F, linesep = '',
              caption = 'Metagroups for Mistake Causes') %>%
-  kableExtra::kable_styling(font_size = 14,
-                            bootstrap_options = c('striped',
-                                                  'responsive'),
-                            latex_options = 'scale_down') %>%
+  kable_styling(font_size = 14, bootstrap_options = c('striped',
+                                                  'responsive')) %>%
   row_spec(0, background = '#EFEFEF') %>%
   row_spec(c(1:6), background = '#E1FAFF') %>%
   row_spec(c(7:8), background = '#D1FFEC') %>%
   row_spec(9, background = '#FFF4D1') %>%
   row_spec(c(10:14), background = '#FFDBDB') %>%
-  kableExtra::footnote(general = 'Table reproduced from Kovacs, Hoekstra, and Aczel (2021).', escape = F)
+  footnote(general_title = '**Note.**',
+           general = 'Table reproduced from Kovacs, Hoekstra, and Aczel (2021).',
+           footnote_as_chunk = TRUE,
+           escape = F)
 
 ```
 
@@ -485,7 +494,7 @@ Kovacs, M., Hoekstra, R., & Aczel, B. (2021). [The role of human fallibility in 
 
 Miedema, F. (2022). [Open Science: The very idea.](https://library.oapen.org/handle/20.500.12657/51498){target="_blank"} Springer.
 
-Nature--Scientific Data (2023). [Frequently Asked Questions.](https://www.nature.com/sdata/faq){target="_blank"} Retrieved from Nature--Scientific Data website: https://www.nature.com/sdata/faq
+Nature—Scientific Data (2023). [Frequently Asked Questions.](https://www.nature.com/sdata/faq){target="_blank"} Retrieved from Nature—Scientific Data website: https://www.nature.com/sdata/faq
 
 Open Science Collaboration. (2015). [Estimating the reproducibility of psychological science.](https://www.science.org/doi/10.1126/science.aac4716){target="_blank"} *Science*, *349*(6251), 1—8.
 

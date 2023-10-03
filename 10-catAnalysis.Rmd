@@ -1,4 +1,5 @@
 # Categorical Data Analysis
+ 
 
 
 
@@ -12,24 +13,235 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 <div style="margin-bottom:40px;">
 </div>
 
-><left>**LEARNING OUTCOMES**</left>
+
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
 ><div style="margin-bottom:30px;">
 ></div>
->- Identify the capabilities of R and RStudio's environment and appraise their functionality.
->- Distinguish between R functions, objects, and diverse data wrangling approaches.
->- Apply basic programming skills to import and organize the data using classic data wrangling approaches and the **tidyverse** grammar.
->- Evaluate the R code and appraise the outputs to demonstrate a satisfactory level of basic programming skills in R.
+>-  Distinguish between the different types of categorical data and their underlying sampling distributions.
+>-  Identify the statistical tests proposed for categorical data analysis of independent and matched data.
+>-  Apply R's functions to estimate the parameters of categorical models and evaluate the R code and appraise the outputs.
+>-  Produce contingency tables and data visualizations to summarize categorical models.
+
+
+<div style="margin-bottom:70px;">
+</div>
 
 
 
-<div style="margin-bottom:60px;">
+A categorical variable assigns numerical values to a set of discrete categories. The measurement level of categorical data ranges from assigning two values to two distinct categories (binomial data or dichotomous variables), to assign values to more than two unordered categories (multinomial data, nominal data, or polytomous variables), to assign values to more than two ordered categories (ordinal data or ordinal variables).
+
+In some cases, we do not have frequency data from independent units or individuals, but a number of events that are not independent.
+
+TODO! provide example of counts.
+
+
+## Categorical data
+
+### Binomial and multinomial data
+
+**Binomial** and **multinomial** data (also called binary and nominal data) include the property of *identity*. For each case and observation that we will measure, we will assign one value that will identify that case or observation with only one category (e.g., `Helping a person in distress` versus `Ignoring a person in distress`).
+
+The set of categories has to be exhaustive, including all the possible categories. For example, if we decide to classify bystanders as individuals helping or ignoring someone in distress, we might find some instrumental behaviors that are difficult to classify as pro-social and anti-social. Consequently, we must include an additional category that could capture other behaviors (`Other behaviors`). Similarly, if we have a large number of categories (e.g., political parties in a general election), we could include the main ones (e.g., `Conservative`, `Labour`, and `Liberal Democrats`) and collapse the remaining categories under a general category (e.g., `Other political parties`).
+
+Because the main property of this measurement level is to belong to one single category, the numeric value that we assign to each category is arbitrary. For instance, we could assign a `0` to the category `Fail` of the binary variable `Grades` and a `1` to the category `Pass` as it is easier to recall the labels of this variable and to interpret the outputs of the model. However, assigning a `10` to `Fail` and a `3` to `Pass` is also possible because the values `10` and `3` are different. 
+
+
+### Ordinal data
+
+**Ordinal** data include the property of *identity* and the property of *order*. When we are measuring observations or cases that could be ordered, we will assign values to the ordered categories that will imply a higher or lower rank. The most basic ordinal variable includes three categories (e.g., `Against`, `Undecided`, and `In favor`). Some ordinal variables are bipolar (i.e., two poles or extremes; e.g., `Bad`, `Neutral`, and `Good`), whereas others are unipolar (i.e., one pole or extreme; e.g., `No income`, `Annual gross salary lower than £25,000`, `Annual gross salary between £25,000 and £50,000`, and `Annual gross salary higher than £50,000`).
+
+In psychology, Likert scales are very popular ordinal variables. We assume a monotonic increase in the ordered categories and provide meaningful anchoring points with their associated labels (e.g., `Strongly disagree`, `Disgree`, `Slightly disagree`, `Neither disagree/agree`, `Strongly agree`, `Agree`, and `Slightly agree`). We usually assign a `0` or `1` to the first category and increase by one point the values assigned to the rest of the ordered categories. Psychologists tend to assume that Likert scales with 5 or more anchoring points could be treated as quasi-interval.
+
+
+
+TODO!
+
+
+## Dealing with categorical variables in R
+
+Categorical data are often called *factors* when we assign values implying identity or order properties to character variables (e.g., `Helping behavior`, `Grades`). In R, the function `factor()` allows us to transform a variable into an unorder (binomial and multinomial data) or order (ordinal data) variable. The arguments `levels` and `labels` are used to set the values and labels for each category respectively.
+
+Let's simulate the data set called `help.data` that includes observations of 18 male and female bystanders who decided to help or not a person in distress and who were asked the extent to which they donate money to charities. We can create the vectors first and then bind them to create a data frame with the function `data.frame`. We can explore the structure of the R object with the function `str()` to find out that the variable `sex` is a character vector, whereas `help.behavior` and `donation` are numeric vectors.
+
+
+```{r, factor1, eval = TRUE, include = T, echo = T}
+
+id <- 1:18
+sex <- c('male', 'female', 'male', 'male', 'male', 'male',
+         'female', 'female', 'male', 'female', 'female', 'female',
+         'female', 'male', 'male', 'female', 'female', 'male')
+help.behavior <- c(1, 1, 0, 0, 0, 0,
+                   0, 1, 0, 1, 1, 0,
+                   0, 0, 1, 1, 1, 1)
+donation <- c(0, 1, 1, 0, 0, 2,
+              0, 3, 1, 2, 2, 0,
+              1, 0, 3, 1, 2, 3)
+coop <- c(2, 1, 2, 2, 1, 3,
+          1, 2, 2, 3, 1, 2,
+          2, 1, 3, 3, 2, 3)
+
+help.data <- data.frame(id, sex, help.behavior, donation, coop)
+help.data
+
+str(help.data)
+
+```
+
+
+Using the function `mutate()` from the package **dplyr** we can transform our three character and numeric variables into factors. For doing so, we will use the function `factor()` to select the variable that we want to transform into a factor as the first argument, followed by three more arguments: `levels` (i.e., to set the levels of the factors), `labels` (i.e., to name the levels), and `ordered` (i.e., to specify if we deal with binomial/multinomial or ordinal data).
+
+
+```{r, factor2, eval = TRUE, include = T, echo = T}
+
+
+library(dplyr)
+
+help.data <- help.data %>%
+  mutate(
+    sex = factor(sex, levels = c('male', 'female'),
+                 labels = c('Male', 'Female'), ordered = F),
+    help.behavior = factor(help.behavior, levels = c(0, 1),
+                 labels = c('No', 'Yes'), ordered = F),
+    donation = factor(donation, levels = c(0, 1, 2, 3),
+                 labels = c('Never', 'Sometimes', 'Often', 'Always'), ordered = T),
+    coop = factor(coop, levels = c(1, 2, 3),
+                 labels = c('Untrue of me', 'Neutral', 'True of me'), ordered = T))
+
+str(help.data)
+
+```
+
+
+
+## Research questions with categorical data
+
+The way of summarizing categorical data is by estimating frequencies, proportions, and percentages for binary and nominal data, and the median and mean ranks for ordinal data. 
+
+Let's take a look at Table 10.1. The table includes ten popular social media sites. The categorical variable 
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Table1001a, eval = TRUE, include = F, echo = F}
+
+my.table10.1 <- data.frame(items = c(1:10),
+                       description = c('Facebook',
+                                 'Twitter',
+                                 'WhatsApp',
+                                 'Instagram',
+                                 'TikTok',
+                                 'Snapchat',
+                                 'YouTube',
+                                 'Twitch',
+                                 'WeChat',
+                                 'Telegram'))
+
+names(my.table10.1) <- c('Item', 'Social media site')
+
+```
+
+
+
+```{r, Table1001b, eval = TRUE, include = T, echo = F}
+
+library(kableExtra)
+library(dplyr)
+knitr::kable(my.table10.1,
+             format = 'html', booktabs = T, align = 'l',
+             escape = F, linesep = '',
+             caption = 'Social Media Sites') %>%
+  kableExtra::kable_styling(font_size = 14,
+                            bootstrap_options = c('striped',
+                                                  'responsive')) %>%
+  row_spec(0, background = '#E1FAFF') 
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+XXXXXXX
+
+
+
+
+
+
+
+TODO >> binomial + chi-square + mcnemar + log-odds + vcd
+
+
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+
+
+## References
+
+<div style="margin-bottom:20px;">
+</div>
+
+
+Arslan, R. C. (2019). [How to automatically document data with the codebook package to facilitate data reuse.](https://journals.sagepub.com/doi/10.1177/2515245919838783){target="_blank"} *Advances in Methods and Practices in Psychological Science*, *2*(2), 169—187.
+
+European Commission. (2021). [Open Science](https://research-and-innovation.ec.europa.eu/system/files/2019-12/ec_rtd_factsheet-open-science_2019.pdf){target="_blank"} [Fact sheet]. European Union.
+
+Gewin, V. (2016). [Data sharing: An open mind on open data.](https://doi.org/10.1038/nj7584-117a){target="_blank"}  *Nature*, *529*, 117—119.
+
+Hunt, L. T. (2019). [The life-changing magic of sharing your data.](https://doi.org/10.1038/s41562-019-0560-3){target="_blank"} *Nature Human Behavior*, *3*, 312—315.
+
+John, L. K., Loewenstein, G., & Prelec, D. (2012). [Measuring the prevalence of questionable research practices with incentives for truth telling.](https://www.cmu.edu/dietrich/sds/docs/loewenstein/MeasPrevalQuestTruthTelling.pdf){target="_blank"} *Psychological Science*, *23*(5), 524—532.
+
+Klein O., Hardwicke T. E., Aust F., Breuer J., Danielsson H., Mohr A. H., Ijzerman H., Nilsonne G., Vanpaemel W., Frank M. C. (2018). [A practical guide for transparency in psychological science.](https://online.ucpress.edu/collabra/article/4/1/20/112998/A-Practical-Guide-for-Transparency-in){target="_blank"} *Collabra: Psychology*, *4*(1):20.
+
+Kovacs, M., Hoekstra, R., & Aczel, B. (2021). [The role of human fallibility in psychological research: A survey of mistakes in data management.](https://journals.sagepub.com/doi/full/10.1177/25152459211045930){target="_blank"} *Advances in Methods and Practices in Psychological Science*, *4*(4), 1—13.
+
+Miedema, F. (2022). [Open Science: The very idea.](https://library.oapen.org/handle/20.500.12657/51498){target="_blank"} Springer.
+
+Nature--Scientific Data (2023). [Frequently Asked Questions.](https://www.nature.com/sdata/faq){target="_blank"} Retrieved from Nature--Scientific Data website: https://www.nature.com/sdata/faq
+
+Open Science Collaboration. (2015). [Estimating the reproducibility of psychological science.](https://www.science.org/doi/10.1126/science.aac4716){target="_blank"} *Science*, *349*(6251), 1—8.
+
+Spellman, B., Gilbert, E. A., & Corker, K. S. (2017, September 20). [Open Science: What, Why, and How.](https://psyarxiv.com/ak6jr/){target="_blank"} https://psyarxiv.com/ak6jr/
+
+UK Reproducibility Network. (2021, September). [Terms of Reference.](https://bpb-eu-w2.wpmucdn.com/blogs.bristol.ac.uk/dist/b/631/files/2021/09/UKRN-ToR-v3.3.pdf){target="_blank"} Version 3.3.
+
+United Nations Educational, Scientific, and Cultural Organization. (2021, November). [UNESCO Recommendation on Open Science](https://www.unesco.org/en/open-science){target="_blank"} (Programme Document SC-PCB-SPP/2021/OS/UROS). Retrieved from the United Nations Educational, Scientific, and Cultural Organization website: https://unesdoc.unesco.org/ark:/48223/pf0000379949
+
+Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J. W., da Silva Santos, L. B., Bourne, P. E., Bouwman, J., Brookes, A. J., Clark, T., Crosas, M., Dillo, I., Dumon, O., Edmunds, S., Evelo, C. T., Finkers, R., Gonzalez-Beltran, A., … Mons, B. (2016). [The FAIR Guiding Principles for scientific data management and stewardship.](https://www.nature.com/articles/sdata201618){target="_blank"} *Scientific Data*, *3*:160018. 
+
+
+
+
+
+<div style="margin-bottom:50px;">
 </div>
 
 
 
 
 
-binomial + chi-square + mcnemar + log-odds + vcd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

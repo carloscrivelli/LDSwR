@@ -1,0 +1,836 @@
+# Reliability
+
+
+
+
+```{r setup14, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60),
+                      warning=FALSE, message=FALSE, tidy=F)
+```
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
+><div style="margin-bottom:30px;">
+></div>
+>-  Identify the different approaches to the concept of reliability.
+>-  Distinguish the key features of reliability for several administrations of a test, inter-rater reliability, and internal consistency.
+>-  Apply R to compute reliability coeﬀicients of internal consistency
+and to generate data visualizations.
+>-  Critically evaluate the different reliability coefficients and appraise
+the outputs produced with the functions included in the package **psych**.
+
+
+<div style="margin-bottom:70px;">
+</div>
+
+
+Despite being a common-sense concept (i.e., how reliable and consistent is the measurement instrument?), reliability has generated much debate among psychometricians. **Reliability** is conceptualized as the proportion of observed score variance attributed to true score variance.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ Reliability =  \frac{\sigma^{2}_{T}}{\sigma^{2}_{X}}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+Although the concept of reliability as the ratio between the true and the observed scores' variability is easy to understand, the different ways to operationalize reliability and to estimate the diversity of reliability coefficients complicate things a little bit (Cronbach, 1951; DeVellis, 2017; Huysamen, 2006; Revelle & Zinbarg, 2009; Sijtsma, 2009).
+
+
+In Classical Test Theory (CTT), test scores are based on the general linear model and test total scores (Crocker & Algina, 1986). This measurement theory is also called *True Score Theory* because it decomposes the observed score into true scores and measurement error (random error and bias).
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ X_{i} =  \ T_{i} + \ E_{i}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+Derived from the former psychometric model, CTT includes four additional assumptions:
+
+
+  - The expected value of the observed score is the true score.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ E(X_{i}) =  \ T_{i}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+ - True scores and errors are independent.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ Cov(T_{i}, \ E_{i}) =  \ 0
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+- Errors across test's forms are independent.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ Cov(E_{i}, \ E_{j}) =  \ 0
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+- The errors in one form are independent of the true score on another form.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ Cov(E_{i}, \ T_{j}) =  \ 0
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+In sum, the assumptions of the CTT model consider that the variance components are independent.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\sigma^{2}_{X} =  \sigma^{2}_{T} + \sigma^{2}_{E}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+## Approaches to reliability
+
+**Reliability** can be operationalized in different ways (Table 14.1). First, we could consider reliability as an estimation of measurement stability. Consequently, we should administer the same test several times. Second, we might consider reliability as the estimation of measurement equivalence in two equal forms. To estimate this type of reliability we must create two equal forms (i.e., alternate forms) of the same test. Third, we could consider reliability as an estimation of consistency across raters. Then, the same task (e.g., classifying objects or people) should be applied to two or more raters/judges. Last, reliability can be conceptualized as a method to estimate the internal consistency of a test. In this case, we need to administer the same test to at least two respondents to generate several scores on the same test.
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+
+```{r, Table1401a, eval = TRUE, include = F, echo = F}
+
+
+Tab1401 <- data.frame(
+          est = c('Test-retest', 'Parallel forms',
+                  'Inter-rater', '', '', '',
+                  'Internal consistency',
+                  'Split half tests', '',
+                  'Item covariance', '', '', '', ''),
+          coeffi = c('$Cor(X_{1}, X_{2})$',
+                  '$Cor(X_{i}, X_{j})$',
+                  '', 'Cohen-Kappa ($\\kappa$)', 'Fleiss-Kappa',
+                  'Intraclass correlation', '',
+                  'Spearman-Brown', 'Tau Equivalent',
+                  'Alpha ($\\alpha$)', 'KR--20',
+                  "Guttman's Lambdas   ($\\lambda$)",
+                  'Omega ($\\omega_{h}, \\omega_{t}$)',
+                  'EFA/CFA'),
+          opera = c('Repetition of measurement',
+                  'Two alternate forms', '',
+                  'Two raters (categorical data)',
+                  'More than two raters (categorical data)',
+                  'Two or more raters (quantitative data)',
+                  'Two or more scores in a single test',
+                  '', '', '', '', '', '', ''),
+          test.admin = c('Two or more times', 'Twice',
+                         'Once', '', '', '',
+                         'Once',
+                         '', '', '', '', '', '', ''),
+          source.error = c('Instability over time',
+                           'Lack of equivalence',
+                           'Disagreement among raters',
+                           '', '','',
+                           'Heterogeneous item content',
+                           '', '', '', '', '', '', ''))
+
+names(Tab1401) <- c('Estimation', 'Coefficient', 'Operationalization',
+               'Test administration', 'Source of error')
+
+```
+
+
+```{r, Table1401b, eval = TRUE, include = T, echo = F, out.width = '100%', fig.align = 'center'}
+
+library(kableExtra)
+library(dplyr)
+knitr::kable(Tab1401, format = 'html', booktabs = T, align = 'l', linesep = '', escape = F,
+  caption = 'Approaches to Reliability') %>%
+  kable_styling(full_width = T) %>%
+  row_spec(0, hline_after = T, background = '#EFEFEF') %>%
+  row_spec(1, hline_after = T, background = '#F0E442') %>%
+  row_spec(2, hline_after = T, background = '#98D3F5') %>%
+  row_spec(3, hline_after = T, background = '#F5B525') %>%
+  row_spec(7, hline_after = T, background = '#F2A5D0') %>%
+  kable_styling(font_size = 14, bootstrap_options = c('striped',
+                                                  'responsive')) %>%
+  add_indent(c(8, 10)) %>%
+  footnote(general_title = '**Note.**',
+           general = '$Cor(X_{1}, X_{2})$ = Correlation between test and retest. $Cor(X_{i}, X_{j})$ = Correlation between forms $i$ and $j$ of the test. KR--20 = Kuder-Richardson Formula 20 to estimate the reliability coefficient for binary data. EFA/CFA = Exploratory Factor Analysis/Confirmatory Factor Analysis.',
+           footnote_as_chunk = TRUE,
+           escape = F)
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+## Reliability methods requiring several administrations of a test
+
+### Test-retest
+
+The **test-retest method** operationalizes reliability as stability of the measures over time. For example, the same test could be administered at the beginning and at the end of the academic year. If the instrument is reliable, the time interval between test administrations should have no effect on test scores.
+
+To estimate the reliability of a test-retest, we will compute a Pearson's correlation test between the test and the retest's scores. The estimation of this type of reliability depends on the measurement scale. For instance, for ordinal data we will compute Kendall's Tau-b tests and for binary data we will compute tetrachoric correlations.
+
+The method to estimate reliability as stability over time is frequently used in speed tests. However, this method can be negatively affected by the time interval between the test and retest (e.g., long periods are related to respondents' individual changes) as well as the influence of the first administration on the second (e.g., recall effects, practice).
+
+
+### Parallel forms
+
+The **parallel-forms** method is designed to overcome some of the limitations of the test-retest approach. For instance, a test aimed at measuring the respondents' ability in verbal comprehension---if administered twice---might be affected by learning and memory effects. For this reason, we could develop two *parallel* (alternate) forms under the same domain and test specification. These two forms should be administered at the same time and to a large number of respondents. Finally, we should compute Pearson's correlation test to the scores of both parallel forms.
+
+This method assumes equal true scores and error variances of both alternate forms.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ X_{i} =  \ T_{i} + \ E_{i}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ X'_{i} =  \ T_{i} + \ E'_{i}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\sigma^{2}_{e} = \sigma^{2}_{e'}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+
+In sum, the reliability coefficient of a parallel-forms test will be estimated as the Pearson's correlation of two parallel forms (i.e., two parallel tests).
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\rho_{xx'} =  \frac{\sigma^{2}_{T}}{\sigma^{2}_{X}}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\sigma^{2}_{e} = \sigma^{2}_{x} \ \sqrt{1 - \rho_{xx'}}
+\end{aligned}$$
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+<div class="alert alert-danger hints-alert">
+  <div class="hints-icon"><i class="fa fa-exclamation-triangle fa-2x fa-pull-right fa-border" aria-hidden="true"></i></div>
+  <h4 class="alert-heading">**CAUTION!**</h4>
+<p style="color: Black">This method is problematic because it is highly unlikely to find strict parallelism between two forms. The parallel-forms reliability coefficient includes random errors and the degree of parallelism of the forms. The parallel-forms method is affected by practice effects.</p>
+</div>
+
+
+<div style="margin-bottom:60px;">
+</div>
+
+
+
+
+## Inter-rater reliability
+
+**Inter-rater reliability** estimates the consistency among raters/judges (i.e., the agreement among raters). There are several methods to estimate inter-rater reliability. We can organize these methods as a function of the number of raters and the level of measurement. When we want to test the inter-rater reliability of two observers classifying objects or persons (i.e., nominal data), Cohen's Kappa ($\kappa$) would be the most appropriate method (Cohen, 1960). However, Fleiss's Kappa will be the preferred option for nominal data and more than two raters.
+
+With ordinal data and two raters, estimating a Weight Kappa coefficient is recommended. On the other hand, Kendall's Tau-b test is the most appropriate test statistic to estimate the agreement of ordered objects or persons for multiple raters.
+
+For quantitative data (e.g., interval data), the intraclass correlation (ICC) is the best method to measure the relative homogeneity of scores within a class (e.g., persons). The ICC estimates reliability using an Analysis of Variance (ANOVA) approach.
+
+
+### Cohen's Kappa
+
+Cohen's Kappa ($\kappa$) estimates the degree of agreement between two raters/judges when assessing and classifying objects or persons (e.g., classification and diagnosis of mental disorders). This method is highly recommended because it considers the effect of random agreement. The agreement between two judges cannot be estimated by only counting the number of agreed cases (i.e., the main diagonal of a confusion matrix). We also need to subtract the estimation of the random agreement based on the marginal cross-products divided by the total number of squared observations.
+
+To compute the observed agreement ($p_{o}$), we sum all the values from the main diagonal divided by the total number of observations.
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ p_{o} =  \displaystyle\sum_{j=1}^{m} p_{jj} = \frac{N_{11}} {N} \ + \ \frac{N_{22}} {N} \ + \ \dots \ + \frac{N_{mm}} {N}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+To estimate the agreement due to randomness ($p_{e}$), we sum the marginal cross-products divided by the total number of squared observations.
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ p_{e} =  \displaystyle\sum_{j=1}^{m} p_{jje} = \displaystyle\sum_{j=1}^{m} \frac{\ {N_{i}} \times {N_{j}}} {{N^{2}}} 
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+Cohen's Kappa ($\kappa$) is computed by subtracting the agreement due to randomness ($p_{e}$) to the observed agreement ($p_{o}$) divided by `1` minus the agreement due to randomness ($p_{e}$). The final inter-rater agreement coefficient will range from `0` to `1`. Values in the .80 — 1 range are considered very good inter-rater reliability coefficients. Kappa's coefficients in the .60 — .79 range represent acceptable levels of agreement. However, agreement rates below .60 are usually considered unacceptable.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\ K = \frac{\ p_{o} \ - \  p_{e}} {1 \ - \  p_{e}}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+### Cohen's Kappa in R
+
+
+We will use the functions `Kappa()` and `agreementplot()` from the package [**vcd**](https://www.datavis.ca/courses/VCD/vcd-tutorial.pdf){target="_blank"} to compute Cohen's Kappa ($\kappa$) coefficients and to generate agreement plots for two different simulated data sets (Friendly, 2017).
+
+```{r, kappa1}
+
+library(vcd)
+
+```
+
+The following simulated data sets will show the level of agreement between two clinical psychologists assessing and ascribing affective disorders to a group of 220 patients. `Bi1` means Bipolar I disorder. `Bi2` means Bipolar II disorder. `PD` means Persistent depressive. `C` means Cyclothymic. `MD` means Major depressive. We will generate two different matrices in which the observations (i.e., number of patients per cell) will be distributed along the main diagonal (i.e., agreement between raters) and off the main diagonal (i.e., disagreement between raters).
+
+The first data set yields an inter-rater reliability of $\kappa = .46, \ 95\% \ CI{[.38, \ .54]}$, that should be considered unacceptable. The function `agreementplot()` generates a representation of a *k* by *k* confusion matrix, where the observed and expected diagonal elements are represented by superposed black and white rectangles, respectively.
+
+
+```{r, kappa2, out.width = '100%', fig.align = 'center', fig.cap = 'Agreement plot displaying low agreement between two clinical psychologists assessing individuals with affective disorders.'}
+
+dat1 <- matrix(c(20, 27, 1, 3, 0,
+                 23, 21, 0, 0, 0,
+                 4, 2, 46, 1, 0,
+                 2, 2, 0, 14, 17,
+                 0, 0, 0, 13, 24), 5, 5, byrow = T,
+                 dimnames= list(c('Bi1', 'Bi2', 'PD', 'C', 'MD'),
+                                c('Bi1', 'Bi2', 'PD', 'C', 'MD')))
+K1 <- Kappa(dat1)
+print(K1, CI = TRUE)
+
+agreementplot(dat1, ylab = 'Rater 1', ylab_rot = 90, ylab_just = 'center',
+              xlab = 'Rater 2', xlab_rot = 0, xlab_just = 'center',
+              reverse_y = TRUE, weights = 1)
+
+```
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+The second data set yields a very high inter-rater reliability, $\kappa = .91, \ 95\% \ CI {[.87, \ .95]}$. The reason for such a high Kappa coefficient can be found in the small amount of disagreement between raters (i.e., there are very few cases in the off-diagonal cells).
+
+```{r, kappa3, out.width = '100%', fig.align = 'center', fig.cap = 'Agreement plot displaying high agreement between two clinical psychologists assessing individuals with affective disorders.'}
+
+dat2 <- matrix(c(79, 0, 0, 0, 0,
+                 2, 31, 0, 0, 0,
+                 1, 3, 46, 1, 0,
+                 0, 2, 0, 6, 0,
+                 0, 1, 0, 5, 43), 5, 5, byrow = T,
+                 dimnames= list(c('Bi1', 'Bi2', 'PD', 'C', 'MD'),
+                                c('Bi1', 'Bi2', 'PD', 'C', 'MD')))
+K2 <- Kappa(dat2)
+print(K2, CI = TRUE)
+
+agreementplot(dat2, ylab = 'Rater 1', ylab_rot = 90, ylab_just = 'center',
+              xlab = 'Rater 2', xlab_rot = 0, xlab_just = 'center',
+              reverse_y = TRUE, weights = 1)
+
+```
+
+
+
+
+## Internal consistency
+
+
+The problems found when trying to generate parallel forms are avoided when using internal consistency methods. The basic assumption is to consider the observed variables of a test (i.e., items) as the sample of observations drawn from a specific domain. A way to estimate the internal consistency of the test is to inspect the consistency of respondents in different parts of the test. To do so, we can divide the test in two halves (Split half tests) or use the information of all items (e.g., Cronbach's alpha).
+
+
+### Split half tests
+
+In this method, all respondents complete the test. Then, the researcher splits the observed variables (e.g., items) in two halves. This procedure requires parallelism of both halves. The goal is to correlate the group of scores from both halves ($\rho_{12}$). The famous Spearman-Brown correction formula for two halves is used to estimate the reliability coefficient.
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\rho_{xx'} = \frac{\ 2 \rho_{12}}{1 + \rho_{12}}
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+A more liberal approach is used when we only keep the assumption of true scores' equal variances. These methods are called *Tau Equivalent* reliability methods. These estimations (e.g., Rulon formula) provide smaller values than computations using Spearman-Brown's equation.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\rho_{xx'} = 2\Bigg( 1 \ - \frac{ \sigma^{2}_{x_{1}} \ +  \sigma^{2}_{x_{2}}} {\sigma^{2}_{x}}\Bigg)
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+The problem with the Split Half approach is that there are different ways to generate two halves, leading to different estimates of the reliability coefficient. To overcome this problem, we will assume that all items generate scores in tests of the same length (`n = 1`). These reliability estimates are based on the covariance of the items.
+
+
+
+### Item covariance tests
+
+
+#### Cronbach's Alpha ($\alpha$)
+
+The most famous reliability estimator based on the covariance of the items of a scale is Cronbach's alpha ($\alpha$). Alpha is the mean of all possible split half reliabilities but corrected for the test length (Revelle & Zinbarg, 2009). In Cronbach's alpha equation, $\ n$ is the number of items, $\sigma^{2}_{i}$ is the variance of the items, and $\sigma^{2}_{x}$ is the variance of the total test scores.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+$$\begin{aligned}
+\alpha  = \frac{\ n}{\ n \ - \ 1} \Bigg( 1 \ - \frac{\displaystyle\sum_{i=1}^{n} \sigma^{2}_{i}} {\sigma^{2}_{x}} \Bigg)
+\end{aligned}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+<div class="alert alert-info hints-alert">
+  <div class="hints-icon"><i class="fa fa-info-circle fa-2x fa-pull-right fa-border" aria-hidden="true"></i></div>
+  <h4 class="alert-heading">**Cronbach's alpha ($\alpha$): Properties and limitations**</h4>
+  <ul><ul type = 'square' style="color: Black">
+<li>Alpha usually yields smaller values than Spearman-Brown's reliability coefficient. For that reason, alpha is considered Spearman-Brown coefficient's lower bound</li>
+<li>If the elements are parallel, alpha ($\alpha$) yields the same value as Spearman-Brown's equation</li>
+<li>If we consider two parts of the same test, alpha is usually equivalent to the Rulon formula for Tau Equivalent tests</li>
+<li>The estimates of Cronbach's alpha and Spearman-Brown's reliability coefficients range from `0` to `1`</li>
+<li>Alpha is problematic if we find negative values</li>
+<li>Alpha is problematic when the factorial structure of a test is not normal</li>
+<li>Raw alpha is sensitive to differences in the item variances</li>
+<li>Do not estimate an overall Cronbach's alpha coefficient for a psychological test that is not unidimensional</li>
+  <ul></ul>
+</div>
+
+
+<div style="margin-bottom:60px;">
+</div>
+
+
+
+#### Other reliability coefficients
+
+
+In addition to Cronbach's alpha ($\alpha$), other coefficients of internal consistency have been proposed. For example, the Kuder-Richardson Formula 20 (KR-20) is suitable for dichotomous items. Another reliability estimation was proposed by Hoyt to compute alpha using a Repeated Measures Analysis of Variance (ANOVA) approximation, testing the main effects and interaction of respondents' scores and items' scores.
+
+Guttman also proposed six different coefficients. For example, Guttman's Lambda 3 ($\lambda_{3}$) provides the same estimation as Cronbach's alpha. Likewise, Guttman's Lambda 4 ($\lambda_{4}$) provides the same estimation as Spearman-Brown's reliability coefficient. Guttman's Lambda 6 ($\lambda_{6}$)—although is a better reliability estimator than Guttman's Lambdas 3 ($\lambda_{3}$) and 4 ($\lambda_{4}$)—is sensitive to the number of items and the average intercorrelation of the items of the test. Last, Revelle's Beta coefficient ($\beta$) provides the reliability estimation of the worst split half of a given scale.
+
+MacDonald's Omega coefficients ($\omega_{h}$, $\omega_{t}$) are an appropriate approximation to the reliability of a test as they are based on hierarchical factor analysis. Omega estimates the reliability of general ($\omega_{h}$) and total ($\omega_{t}$) factor saturation. It is recommended to run an EFA before using the function `omega()` from the package [**psych**](http://personality-project.org/r/psych/psych-manual.pdf){target="_blank"} . 
+
+Omega hierarchical ($\omega_{h}$) estimates the general factor saturation of a test. We can estimate this coefficient by running an Exploratory Factor Analysis (EFA) using the Schmid-Leiman transformation and an oblique rotation method. On the other hand, Omega total ($\omega_{t}$) estimates the total reliability of the test and it is similar to Guttman's $\lambda_{6}$ (G6).
+
+It is important to note that Omega hierarchical ($\omega_{h}$) is based upon the sum of the squared loadings on the general factor, whereas Omega total ($\omega_{t}$) is based upon the sum of the squared loadings on all the factors. Estimations of reliability using Omega total ($\omega_{t}$) produce similar results than estimations of reliability using Guttman's $\lambda_{6}$ (G6).
+
+
+
+
+## Internal consistency in R
+
+In the following subsections, we will use the data included in the data set `burnout.sav` to estimate different measures of internal consistency.
+
+
+
+### Data wrangling
+
+
+  - **Starting the session in R**: Start every session in R by removing all objects from the *global environment* using the function `rm()`. Likewise, set in advance the randomization seed for the current session using the function `set.seed()` and avoid using the scientific notation.
+  
+
+```{r, intro1401, results = 'hide'}
+
+rm(list = ls())
+set.seed(1234)
+options(scipen = 999)
+
+```
+
+
+
+
+  - **Setting the working directory**: Place the data set `burnout.sav` in the same folder where you will set the working directory. Then, set the working directory accordingly. For example, the instructor's working directory can be found in a folder named *Chapter14* that is located inside of the folder *LDSwR* and the folder *R*; all of them placed in the home folder *Users*.
+
+```{r, intro1402, results = 'hide', eval = FALSE}
+
+setwd('/Users/R/LDSwR/Chapter14')
+
+```
+
+
+  - **Loading packages**: Load the packages that will be required to execute the R code for this session.
+
+
+```{r, intro1403, results = 'hide', message = FALSE, warning = FALSE}
+
+library(rio)
+library(dplyr)
+library(psych)
+
+```
+
+
+
+  - **Reading the data set**: To read the data from the SPSS file stored in the working directory, use the function `import()` from the package [**rio**](https://cran.r-project.org/web/packages/rio/vignettes/rio.html){target="_blank"} but do not forget to add the path with the additional folder (*datasets*) followed by the name of the data set with its corresponding file extension (e.g., `.sav`, `.csv`, `.dat`).
+
+```{r, read_data1401}
+
+burnout.dat <- import('./datasets/burnout.sav')
+
+```
+
+
+
+  - **Subsetting**: To generate the correlation or structure matrix (**P**), we only need the items of the Job Burnout Scale. However, this time we will use only the 10 items that were retained after computing the Exploratory Factor Analysis conducted in *Chapter 13*. Thus, we are going to subset the data set to select the items 1 to 12 using the function `select()` from the package [**dplyr**](https://dplyr.tidyverse.org){target="_blank"} and then drop the problematic items `i4` and `i5`. The resulting 10 covariates will be stored in a new R object named `burnout`.
+
+```{r, read_data1402}
+
+burnout <- burnout.dat %>% 
+  select(i1:i12) %>%
+  select(-c(i4, i5))
+
+headTail(burnout)
+dim(burnout)
+names(burnout)
+
+```
+
+
+  - **Reverse scoring**: We need to reverse the scoring of the two items that were negatively worded (`i3` and `i8`). First, we will create a new vector (`new`) after selecting all the rows and only the columns of the items named `i3` and `i8`. The vector named `new` is the result of subtracting a value of `6` to the scores of two items that range from `1` to `5`. Consequently, a score of `1` will be transformed into a score of `5` (i.e., `6 - 1 = 5`) and a score of `5` will be transformed into a score of `1` (i.e., `6 - 5 = 1`). After reverse scoring the two items included in the vector `new`, we will substitute the original items `i3` and `i8` included in our data set with the new ones stored in the R object `new`. As usual, you can inspect the result using the function `head()`.
+
+
+```{r, read_reverse_scoring1401}
+
+new <- 6 - burnout[ , c('i3', 'i8')]
+burnout[ , c('i3', 'i8')] <- new
+head(burnout)
+
+```
+
+
+
+
+## Cronbach's alpha ($\alpha$)
+
+
+First, we will use the function `alpha()` from the package [**psych**](http://personality-project.org/r/psych/psych-manual.pdf){target="_blank"} to estimate Cronbach's alpha coefficient ($\alpha$). Please, be aware that we are not considering the possibility of having two or more latent variables (i.e., factors). When using the function *alpha*() on all items, we are assuming that the scale is unidimensional (i.e., there is only one latent variable or factor).
+
+The function `alpha()` provides a lot of useful information. However, the relevant coefficients and sections to inspect are `raw_alpha`, `G6(smc)`, and the `raw_alpha` column under the section `reliability if an item is dropped`. In the Job Burnout Scale, we found a marginally optimal Cronbach's reliability coefficient ($\alpha = .78$). Although Guttman's $\lambda_{6}$ (G6) was also optimal ($\lambda_{6} = .81$), be aware that it is usually considered an upper bound of Cronbach's alpha.
+
+The alpha coefficients displayed in the column `raw_alpha` inform us about what could happen to the alpha coefficient of our scale ($\alpha = .78$) if we dropped the item under consideration. For example, the row related to item 11 (i.e., `i11`) shows that, if dropping that item, Cronbach's reliability coefficient ($\alpha = .78$) might increase by 1% ($\alpha = .79$). It is the only item of our scale that, if dropped, improves the reliability of our test.
+
+
+```{r, alpha1401}
+
+psych::alpha(burnout, check.keys = TRUE)
+
+``` 
+
+
+
+In the previous example, we used the function `alpha()` assuming that our scale was not unidimensional (i.e., all items reflect just one underlying latent variable or factor). However, we know that the `burnout` scale is not unidimensional, but bidimensional. We will create two datasets as a function of the EFA's factors previously extracted in the *Chapter 13* (*Exploratory Factor Analysis*). Then, we will compute Cronbach's alpha per factor using the function `alpha()`.
+
+Please, note the difference of estimating Cronbach's alpha assuming unidimensionality or computing the same reliability coefficient of internal consistency when estimating alpha per factor. Estimating Cronbach's alpha on a non-unidimensional scale overestimates its reliability.
+
+
+
+```{r, alpha1402}
+
+burnout %>%
+  select(c(i7, i9, i11)) %>%
+  psych::alpha(check.keys = TRUE)
+
+``` 
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+When we computed Cronbach's reliability coefficient for the whole test ($\alpha = .78$), we concluded that the reliability was marginally optimal ($\alpha > .80$ is usually optimal). A similar conclusion was reached with for Guttman's $\lambda_{6}$ (G6, $\lambda_{6} = .81$).
+
+However, when estimating Cronbach's reliability coefficient for the three items reflecting `factor 1` (*Affective*), the reliability of the test reflecting this latent variable dropped ($\alpha = .75$, $\lambda_{6} = .69$). We also found that item 11 (i.e., `i11`) was a case of concern because dropping this item would have improved greatly the reliability of the scale ($\alpha = .81$).
+
+Below, we will compute Cronbach's alpha for the seven items reflecting `factor 2` (*Reward*). We will set the argument `check.keys = TRUE` to detect negatively correlated items and reverse score them automatically if needed.
+
+
+```{r, alpha1403}
+
+burnout %>%
+  select(-c(i7, i9, i11)) %>%
+  psych::alpha(check.keys = TRUE)
+
+``` 
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+The previous results showed that Cronbach's reliability coefficient for the items reflecting `factor 2` (*Reward*) was marginally optimal ($\alpha = .78$, $\lambda_{6} = .77$). We found that, if we drop item 12 (i.e., `i12`), the reliability of the scale will be improved by 1% ($\alpha = .79$).
+
+
+
+## Other reliability coefficients
+
+
+In this section, we will inspect other reliability coefficients generated with other functions that you can find in the package [**psych**](http://personality-project.org/r/psych/psych-manual.pdf){target="_blank"} (Revelle, 2018; Revelle & Zinbarg, 2009). Although most reliability coefficients will yield similar values despite the different functions being used, differences might arise due to the different procedures used to estimate these coefficients. In addition to reading the literature on the topic, read the description and details provided in every function that we use in R.
+
+First, we will use the function `omega()` to estimate both Omega hierarchical ($\omega_{h}$)---the estimation of the general factor saturation of a test---and Omega total ($\omega_{t}$)---the estimation of the total reliability of the test. We must set the optional argument `nfactors` to `2` because those were the number of factors that we extracted in *Chapter 13* (*Exploratory Factor Analysis*).
+
+
+```{r, alpha1404, fig.align = 'center'}
+
+psych::omega(burnout, nfactors = 2, flip = TRUE)
+
+``` 
+
+
+
+Omega hierarchical ($\omega_{h}$) estimates the general factor saturation of a test. In the `burnout` data set, the factor loadings were moderate for some items (e.g., items `i1` and `i8`) and low for others (e.g., items `i11` and `i12`). For this reason, Omega hierarchical yields a low value ($\omega_{h} = .41$). Be aware that the reliability coefficient estimated with Guttman's $\lambda_{6}$ ($G6 = .81$) tends to be  similar to Omega total ($\omega_{t} = .83$).
+
+Cronbach's alpha coefficient estimated with the function `omega()` is .`79`, whereas the coefficient estimated with the function `alpha()` yielded a lower value ($\alpha = .78$). In case of disagreement, use Cronbach's alpha reliability coefficient estimated with the functions `omega()` or `iclust()` (in this example, $\alpha = .79$).
+
+We can also inspect the tables (e.g., `Schmid Leiman Factor loadings greater than 0.2`) to reach the same conclusion in relation to keeping or dropping items. The decision to drop items has to consider the fact that latent variables with less than 3 observable measures (i.e., items) will lead to an unspecified model (Fabrigar et al., 1999).
+
+In the previous example, we produced a plot with the second order factor (`g`) displayed on the left. On the other hand, the first order factors (*Affective* and *Reward*; i.e., factors `1` and `2`) were plotted on the right-hand side without an arrow connecting them (both factors were assumed to be uncorrelated or orthogonal). This model is called *bifactor*, but it is not easily found in psychology. As we discussed in previous sessions, most psychological constructs tend to be correlated to each other. Indeed, in the session *Exploratory Factor Analysis* we found that the two factors extracted from the Job Burnout Scale were correlated (interfactor correlation, $r = .37$). Consequently, we cannot use here a bifactor approach (i.e., factors are independent) to visualize the internal structure of the Job Burnout Scale, but a hierarchical approach. In the next visualization, we will be able to observe that the path diagram shows two first order latent variables (factors `1` and `2`) and one second order factor (`g`).
+
+The argument `sl` refers to how we would like to plot the results (i.e., using the Schmid Leiman solution or not). The defaulted model assumes that the factors are independent (not correlated). The default option sets this argument to `TRUE`. Thus, by setting the argument `sl` to `FALSE`, we will plot a hierarchical solution, assuming that the first order latent variables are correlated and that they also reflect the higher order latent variable (`g`).
+
+
+
+```{r, alpha1405, results = 'hide', fig.align = 'center'}
+
+my.omega <- psych::omega(burnout, nfactors = 2, sl = FALSE,
+                         rotate = 'oblimin', fm = 'ml', digits = 2,
+                         option = 'equal', flip = TRUE)
+
+``` 
+
+
+In the previous R code, we stored the computations executed with the function `omega()` in the object `my.omega`. We specified the number of factors (`nfactors = 2`) and the estimation of a hierarchical model (correlated factors; `sl = FALSE`). Likewise, we used the rotation method `oblimin` for correlated factors and the estimation method `ml` (maximum likelihood). For two factors, we had to specify equal loadings for both factors. Finally, we flipped the items negatively correlated to the general factor.
+
+
+The function `omega.diagram()` enables us to use the object `my.omega` to get the hierarchical plot with some interesting modifications. For example, we can set the labels of the factors (`flabels = c('Affective', 'Reward')`). We can also specify the cutoff point for the loadings (`cut = .30`), increase or decrease the font size (`cex`) or the size of the round boxes of the factors (`e.size`).
+
+
+```{r, alpha1407, results = 'hide', fig.align = 'center'}
+
+omega.diagram(my.omega, sl = FALSE, flabels = c('Affective', 'Reward'),
+              cut = .3, digits = 2, e.size = .15, cex = 1.2, adj = 2,
+              main = ' \n Hierarchical Omega (Burnout dataset)')
+
+
+``` 
+
+
+
+The function `guttman()` estimates Guttman's Lambdas ($\lambda_{1}$ to $\lambda_{6}$). Please, remember that $\lambda_{3}$ provides the same reliability estimation as Cronbach's alpha coefficient ($\alpha$). Beta ($\beta$) is a reliability coefficient that looks for the worst split half to generate the coefficient of reliability (Revelle & Zinbarg, 2009). Consequently, beta ($\beta$) is an estimator that yields a low reliability value (i.e., a lower bound of reliability). However, the best estimation of beta ($\beta$) is computed with the function `iclust()` that will be explained below.
+
+
+```{r, alpha1408, fig.align = 'center'}
+
+psych::guttman(burnout)
+
+``` 
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+The function `splitHalf()` computes the split half of the test and provides an estimation of $\lambda_{3}$, $\lambda_{4}$, and $\lambda_{6}$. The estimation of $\beta$ as the minimum split half reliability is important because it contrasts sharply with $\lambda_{4}$ (i.e., the greatest split half reliability).
+
+
+```{r, alpha1409, fig.align = 'center'}
+
+psych::splitHalf(burnout)
+
+``` 
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+The function `iclust()` finds the overall correlation matrix to combine the two most similar items into a new (composite) item. Then, it computes the correlation of this new item with the remaining items and repeats this process until the worst split half correlation ($\beta$) stops increasing.
+
+Here, beta ($\beta$) will tend to coincide with omega hierarchical ($\omega_{h}$) as both reliability coefficients estimate the general factor saturation (Revelle, 2018). In case of disagreements among the values generated for beta ($\beta$) in other functions included in the package [**psych**](http://personality-project.org/r/psych/psych-manual.pdf){target="_blank"}, always report `iclust()`'s original beta ($\beta = .48$).
+
+
+```{r, alpha1410, fig.align = 'center'}
+
+psych::iclust(burnout, plot = TRUE, reverse = TRUE)
+
+``` 
+
+
+
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+
+
+## References
+
+<div style="margin-bottom:20px;">
+</div>
+
+
+Cohen, J. (1960). A coefficient of agreement for nominal scales. *Educational and Psychological Measurement*, *20*, 37—46.
+
+Crocker, L., & Algina, J. (1986). *Introduction to classical and modern test theory*. Holt, Rinehart, & Winston.
+
+Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. *Psychometrika*, *16*, 297—334.
+
+DeVellis, R. F. (2017). [*Scale development: Theory and applications*](https://prism.librarymanagementcloud.co.uk/dmu/items/672778?query=Scale+development&resultsUri=items%3Fquery%3DScale%2Bdevelopment%26target%3Dcatalogue&target=catalogue){target="_blank"} (4th ed.). SAGE.
+
+Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., & Strahan, E. J. (1999). [Evaluating the use of exploratory factor analysis in psychological research.](http://www.ww.w.statpower.net/Content/312/Handout/Fabrigar1999.pdf){target="_blank"} *Psychological Methods*, *4*(3), 272—299.
+
+Friendly, M. (2017). *Working with categorical data with R and the vcd and vcdExtra packages*. Retrieved at [http://cran.nexr.com/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf](http://cran.nexr.com/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf){target="_blank"}
+
+Huysamen, G. K. (2006). [Coefficient alpha: Unnecessarily ambiguous; Unduly ubiquitous.](https://sajip.co.za/index.php/sajip/article/view/242/239){target="_blank"} *Journal of Industrial Psychology*, *32*, 34—40.
+
+Revelle, W. (2018). *psych: Procedures for psychological, psychometric, and personality research*. Retrieved at [http://personality-project.org/r/psych/psych-manual.pdf](http://personality-project.org/r/psych/psych-manual.pdf){target="_blank"}
+
+Revelle, W., & Zinbarg, R. E. (2009). [Coefficients alpha, beta, omega, and the glb: Comments on Sijtsma.](https://personality-project.org/revelle/publications/revelle.zinbarg.08.pdf){target="_blank"} *Psychometrika*, *74*(1), 145—154.
+
+Sijtsma, K. (2009). [On the use, the misuse, and the very limited usefulness of Cronbach's alpha.](https://link.springer.com/content/pdf/10.1007/s11336-008-9101-0.pdf){target="_blank"} *Psychometrika*, *74*, 107—120.
+
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+
+
+
+

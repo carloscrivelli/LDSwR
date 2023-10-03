@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="renaming-recoding-and-sorting-data.html"/>
-<link rel="next" href="references-2.html"/>
+<link rel="next" href="data-wrangling-with-the-tidyverse.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,10 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.9000/grViz.js"></script>
 
 
 <style type="text/css">
@@ -118,28 +122,6 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -154,7 +136,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li class="toc-logo"><a href="./"><img src="images/LDSwR.png"></a></li>
+<li class="toc-logo"><a href="./"><img src="images/LDSwR_transp.png"></a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
@@ -162,6 +144,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i>How to use this book</a></li>
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
 </ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
 <li class="chapter" data-level="1" data-path="what-is-open-science.html"><a href="what-is-open-science.html"><i class="fa fa-check"></i><b>1</b> What is Open Science?</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="the-credibility-of-science.html"><a href="the-credibility-of-science.html"><i class="fa fa-check"></i><b>1.1</b> The credibility of Science</a></li>
@@ -224,16 +207,13 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-pipe"><i class="fa fa-check"></i><b>3.4.1</b> The pipe (%&gt;%)</a></li>
 <li class="chapter" data-level="3.4.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-dplyr"><i class="fa fa-check"></i><b>3.4.2</b> The package <strong>dplyr</strong></a></li>
-<li class="chapter" data-level="3.4.3" data-path="the-tidyverse.html"><a href="the-tidyverse.html#data-wrangling-with-dplyr"><i class="fa fa-check"></i><b>3.4.3</b> Data wrangling with <em>dplyr</em></a></li>
-<li class="chapter" data-level="3.4.4" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-tidyr"><i class="fa fa-check"></i><b>3.4.4</b> The package <strong>tidyr</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-tidyr"><i class="fa fa-check"></i><b>3.4.3</b> The package <strong>tidyr</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling-with-the-tidyverse.html"><a href="data-wrangling-with-the-tidyverse.html"><i class="fa fa-check"></i><b>3.5</b> Data wrangling with the <strong>tidyverse</strong></a></li>
+<li class="chapter" data-level="3.6" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>3.6</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics and Data Visualization</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="footnotes.html"><a href="footnotes.html"><i class="fa fa-check"></i><b>4.1</b> Footnotes</a></li>
-<li class="chapter" data-level="4.2" data-path="citations.html"><a href="citations.html"><i class="fa fa-check"></i><b>4.2</b> Citations</a></li>
-</ul></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics and Data Visualization</a></li>
+<li class="part"><span><b>II Modeling</b></span></li>
 <li class="chapter" data-level="5" data-path="modeling-in-r.html"><a href="modeling-in-r.html"><i class="fa fa-check"></i><b>5</b> Modeling in R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="some-common-statistical-models.html"><a href="some-common-statistical-models.html"><i class="fa fa-check"></i><b>5.1</b> Some common statistical models</a></li>
@@ -242,8 +222,116 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="linear-models-ii.html"><a href="linear-models-ii.html"><i class="fa fa-check"></i><b>7</b> Linear Models II</a></li>
 <li class="chapter" data-level="8" data-path="linear-models-iii.html"><a href="linear-models-iii.html"><i class="fa fa-check"></i><b>8</b> Linear Models III</a></li>
 <li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a></li>
-<li class="chapter" data-level="10" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>10</b> Categorical Data Analysis</a></li>
+<li class="chapter" data-level="10" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>10</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>10.1</b> Categorical data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="categorical-data.html"><a href="categorical-data.html#binomial-and-multinomial-data"><i class="fa fa-check"></i><b>10.1.1</b> Binomial and multinomial data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="categorical-data.html"><a href="categorical-data.html#ordinal-data"><i class="fa fa-check"></i><b>10.1.2</b> Ordinal data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="dealing-with-categorical-variables-in-r.html"><a href="dealing-with-categorical-variables-in-r.html"><i class="fa fa-check"></i><b>10.2</b> Dealing with categorical variables in R</a></li>
+<li class="chapter" data-level="10.3" data-path="research-questions-with-categorical-data.html"><a href="research-questions-with-categorical-data.html"><i class="fa fa-check"></i><b>10.3</b> Research questions with categorical data</a></li>
+<li class="chapter" data-level="10.4" data-path="references-3.html"><a href="references-3.html"><i class="fa fa-check"></i><b>10.4</b> References</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>11</b> Linear Mixed Models</a></li>
+<li class="part"><span><b>III Psychometrics</b></span></li>
+<li class="chapter" data-level="12" data-path="scale-development.html"><a href="scale-development.html"><i class="fa fa-check"></i><b>12</b> Scale Development</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="reflective-and-formative-indicators.html"><a href="reflective-and-formative-indicators.html"><i class="fa fa-check"></i><b>12.1</b> Reflective and formative indicators</a></li>
+<li class="chapter" data-level="12.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html"><i class="fa fa-check"></i><b>12.2</b> Classification of scales of measurement</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#nominal-scale"><i class="fa fa-check"></i><b>12.2.1</b> Nominal scale</a></li>
+<li class="chapter" data-level="12.2.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ordinal-scale"><i class="fa fa-check"></i><b>12.2.2</b> Ordinal scale</a></li>
+<li class="chapter" data-level="12.2.3" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#interval-scale"><i class="fa fa-check"></i><b>12.2.3</b> Interval scale</a></li>
+<li class="chapter" data-level="12.2.4" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ratio-scale"><i class="fa fa-check"></i><b>12.2.4</b> Ratio scale</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="test-theory.html"><a href="test-theory.html"><i class="fa fa-check"></i><b>12.3</b> Test theory</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="test-theory.html"><a href="test-theory.html#what-is-a-test"><i class="fa fa-check"></i><b>12.3.1</b> What is a test?</a></li>
+<li class="chapter" data-level="12.3.2" data-path="test-theory.html"><a href="test-theory.html#classification-of-psychological-tests"><i class="fa fa-check"></i><b>12.3.2</b> Classification of psychological tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="test-theory.html"><a href="test-theory.html#measurement-error"><i class="fa fa-check"></i><b>12.3.3</b> Measurement error</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="scale-development-1.html"><a href="scale-development-1.html"><i class="fa fa-check"></i><b>12.4</b> Scale development</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="scale-development-1.html"><a href="scale-development-1.html#purpose-of-the-test"><i class="fa fa-check"></i><b>12.4.1</b> Purpose of the test</a></li>
+<li class="chapter" data-level="12.4.2" data-path="scale-development-1.html"><a href="scale-development-1.html#administration-restrictions"><i class="fa fa-check"></i><b>12.4.2</b> Administration restrictions</a></li>
+<li class="chapter" data-level="12.4.3" data-path="scale-development-1.html"><a href="scale-development-1.html#defining-the-domain"><i class="fa fa-check"></i><b>12.4.3</b> Defining the domain</a></li>
+<li class="chapter" data-level="12.4.4" data-path="scale-development-1.html"><a href="scale-development-1.html#test-specification-blueprint"><i class="fa fa-check"></i><b>12.4.4</b> Test specification (blueprint)</a></li>
+<li class="chapter" data-level="12.4.5" data-path="scale-development-1.html"><a href="scale-development-1.html#draft-the-initial-pool-of-items-review-them-and-pilot-them"><i class="fa fa-check"></i><b>12.4.5</b> Draft the initial pool of items, review them, and pilot them</a></li>
+<li class="chapter" data-level="12.4.6" data-path="scale-development-1.html"><a href="scale-development-1.html#psychometric-principles-reliability-validity-comparability-and-fairness"><i class="fa fa-check"></i><b>12.4.6</b> Psychometric principles: Reliability, validity, comparability, and fairness</a></li>
+<li class="chapter" data-level="12.4.7" data-path="scale-development-1.html"><a href="scale-development-1.html#field-test-and-the-development-of-guidelines-for-administration-scoring-and-interpretation-of-test-scores"><i class="fa fa-check"></i><b>12.4.7</b> Field test and the development of guidelines for administration, scoring, and interpretation of test scores</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i><b>12.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="exploratory-factor-analysis.html"><a href="exploratory-factor-analysis.html"><i class="fa fa-check"></i><b>13</b> Exploratory Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html"><i class="fa fa-check"></i><b>13.1</b> Data reduction techniques</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html#principal-components-analysis-pca"><i class="fa fa-check"></i><b>13.1.1</b> Principal Components Analysis (PCA)</a></li>
+<li class="chapter" data-level="13.1.2" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html#factor-analysis-fa"><i class="fa fa-check"></i><b>13.1.2</b> Factor Analysis (FA)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html"><i class="fa fa-check"></i><b>13.2</b> Exploratory Factor Analysis (EFA)</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html#the-basic-efa-model"><i class="fa fa-check"></i><b>13.2.1</b> The basic EFA model</a></li>
+<li class="chapter" data-level="13.2.2" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html#steps-to-conduct-an-exploratory-factor-analysis-efa"><i class="fa fa-check"></i><b>13.2.2</b> Steps to conduct an Exploratory Factor Analysis (EFA)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="initial-considerations.html"><a href="initial-considerations.html"><i class="fa fa-check"></i><b>13.3</b> Initial considerations</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="initial-considerations.html"><a href="initial-considerations.html#tidying-the-data-set"><i class="fa fa-check"></i><b>13.3.1</b> Tidying the data set</a></li>
+<li class="chapter" data-level="13.3.2" data-path="initial-considerations.html"><a href="initial-considerations.html#generating-the-correlation-matrix"><i class="fa fa-check"></i><b>13.3.2</b> Generating the correlation matrix</a></li>
+<li class="chapter" data-level="13.3.3" data-path="initial-considerations.html"><a href="initial-considerations.html#exploring-the-data-using-descriptive-statistics-and-data-visualizations"><i class="fa fa-check"></i><b>13.3.3</b> Exploring the data using descriptive statistics and data visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="factor-extraction.html"><a href="factor-extraction.html"><i class="fa fa-check"></i><b>13.4</b> Factor extraction</a></li>
+<li class="chapter" data-level="13.5" data-path="factor-rotation-and-interpretation-of-efa.html"><a href="factor-rotation-and-interpretation-of-efa.html"><i class="fa fa-check"></i><b>13.5</b> Factor rotation and interpretation of EFA</a></li>
+<li class="chapter" data-level="13.6" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i><b>13.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="reliability-1.html"><a href="reliability-1.html"><i class="fa fa-check"></i><b>14</b> Reliability</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="approaches-to-reliability.html"><a href="approaches-to-reliability.html"><i class="fa fa-check"></i><b>14.1</b> Approaches to reliability</a></li>
+<li class="chapter" data-level="14.2" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html"><i class="fa fa-check"></i><b>14.2</b> Reliability methods requiring several administrations of a test</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html#test-retest"><i class="fa fa-check"></i><b>14.2.1</b> Test-retest</a></li>
+<li class="chapter" data-level="14.2.2" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html#parallel-forms"><i class="fa fa-check"></i><b>14.2.2</b> Parallel forms</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html"><i class="fa fa-check"></i><b>14.3</b> Inter-rater reliability</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html#cohens-kappa"><i class="fa fa-check"></i><b>14.3.1</b> Cohen's Kappa</a></li>
+<li class="chapter" data-level="14.3.2" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html#cohens-kappa-in-r"><i class="fa fa-check"></i><b>14.3.2</b> Cohen's Kappa in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="internal-consistency.html"><a href="internal-consistency.html"><i class="fa fa-check"></i><b>14.4</b> Internal consistency</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="internal-consistency.html"><a href="internal-consistency.html#split-half-tests"><i class="fa fa-check"></i><b>14.4.1</b> Split half tests</a></li>
+<li class="chapter" data-level="14.4.2" data-path="internal-consistency.html"><a href="internal-consistency.html#item-covariance-tests"><i class="fa fa-check"></i><b>14.4.2</b> Item covariance tests</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="internal-consistency-in-r.html"><a href="internal-consistency-in-r.html"><i class="fa fa-check"></i><b>14.5</b> Internal consistency in R</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="internal-consistency-in-r.html"><a href="internal-consistency-in-r.html#data-wrangling-1"><i class="fa fa-check"></i><b>14.5.1</b> Data wrangling</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="cronbachs-alpha-alpha-1.html"><a href="cronbachs-alpha-alpha-1.html"><i class="fa fa-check"></i><b>14.6</b> Cronbach's alpha (<span class="math inline">\(\alpha\)</span>)</a></li>
+<li class="chapter" data-level="14.7" data-path="other-reliability-coefficients-1.html"><a href="other-reliability-coefficients-1.html"><i class="fa fa-check"></i><b>14.7</b> Other reliability coefficients</a></li>
+<li class="chapter" data-level="14.8" data-path="references-6.html"><a href="references-6.html"><i class="fa fa-check"></i><b>14.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="introduction-to-item-response-theory.html"><a href="introduction-to-item-response-theory.html"><i class="fa fa-check"></i><b>15</b> Introduction to Item Response Theory</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="item-response-theory-irt.html"><a href="item-response-theory-irt.html"><i class="fa fa-check"></i><b>15.1</b> Item Response Theory (IRT)</a></li>
+<li class="chapter" data-level="15.2" data-path="item-characteristic-curve-icc.html"><a href="item-characteristic-curve-icc.html"><i class="fa fa-check"></i><b>15.2</b> Item Characteristic Curve (ICC)</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="item-characteristic-curve-icc.html"><a href="item-characteristic-curve-icc.html#example-depression-scores"><i class="fa fa-check"></i><b>15.2.1</b> Example: Depression scores</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="irt-models.html"><a href="irt-models.html"><i class="fa fa-check"></i><b>15.3</b> IRT Models</a></li>
+<li class="chapter" data-level="15.4" data-path="parameters.html"><a href="parameters.html"><i class="fa fa-check"></i><b>15.4</b> Parameters</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="parameters.html"><a href="parameters.html#item-difficulty-b_j"><i class="fa fa-check"></i><b>15.4.1</b> Item difficulty (<span class="math inline">\(b_{j}\)</span>)</a></li>
+<li class="chapter" data-level="15.4.2" data-path="parameters.html"><a href="parameters.html#item-discrimination-a_j"><i class="fa fa-check"></i><b>15.4.2</b> Item discrimination (<span class="math inline">\(a_{j}\)</span>)</a></li>
+<li class="chapter" data-level="15.4.3" data-path="parameters.html"><a href="parameters.html#guessing-c_j"><i class="fa fa-check"></i><b>15.4.3</b> Guessing (<span class="math inline">\(c_{j}\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="the-information-function.html"><a href="the-information-function.html"><i class="fa fa-check"></i><b>15.5</b> The Information Function</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="the-information-function.html"><a href="the-information-function.html#item-information-function"><i class="fa fa-check"></i><b>15.5.1</b> Item Information Function</a></li>
+<li class="chapter" data-level="15.5.2" data-path="the-information-function.html"><a href="the-information-function.html#test-information-function"><i class="fa fa-check"></i><b>15.5.2</b> Test Information Function</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="references-7.html"><a href="references-7.html"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
 <li class="chapter" data-level="A" data-path="appenA.html"><a href="appenA.html"><i class="fa fa-check"></i><b>A</b> Software</a>
 <ul>
@@ -359,100 +447,26 @@ div.csl-indent {
 
 </div>
 </div>
-<div id="data-wrangling-with-dplyr" class="section level3 hasAnchor" number="3.4.3">
-<h3><span class="header-section-number">3.4.3</span> Data wrangling with <em>dplyr</em><a href="the-tidyverse.html#data-wrangling-with-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>First of all, we need to load the <strong>tidyverse</strong> that includes a suite of packages such as <strong>dplyr</strong>, <strong>tidyr</strong>, or <strong>ggplot2</strong>. If we are not loading the <strong>tidyverse</strong> or any of its packages, we will need to upload the package <strong>magrittr</strong> to use the pipe operator.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="the-tidyverse.html#cb33-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-2"><a href="the-tidyverse.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<p>We are going to use the simulated data set <code>affective.dis</code> to perform several operations that will end with the estimation of two descriptive statistics (<em>M</em> and <em>SD</em>) of the variables <em>depression</em> and <em>life.satis</em> for the female participants only and split by the three experimental conditions of the variable <em>treatment</em>.</p>
-<p>First, the data set <code>affective.dis</code> will be piped to the first operation: to select the variables <em>id</em>, <em>treatment</em>, <em>sex</em>, <em>depression</em>, and <em>life.satis</em>. Second, the resulting data set will be piped to the second operation: to filter a subset of rows based on the logical condition <code>sex == 'female'</code> (i.e., selecting only the rows/participants that are females). Third, we will split the following operations by the three experimental groups of the variable <em>treatment</em>. Last, we will compute the means and standard deviations of the variables <em>depression</em> and <em>life.satis</em>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="the-tidyverse.html#cb34-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-2"><a href="the-tidyverse.html#cb34-2" aria-hidden="true" tabindex="-1"></a>affective.dis <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a href="the-tidyverse.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, treatment, sex, depression, life.satis) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-4"><a href="the-tidyverse.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&#39;female&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb34-5"><a href="the-tidyverse.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-6"><a href="the-tidyverse.html#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_depression =</span> <span class="fu">mean</span>(depression),</span>
-<span id="cb34-7"><a href="the-tidyverse.html#cb34-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_depression =</span> <span class="fu">sd</span>(depression),</span>
-<span id="cb34-8"><a href="the-tidyverse.html#cb34-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_life.satis =</span> <span class="fu">mean</span>(life.satis),</span>
-<span id="cb34-9"><a href="the-tidyverse.html#cb34-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_life.satis =</span> <span class="fu">sd</span>(life.satis))</span>
-<span id="cb34-10"><a href="the-tidyverse.html#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 5</span></span>
-<span id="cb34-11"><a href="the-tidyverse.html#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   treatment mean_depression sd_depression mean_life.satis sd_life.satis</span></span>
-<span id="cb34-12"><a href="the-tidyverse.html#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="do">##       &lt;int&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;         &lt;dbl&gt;</span></span>
-<span id="cb34-13"><a href="the-tidyverse.html#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1         1           18             4.65            39.4          10.2</span></span>
-<span id="cb34-14"><a href="the-tidyverse.html#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2         2            9.83          3.06            39.2          10.3</span></span>
-<span id="cb34-15"><a href="the-tidyverse.html#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3         3            6.5           3.51            32.3          11.8</span></span></code></pre></div>
-<p>Sometimes, we are interested in using pipes to make sequential operations in our data sets, but the final goal is not to produce an output, but to modify a data set and to keep those changes. In these cases, we will use the assignment operator to save these changes into the same R object or into a different one. For example, in the following R code, (1) we will drop the variable <em>year</em> because it is a constant, (2) we will transform the variable <em>treatment</em> into a factor---assigning labels to its three experimental conditions, (3) we will move the variables <em>sex</em> and <em>age</em> to the second and third column respectively and the variable <em>satis</em> after the variable <em>life.satis</em>, (4) instead of overwriting the new data set on the former R object <code>affective.dis</code>, we will assign the new data set to the R object <code>affective.dis2</code>, and (5) we will reorder the rows of the new data set from the first (<code>id = 1</code>) to the last (<code>id = 36</code>) participant.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="the-tidyverse.html#cb35-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-2"><a href="the-tidyverse.html#cb35-2" aria-hidden="true" tabindex="-1"></a>affective.dis2 <span class="ot">&lt;-</span> affective.dis <span class="sc">%&gt;%</span> </span>
-<span id="cb35-3"><a href="the-tidyverse.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-4"><a href="the-tidyverse.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> <span class="fu">factor</span>(treatment,</span>
-<span id="cb35-5"><a href="the-tidyverse.html#cb35-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;Exercise&#39;</span>,</span>
-<span id="cb35-6"><a href="the-tidyverse.html#cb35-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&#39;Mindfulness&#39;</span>,</span>
-<span id="cb35-7"><a href="the-tidyverse.html#cb35-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&#39;CBT&#39;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-8"><a href="the-tidyverse.html#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(sex, age, <span class="at">.after =</span> id) <span class="sc">%&gt;%</span></span>
-<span id="cb35-9"><a href="the-tidyverse.html#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(satis, <span class="at">.after =</span> life.satis) <span class="sc">%&gt;%</span></span>
-<span id="cb35-10"><a href="the-tidyverse.html#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id)</span>
-<span id="cb35-11"><a href="the-tidyverse.html#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="the-tidyverse.html#cb35-12" aria-hidden="true" tabindex="-1"></a>affective.dis2</span>
-<span id="cb35-13"><a href="the-tidyverse.html#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="do">##    id    sex age   treatment depression life.satis  satis friends alone</span></span>
-<span id="cb35-14"><a href="the-tidyverse.html#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   1   male  30    Exercise         22   46.29640 Medium      11     0</span></span>
-<span id="cb35-15"><a href="the-tidyverse.html#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 2   2 female  24    Exercise         19   45.05375 Medium      19     0</span></span>
-<span id="cb35-16"><a href="the-tidyverse.html#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 3   3   male  27    Exercise         14   30.72955 Medium      16     0</span></span>
-<span id="cb35-17"><a href="the-tidyverse.html#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   4 female  28    Exercise         23   41.68792 Medium      12     0</span></span>
-<span id="cb35-18"><a href="the-tidyverse.html#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   5   male  21    Exercise         16   49.46538   High       1     0</span></span>
-<span id="cb35-19"><a href="the-tidyverse.html#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 6   6 female  18    Exercise         11   31.91528 Medium      10     0</span></span>
-<span id="cb35-20"><a href="the-tidyverse.html#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 7   7   male  22    Exercise         29   26.61934 Medium      19     0</span></span>
-<span id="cb35-21"><a href="the-tidyverse.html#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   8 female  26    Exercise         19   34.54426 Medium      17     0</span></span>
-<span id="cb35-22"><a href="the-tidyverse.html#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   9   male  18    Exercise         17   46.71564 Medium      11     0</span></span>
-<span id="cb35-23"><a href="the-tidyverse.html#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 10 female  19    Exercise         14   27.40801 Medium      13     0</span></span>
-<span id="cb35-24"><a href="the-tidyverse.html#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 11   male  18    Exercise         20   28.78611 Medium      14     1</span></span>
-<span id="cb35-25"><a href="the-tidyverse.html#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 12 female  18    Exercise         22   55.58027   High      11     0</span></span>
-<span id="cb35-26"><a href="the-tidyverse.html#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 13   male  25 Mindfulness         11   56.59889   High      17     0</span></span>
-<span id="cb35-27"><a href="the-tidyverse.html#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 14 female  29 Mindfulness          8   44.83303 Medium      18     0</span></span>
-<span id="cb35-28"><a href="the-tidyverse.html#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 15   male  21 Mindfulness          5   57.63776   High      11     0</span></span>
-<span id="cb35-29"><a href="the-tidyverse.html#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 16 16 female  22 Mindfulness          7   56.96347   High      11     0</span></span>
-<span id="cb35-30"><a href="the-tidyverse.html#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 17   male  26 Mindfulness         13   60.14921   High      11     0</span></span>
-<span id="cb35-31"><a href="the-tidyverse.html#cb35-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 18 female  23 Mindfulness         10   30.85689 Medium       9     0</span></span>
-<span id="cb35-32"><a href="the-tidyverse.html#cb35-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 19 19   male  23 Mindfulness          9   29.75329 Medium       6     0</span></span>
-<span id="cb35-33"><a href="the-tidyverse.html#cb35-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 20 20 female  30 Mindfulness          7   38.85606 Medium       4     0</span></span>
-<span id="cb35-34"><a href="the-tidyverse.html#cb35-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 21 21   male  28 Mindfulness         16   42.69900 Medium       8     1</span></span>
-<span id="cb35-35"><a href="the-tidyverse.html#cb35-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 22 22 female  18 Mindfulness         13   32.87654 Medium      12     0</span></span>
-<span id="cb35-36"><a href="the-tidyverse.html#cb35-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 23 23   male  18 Mindfulness         11   30.90008 Medium       0     1</span></span>
-<span id="cb35-37"><a href="the-tidyverse.html#cb35-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 24 24 female  28 Mindfulness         14   30.81424 Medium      13     0</span></span>
-<span id="cb35-38"><a href="the-tidyverse.html#cb35-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 25 25   male  19         CBT          8   35.59354 Medium      19     0</span></span>
-<span id="cb35-39"><a href="the-tidyverse.html#cb35-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 26 26 female  30         CBT         12   11.03705    Low      18     1</span></span>
-<span id="cb35-40"><a href="the-tidyverse.html#cb35-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 27 27   male  28         CBT          7   39.29192 Medium       3     1</span></span>
-<span id="cb35-41"><a href="the-tidyverse.html#cb35-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 28 28 female  22         CBT          4   29.59960 Medium      13     0</span></span>
-<span id="cb35-42"><a href="the-tidyverse.html#cb35-42" aria-hidden="true" tabindex="-1"></a><span class="do">## 29 29   male  26         CBT          9   44.18316 Medium       1     1</span></span>
-<span id="cb35-43"><a href="the-tidyverse.html#cb35-43" aria-hidden="true" tabindex="-1"></a><span class="do">## 30 30 female  18         CBT          7   39.36645 Medium       4     0</span></span>
-<span id="cb35-44"><a href="the-tidyverse.html#cb35-44" aria-hidden="true" tabindex="-1"></a><span class="do">## 31 31   male  25         CBT         11   29.17553 Medium      17     0</span></span>
-<span id="cb35-45"><a href="the-tidyverse.html#cb35-45" aria-hidden="true" tabindex="-1"></a><span class="do">## 32 32 female  30         CBT          3   30.28502 Medium      15     0</span></span>
-<span id="cb35-46"><a href="the-tidyverse.html#cb35-46" aria-hidden="true" tabindex="-1"></a><span class="do">## 33 33   male  21         CBT          5   45.87805 Medium      10     0</span></span>
-<span id="cb35-47"><a href="the-tidyverse.html#cb35-47" aria-hidden="true" tabindex="-1"></a><span class="do">## 34 34 female  22         CBT          9   42.85057 Medium       7     0</span></span>
-<span id="cb35-48"><a href="the-tidyverse.html#cb35-48" aria-hidden="true" tabindex="-1"></a><span class="do">## 35 35   male  30         CBT         14   19.57498    Low       6     0</span></span>
-<span id="cb35-49"><a href="the-tidyverse.html#cb35-49" aria-hidden="true" tabindex="-1"></a><span class="do">## 36 36 female  26         CBT          4   40.61539 Medium       6     1</span></span></code></pre></div>
-<div style="margin-bottom:50px;">
-
-</div>
-</div>
-<div id="the-package-tidyr" class="section level3 hasAnchor" number="3.4.4">
-<h3><span class="header-section-number">3.4.4</span> The package <strong>tidyr</strong><a href="the-tidyverse.html#the-package-tidyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-package-tidyr" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> The package <strong>tidyr</strong><a href="the-tidyverse.html#the-package-tidyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The package <a href="https://tidyr.tidyverse.org" target="_blank"><strong>tidyr</strong></a> was also developed by Hadley Wickham and colleagues. The package <strong>tidyr</strong> was created to tidy data; i.e., every vector column represents a variable, every row includes information of one participant/observation, and cells include a single value. The package <strong>tidyr</strong> is widely used to transform data frames from wide to long format and viceversa. This process involving the reshaping of data relies on pivoting the data set to collapse several columns into fewer columns (<code>pivot_longer()</code>) to generate a long-format data set, or to expand a few columns into more columns (<code>pivot_wider()</code>) to create a wide-format data set.</p>
 <p>Let's select the first four observations of the simulated data set <code>affective.dis</code>, a wide-format data set in which participant's responses were entered in a single row and multiple columns. We will use the function <code>slice_sample()</code> from the package <strong>dplyr</strong> to subset <em>n</em> random rows, rather than using the function <code>filter()</code> that requires setting conditions to keep some rows while dropping others (e.g., <code>filter(sex == 'female')</code>).</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="the-tidyverse.html#cb36-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-2"><a href="the-tidyverse.html#cb36-2" aria-hidden="true" tabindex="-1"></a>affective.wide1 <span class="ot">&lt;-</span> affective.dis <span class="sc">%&gt;%</span> </span>
-<span id="cb36-3"><a href="the-tidyverse.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
-<span id="cb36-4"><a href="the-tidyverse.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="the-tidyverse.html#cb36-5" aria-hidden="true" tabindex="-1"></a>affective.wide1</span>
-<span id="cb36-6"><a href="the-tidyverse.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex age depression life.satis  satis friends alone</span></span>
-<span id="cb36-7"><a href="the-tidyverse.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 22         2 2020 female  18         13   32.87654 Medium      12     0</span></span>
-<span id="cb36-8"><a href="the-tidyverse.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 29         3 2020   male  26          9   44.18316 Medium       1     1</span></span>
-<span id="cb36-9"><a href="the-tidyverse.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 17         2 2020   male  26         13   60.14921   High      11     0</span></span>
-<span id="cb36-10"><a href="the-tidyverse.html#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 33         3 2020   male  21          5   45.87805 Medium      10     0</span></span>
-<span id="cb36-11"><a href="the-tidyverse.html#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  6         1 2020 female  18         11   31.91528 Medium      10     0</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="the-tidyverse.html#cb33-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-2"><a href="the-tidyverse.html#cb33-2" aria-hidden="true" tabindex="-1"></a>affective.wide1 <span class="ot">&lt;-</span> affective.dis <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="the-tidyverse.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb33-4"><a href="the-tidyverse.html#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="the-tidyverse.html#cb33-5" aria-hidden="true" tabindex="-1"></a>affective.wide1</span>
+<span id="cb33-6"><a href="the-tidyverse.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   id treatment year    sex age depression life.satis  satis friends alone</span></span>
+<span id="cb33-7"><a href="the-tidyverse.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  7         1 2020   male  30         29   32.00596 Medium       9     0</span></span>
+<span id="cb33-8"><a href="the-tidyverse.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 22         2 2020 female  30         13   44.87210 Medium       3     0</span></span>
+<span id="cb33-9"><a href="the-tidyverse.html#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 23         2 2020   male  26         11   49.37174   High      19     0</span></span>
+<span id="cb33-10"><a href="the-tidyverse.html#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 29         3 2020   male  19          9   58.75117   High       2     0</span></span>
+<span id="cb33-11"><a href="the-tidyverse.html#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 12         1 2020 female  26         22   48.86415   High      13     0</span></span></code></pre></div>
 <div style="margin-bottom:50px;">
 
 </div>
+<p>XXXXXX</p>
+<p>TODO!!</p>
 <p>XXXXXX</p>
 </div>
 </div>
@@ -462,7 +476,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="renaming-recoding-and-sorting-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-wrangling-with-the-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

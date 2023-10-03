@@ -7,11 +7,11 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 ```
 
 
-
 <div style="margin-bottom:40px;">
 </div>
 
-><left>**LEARNING OUTCOMES**</left>
+
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
 ><div style="margin-bottom:30px;">
 ></div>
 >- Identify the capabilities of R and RStudio's environment and appraise their functionality.
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 
 
 
-<div style="margin-bottom:60px;">
+<div style="margin-bottom:70px;">
 </div>
 
 
@@ -34,7 +34,7 @@ R, in its most basic form, is composed by (1) a *script* in which we write the l
 </div>
 
 
-```{r, Rpanels, fig.align = 'center', fig.cap = "R displayed in two panels: Script (left) and Console (right).", echo = FALSE, out.width = '100%'}
+```{r, Fig0201Rpanels, fig.align = 'center', fig.cap = "R displayed in two panels: Script (left) and Console (right).", echo = FALSE, out.width = '100%'}
 knitr::include_graphics('./images/R_panels.jpg')
 ```
 
@@ -395,7 +395,7 @@ To learn how to install R packages in your machine, please read carefully Append
 Some basic packages (e.g., **base**, **stats**, **graphics**) are automatically uploaded when we start our session in R and RStudio. In contrast, most R packages will have to be uploaded at the beginning of our session in order to use them. The functions `library()` and `require()` load packages, using the name of the package as the first argument of the function. When the packages are successfully uploaded into our session, they are displayed with a ticked box (i.e., active) in the *packages* tab.
 
 
-```{r, library()_require(), results='hide', eval = FALSE}
+```{r, library()require(), results='hide', eval = FALSE}
 
 library(magrittr)
 require(dplyr)

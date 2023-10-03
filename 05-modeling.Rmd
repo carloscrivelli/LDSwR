@@ -1,3 +1,5 @@
+# (PART) Modeling {-} 
+
 # Modeling in R
 
 
@@ -11,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 <div style="margin-bottom:40px;">
 </div>
 
-><left>**LEARNING OUTCOMES**</left>
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
 ><div style="margin-bottom:30px;">
 ></div>
 >- Identify the capabilities of R and RStudio's environment and appraise their functionality.
@@ -23,6 +25,9 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 
 <div style="margin-bottom:60px;">
 </div>
+
+
+XXXXX TODO!! XXXXXX
 
 
 The purpose of a statistical model is to help understand what variables might best predict a phenomenon of interest, which ones have more or less influence, define a predictive equation with coefficients for each of the variables, and then apply that equation to predict values using the same input variables for other areas. This process requires samples with observations of the explanatory (or independent) and response (or dependent) variables in question.

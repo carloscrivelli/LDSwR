@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>13.3 Initial considerations | Learning Data Science with R</title>
+  <meta name="description" content="13.3 Initial considerations | Learning Data Science with R" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="13.3 Initial considerations | Learning Data Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="13.3 Initial considerations | Learning Data Science with R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-factor-analysis-efa.html"/>
+<link rel="next" href="factor-extraction.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.9000/grViz.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/LDSwR_transp.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="1" data-path="what-is-open-science.html"><a href="what-is-open-science.html"><i class="fa fa-check"></i><b>1</b> What is Open Science?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="the-credibility-of-science.html"><a href="the-credibility-of-science.html"><i class="fa fa-check"></i><b>1.1</b> The credibility of Science</a></li>
+<li class="chapter" data-level="1.2" data-path="questionable-scientific-practices.html"><a href="questionable-scientific-practices.html"><i class="fa fa-check"></i><b>1.2</b> Questionable scientific practices</a></li>
+<li class="chapter" data-level="1.3" data-path="the-credibility-crisis.html"><a href="the-credibility-crisis.html"><i class="fa fa-check"></i><b>1.3</b> The credibility crisis</a></li>
+<li class="chapter" data-level="1.4" data-path="threats-to-the-quality-of-the-scientific-process.html"><a href="threats-to-the-quality-of-the-scientific-process.html"><i class="fa fa-check"></i><b>1.4</b> Threats to the quality of the scientific process</a></li>
+<li class="chapter" data-level="1.5" data-path="open-data.html"><a href="open-data.html"><i class="fa fa-check"></i><b>1.5</b> Open Data</a></li>
+<li class="chapter" data-level="1.6" data-path="fair-data.html"><a href="fair-data.html"><i class="fa fa-check"></i><b>1.6</b> FAIR Data</a></li>
+<li class="chapter" data-level="1.7" data-path="contributorship-credit.html"><a href="contributorship-credit.html"><i class="fa fa-check"></i><b>1.7</b> Contributorship (CRediT)</a></li>
+<li class="chapter" data-level="1.8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-rstudio.html"><a href="what-is-rstudio.html"><i class="fa fa-check"></i><b>2.1</b> What is RStudio?</a></li>
+<li class="chapter" data-level="2.2" data-path="lets-get-started.html"><a href="lets-get-started.html"><i class="fa fa-check"></i><b>2.2</b> Let's get started!</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="lets-get-started.html"><a href="lets-get-started.html#running-a-line-of-code"><i class="fa fa-check"></i><b>2.2.1</b> Running a line of code</a></li>
+<li class="chapter" data-level="2.2.2" data-path="lets-get-started.html"><a href="lets-get-started.html#adding-comments-on-r-scripts"><i class="fa fa-check"></i><b>2.2.2</b> Adding comments on R scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html"><i class="fa fa-check"></i><b>2.3</b> Starting a session in RStudio</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-global-options"><i class="fa fa-check"></i><b>2.3.1</b> Setting the global options</a></li>
+<li class="chapter" data-level="2.3.2" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#first-lines-of-code"><i class="fa fa-check"></i><b>2.3.2</b> First lines of code</a></li>
+<li class="chapter" data-level="2.3.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-working-directory"><i class="fa fa-check"></i><b>2.3.3</b> Setting the working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html"><i class="fa fa-check"></i><b>2.4</b> R objects and functions</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#functions"><i class="fa fa-check"></i><b>2.4.1</b> Functions</a></li>
+<li class="chapter" data-level="2.4.2" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#r-objects"><i class="fa fa-check"></i><b>2.4.2</b> R objects</a></li>
+<li class="chapter" data-level="2.4.3" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#applying-functions-to-objects"><i class="fa fa-check"></i><b>2.4.3</b> Applying functions to objects</a></li>
+<li class="chapter" data-level="2.4.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#getting-help"><i class="fa fa-check"></i><b>2.4.4</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2.5</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="packages.html"><a href="packages.html#loading-r-packages"><i class="fa fa-check"></i><b>2.5.1</b> Loading R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html"><i class="fa fa-check"></i><b>2.6</b> Importing and exporting data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#loading-data"><i class="fa fa-check"></i><b>2.6.1</b> Loading data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exporting-data"><i class="fa fa-check"></i><b>2.6.2</b> Exporting data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>2.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html"><i class="fa fa-check"></i><b>3.1</b> Indexing and subsetting</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-columns-variables"><i class="fa fa-check"></i><b>3.1.1</b> Selecting columns (variables)</a></li>
+<li class="chapter" data-level="3.1.2" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-rows-observations"><i class="fa fa-check"></i><b>3.1.2</b> Selecting rows (observations)</a></li>
+<li class="chapter" data-level="3.1.3" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-rows-and-columns-conditional-subsetting"><i class="fa fa-check"></i><b>3.1.3</b> Selecting rows and columns (conditional subsetting)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="adding-new-data-to-a-data-frame.html"><a href="adding-new-data-to-a-data-frame.html"><i class="fa fa-check"></i><b>3.2</b> Adding new data to a data frame</a></li>
+<li class="chapter" data-level="3.3" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html"><i class="fa fa-check"></i><b>3.3</b> Renaming, recoding, and sorting data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#renaming"><i class="fa fa-check"></i><b>3.3.1</b> Renaming</a></li>
+<li class="chapter" data-level="3.3.2" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#recoding"><i class="fa fa-check"></i><b>3.3.2</b> Recoding</a></li>
+<li class="chapter" data-level="3.3.3" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#sorting"><i class="fa fa-check"></i><b>3.3.3</b> Sorting</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>3.4</b> The <strong>tidyverse</strong></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-pipe"><i class="fa fa-check"></i><b>3.4.1</b> The pipe (%&gt;%)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-dplyr"><i class="fa fa-check"></i><b>3.4.2</b> The package <strong>dplyr</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-tidyr"><i class="fa fa-check"></i><b>3.4.3</b> The package <strong>tidyr</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling-with-the-tidyverse.html"><a href="data-wrangling-with-the-tidyverse.html"><i class="fa fa-check"></i><b>3.5</b> Data wrangling with the <strong>tidyverse</strong></a></li>
+<li class="chapter" data-level="3.6" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>3.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics and Data Visualization</a></li>
+<li class="part"><span><b>II Modeling</b></span></li>
+<li class="chapter" data-level="5" data-path="modeling-in-r.html"><a href="modeling-in-r.html"><i class="fa fa-check"></i><b>5</b> Modeling in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="some-common-statistical-models.html"><a href="some-common-statistical-models.html"><i class="fa fa-check"></i><b>5.1</b> Some common statistical models</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-models-i.html"><a href="linear-models-i.html"><i class="fa fa-check"></i><b>6</b> Linear Models I</a></li>
+<li class="chapter" data-level="7" data-path="linear-models-ii.html"><a href="linear-models-ii.html"><i class="fa fa-check"></i><b>7</b> Linear Models II</a></li>
+<li class="chapter" data-level="8" data-path="linear-models-iii.html"><a href="linear-models-iii.html"><i class="fa fa-check"></i><b>8</b> Linear Models III</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="10" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>10</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>10.1</b> Categorical data</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="categorical-data.html"><a href="categorical-data.html#binomial-and-multinomial-data"><i class="fa fa-check"></i><b>10.1.1</b> Binomial and multinomial data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="categorical-data.html"><a href="categorical-data.html#ordinal-data"><i class="fa fa-check"></i><b>10.1.2</b> Ordinal data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="dealing-with-categorical-variables-in-r.html"><a href="dealing-with-categorical-variables-in-r.html"><i class="fa fa-check"></i><b>10.2</b> Dealing with categorical variables in R</a></li>
+<li class="chapter" data-level="10.3" data-path="research-questions-with-categorical-data.html"><a href="research-questions-with-categorical-data.html"><i class="fa fa-check"></i><b>10.3</b> Research questions with categorical data</a></li>
+<li class="chapter" data-level="10.4" data-path="references-3.html"><a href="references-3.html"><i class="fa fa-check"></i><b>10.4</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>11</b> Linear Mixed Models</a></li>
+<li class="part"><span><b>III Psychometrics</b></span></li>
+<li class="chapter" data-level="12" data-path="scale-development.html"><a href="scale-development.html"><i class="fa fa-check"></i><b>12</b> Scale Development</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="reflective-and-formative-indicators.html"><a href="reflective-and-formative-indicators.html"><i class="fa fa-check"></i><b>12.1</b> Reflective and formative indicators</a></li>
+<li class="chapter" data-level="12.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html"><i class="fa fa-check"></i><b>12.2</b> Classification of scales of measurement</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#nominal-scale"><i class="fa fa-check"></i><b>12.2.1</b> Nominal scale</a></li>
+<li class="chapter" data-level="12.2.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ordinal-scale"><i class="fa fa-check"></i><b>12.2.2</b> Ordinal scale</a></li>
+<li class="chapter" data-level="12.2.3" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#interval-scale"><i class="fa fa-check"></i><b>12.2.3</b> Interval scale</a></li>
+<li class="chapter" data-level="12.2.4" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ratio-scale"><i class="fa fa-check"></i><b>12.2.4</b> Ratio scale</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="test-theory.html"><a href="test-theory.html"><i class="fa fa-check"></i><b>12.3</b> Test theory</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="test-theory.html"><a href="test-theory.html#what-is-a-test"><i class="fa fa-check"></i><b>12.3.1</b> What is a test?</a></li>
+<li class="chapter" data-level="12.3.2" data-path="test-theory.html"><a href="test-theory.html#classification-of-psychological-tests"><i class="fa fa-check"></i><b>12.3.2</b> Classification of psychological tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="test-theory.html"><a href="test-theory.html#measurement-error"><i class="fa fa-check"></i><b>12.3.3</b> Measurement error</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="scale-development-1.html"><a href="scale-development-1.html"><i class="fa fa-check"></i><b>12.4</b> Scale development</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="scale-development-1.html"><a href="scale-development-1.html#purpose-of-the-test"><i class="fa fa-check"></i><b>12.4.1</b> Purpose of the test</a></li>
+<li class="chapter" data-level="12.4.2" data-path="scale-development-1.html"><a href="scale-development-1.html#administration-restrictions"><i class="fa fa-check"></i><b>12.4.2</b> Administration restrictions</a></li>
+<li class="chapter" data-level="12.4.3" data-path="scale-development-1.html"><a href="scale-development-1.html#defining-the-domain"><i class="fa fa-check"></i><b>12.4.3</b> Defining the domain</a></li>
+<li class="chapter" data-level="12.4.4" data-path="scale-development-1.html"><a href="scale-development-1.html#test-specification-blueprint"><i class="fa fa-check"></i><b>12.4.4</b> Test specification (blueprint)</a></li>
+<li class="chapter" data-level="12.4.5" data-path="scale-development-1.html"><a href="scale-development-1.html#draft-the-initial-pool-of-items-review-them-and-pilot-them"><i class="fa fa-check"></i><b>12.4.5</b> Draft the initial pool of items, review them, and pilot them</a></li>
+<li class="chapter" data-level="12.4.6" data-path="scale-development-1.html"><a href="scale-development-1.html#psychometric-principles-reliability-validity-comparability-and-fairness"><i class="fa fa-check"></i><b>12.4.6</b> Psychometric principles: Reliability, validity, comparability, and fairness</a></li>
+<li class="chapter" data-level="12.4.7" data-path="scale-development-1.html"><a href="scale-development-1.html#field-test-and-the-development-of-guidelines-for-administration-scoring-and-interpretation-of-test-scores"><i class="fa fa-check"></i><b>12.4.7</b> Field test and the development of guidelines for administration, scoring, and interpretation of test scores</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i><b>12.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="exploratory-factor-analysis.html"><a href="exploratory-factor-analysis.html"><i class="fa fa-check"></i><b>13</b> Exploratory Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html"><i class="fa fa-check"></i><b>13.1</b> Data reduction techniques</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html#principal-components-analysis-pca"><i class="fa fa-check"></i><b>13.1.1</b> Principal Components Analysis (PCA)</a></li>
+<li class="chapter" data-level="13.1.2" data-path="data-reduction-techniques.html"><a href="data-reduction-techniques.html#factor-analysis-fa"><i class="fa fa-check"></i><b>13.1.2</b> Factor Analysis (FA)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html"><i class="fa fa-check"></i><b>13.2</b> Exploratory Factor Analysis (EFA)</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html#the-basic-efa-model"><i class="fa fa-check"></i><b>13.2.1</b> The basic EFA model</a></li>
+<li class="chapter" data-level="13.2.2" data-path="exploratory-factor-analysis-efa.html"><a href="exploratory-factor-analysis-efa.html#steps-to-conduct-an-exploratory-factor-analysis-efa"><i class="fa fa-check"></i><b>13.2.2</b> Steps to conduct an Exploratory Factor Analysis (EFA)</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="initial-considerations.html"><a href="initial-considerations.html"><i class="fa fa-check"></i><b>13.3</b> Initial considerations</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="initial-considerations.html"><a href="initial-considerations.html#tidying-the-data-set"><i class="fa fa-check"></i><b>13.3.1</b> Tidying the data set</a></li>
+<li class="chapter" data-level="13.3.2" data-path="initial-considerations.html"><a href="initial-considerations.html#generating-the-correlation-matrix"><i class="fa fa-check"></i><b>13.3.2</b> Generating the correlation matrix</a></li>
+<li class="chapter" data-level="13.3.3" data-path="initial-considerations.html"><a href="initial-considerations.html#exploring-the-data-using-descriptive-statistics-and-data-visualizations"><i class="fa fa-check"></i><b>13.3.3</b> Exploring the data using descriptive statistics and data visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="factor-extraction.html"><a href="factor-extraction.html"><i class="fa fa-check"></i><b>13.4</b> Factor extraction</a></li>
+<li class="chapter" data-level="13.5" data-path="factor-rotation-and-interpretation-of-efa.html"><a href="factor-rotation-and-interpretation-of-efa.html"><i class="fa fa-check"></i><b>13.5</b> Factor rotation and interpretation of EFA</a></li>
+<li class="chapter" data-level="13.6" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i><b>13.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="reliability-1.html"><a href="reliability-1.html"><i class="fa fa-check"></i><b>14</b> Reliability</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="approaches-to-reliability.html"><a href="approaches-to-reliability.html"><i class="fa fa-check"></i><b>14.1</b> Approaches to reliability</a></li>
+<li class="chapter" data-level="14.2" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html"><i class="fa fa-check"></i><b>14.2</b> Reliability methods requiring several administrations of a test</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html#test-retest"><i class="fa fa-check"></i><b>14.2.1</b> Test-retest</a></li>
+<li class="chapter" data-level="14.2.2" data-path="reliability-methods-requiring-several-administrations-of-a-test.html"><a href="reliability-methods-requiring-several-administrations-of-a-test.html#parallel-forms"><i class="fa fa-check"></i><b>14.2.2</b> Parallel forms</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html"><i class="fa fa-check"></i><b>14.3</b> Inter-rater reliability</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html#cohens-kappa"><i class="fa fa-check"></i><b>14.3.1</b> Cohen's Kappa</a></li>
+<li class="chapter" data-level="14.3.2" data-path="inter-rater-reliability.html"><a href="inter-rater-reliability.html#cohens-kappa-in-r"><i class="fa fa-check"></i><b>14.3.2</b> Cohen's Kappa in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="internal-consistency.html"><a href="internal-consistency.html"><i class="fa fa-check"></i><b>14.4</b> Internal consistency</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="internal-consistency.html"><a href="internal-consistency.html#split-half-tests"><i class="fa fa-check"></i><b>14.4.1</b> Split half tests</a></li>
+<li class="chapter" data-level="14.4.2" data-path="internal-consistency.html"><a href="internal-consistency.html#item-covariance-tests"><i class="fa fa-check"></i><b>14.4.2</b> Item covariance tests</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="internal-consistency-in-r.html"><a href="internal-consistency-in-r.html"><i class="fa fa-check"></i><b>14.5</b> Internal consistency in R</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="internal-consistency-in-r.html"><a href="internal-consistency-in-r.html#data-wrangling-1"><i class="fa fa-check"></i><b>14.5.1</b> Data wrangling</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="cronbachs-alpha-alpha-1.html"><a href="cronbachs-alpha-alpha-1.html"><i class="fa fa-check"></i><b>14.6</b> Cronbach's alpha (<span class="math inline">\(\alpha\)</span>)</a></li>
+<li class="chapter" data-level="14.7" data-path="other-reliability-coefficients-1.html"><a href="other-reliability-coefficients-1.html"><i class="fa fa-check"></i><b>14.7</b> Other reliability coefficients</a></li>
+<li class="chapter" data-level="14.8" data-path="references-6.html"><a href="references-6.html"><i class="fa fa-check"></i><b>14.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="introduction-to-item-response-theory.html"><a href="introduction-to-item-response-theory.html"><i class="fa fa-check"></i><b>15</b> Introduction to Item Response Theory</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="item-response-theory-irt.html"><a href="item-response-theory-irt.html"><i class="fa fa-check"></i><b>15.1</b> Item Response Theory (IRT)</a></li>
+<li class="chapter" data-level="15.2" data-path="item-characteristic-curve-icc.html"><a href="item-characteristic-curve-icc.html"><i class="fa fa-check"></i><b>15.2</b> Item Characteristic Curve (ICC)</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="item-characteristic-curve-icc.html"><a href="item-characteristic-curve-icc.html#example-depression-scores"><i class="fa fa-check"></i><b>15.2.1</b> Example: Depression scores</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="irt-models.html"><a href="irt-models.html"><i class="fa fa-check"></i><b>15.3</b> IRT Models</a></li>
+<li class="chapter" data-level="15.4" data-path="parameters.html"><a href="parameters.html"><i class="fa fa-check"></i><b>15.4</b> Parameters</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="parameters.html"><a href="parameters.html#item-difficulty-b_j"><i class="fa fa-check"></i><b>15.4.1</b> Item difficulty (<span class="math inline">\(b_{j}\)</span>)</a></li>
+<li class="chapter" data-level="15.4.2" data-path="parameters.html"><a href="parameters.html#item-discrimination-a_j"><i class="fa fa-check"></i><b>15.4.2</b> Item discrimination (<span class="math inline">\(a_{j}\)</span>)</a></li>
+<li class="chapter" data-level="15.4.3" data-path="parameters.html"><a href="parameters.html#guessing-c_j"><i class="fa fa-check"></i><b>15.4.3</b> Guessing (<span class="math inline">\(c_{j}\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="the-information-function.html"><a href="the-information-function.html"><i class="fa fa-check"></i><b>15.5</b> The Information Function</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="the-information-function.html"><a href="the-information-function.html#item-information-function"><i class="fa fa-check"></i><b>15.5.1</b> Item Information Function</a></li>
+<li class="chapter" data-level="15.5.2" data-path="the-information-function.html"><a href="the-information-function.html#test-information-function"><i class="fa fa-check"></i><b>15.5.2</b> Test Information Function</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="references-7.html"><a href="references-7.html"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="appenA.html"><a href="appenA.html"><i class="fa fa-check"></i><b>A</b> Software</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="appenA1.html"><a href="appenA1.html"><i class="fa fa-check"></i><b>A.1</b> Installation of R and RStudio</a></li>
+<li class="chapter" data-level="A.2" data-path="appenA2.html"><a href="appenA2.html"><i class="fa fa-check"></i><b>A.2</b> Installation of R packages</a></li>
+<li class="chapter" data-level="A.3" data-path="appenA3.html"><a href="appenA3.html"><i class="fa fa-check"></i><b>A.3</b> Packages used in this book</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="appenB.html"><a href="appenB.html"><i class="fa fa-check"></i><b>B</b> Stylistic Conventions</a></li>
+<li class="chapter" data-level="C" data-path="appenC.html"><a href="appenC.html"><i class="fa fa-check"></i><b>C</b> Universal Design for Learning</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning Data Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="initial-considerations" class="section level2 hasAnchor" number="13.3">
+<h2><span class="header-section-number">13.3</span> Initial considerations<a href="initial-considerations.html#initial-considerations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The scale's observed measures (i.e., the items) must be quantitative data. To estimate the correlations in the structure matrix (<strong>P</strong>), the scale needs to provide a sufficient amount of variability in the responses. As a rule of thumb, we will need at least 4-5 observed variables per factor and several hundred respondents to avoid underspecified models and a poor estimation of the internal structure of the scale (Fabrigar et al., 1999). Last, we will also require a significant number of high correlations (<span class="math inline">\(r &gt; .30\)</span>) among the items.</p>
+<p>After collecting the data and selecting the observed variables (i.e., items) that we want to explore, we will organize and tidy the data set. For example, items negatively worded must be recoded. Likewise, we must check if there are missing cases (<code>NaN</code>) to drop them from the analyses.</p>
+<p>Once the data set will be properly organized and formatted, we will generate the correlation matrix (<strong>P</strong>) and save it into an R object (e.g., the correlation matrix <code>corre</code>). Then, we will explore our data using some useful plots that will reveal the patterns of association, problematic issues regarding poor quality items, and an initial approximation to the latent variables of the scale.</p>
+<div id="tidying-the-data-set" class="section level3 hasAnchor" number="13.3.1">
+<h3><span class="header-section-number">13.3.1</span> Tidying the data set<a href="initial-considerations.html#tidying-the-data-set" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the current example, the Job Burnout Scale was used to measure 510 respondents' degree of agreement (5-point Likert scale: <em>strongly disagree</em> &lt; <em>disagree</em> &lt; <em>neutral</em> &lt; <em>agree</em> &lt; <em>strongly agree</em>) with the 12 statements covering the domain of the psychological construct <em>job burnout</em>. Two items were reversed worded (<code>i3</code> and <code>i8</code>), requiring further recoding.</p>
+<ul>
+<li><strong>Starting the session in R</strong>: Start every session in R by removing all objects from the <em>global environment</em> using the function <code>rm()</code>. Likewise, set in advance the randomization seed for the current session using the function <code>set.seed()</code>, and avoid using the scientific notation.</li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="initial-considerations.html#cb39-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-2"><a href="initial-considerations.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb39-3"><a href="initial-considerations.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb39-4"><a href="initial-considerations.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span></code></pre></div>
+<ul>
+<li><strong>Setting the working directory</strong>: Place the data set <code>burnout.sav</code> in the same folder where you will set the working directory. Then, set the working directory accordingly. For example, the instructor's working directory can be found in a folder named <em>Chapter13</em> that is located inside of the folder <em>LDSwR</em> and the folder <em>R</em>; all of them placed in the home folder <em>Users</em>.</li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="initial-considerations.html#cb40-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-2"><a href="initial-considerations.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;/Users/R/LDSwR/Chapter13&#39;</span>)</span></code></pre></div>
+<ul>
+<li><strong>Loading packages</strong>: Load the packages that will be required to execute the R code for this session.</li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="initial-considerations.html#cb41-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-2"><a href="initial-considerations.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb41-3"><a href="initial-considerations.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb41-4"><a href="initial-considerations.html#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb41-5"><a href="initial-considerations.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb41-6"><a href="initial-considerations.html#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code></pre></div>
+<ul>
+<li><strong>Reading the data set</strong>: To read the data from the SPSS file stored in the folder <em>datasets</em> inside of the working directory, use the function <code>import()</code> from the package <a href="https://cran.r-project.org/web/packages/rio/vignettes/rio.html" target="_blank"><strong>rio</strong></a> but do not forget to add the path with the additional folder (<em>datasets</em>) followed by the name of the data set with its corresponding file extension (e.g., <code>.sav</code>, <code>.csv</code>, <code>.dat</code>). Given that there are 510 observations, it is not recommended to inspect all the rows of the data set. We could use the function <code>head()</code> to inspect the first six participants. We could also explore the dimensions of the data set (e.g., 510 rows and 23 columns) and the names of the variables using the functions <code>dim()</code> and <code>names()</code> respectively.</li>
+</ul>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="initial-considerations.html#cb42-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-2"><a href="initial-considerations.html#cb42-2" aria-hidden="true" tabindex="-1"></a>burnout.dat <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&#39;./datasets/burnout.sav&#39;</span>)</span>
+<span id="cb42-3"><a href="initial-considerations.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(burnout.dat)</span>
+<span id="cb42-4"><a href="initial-considerations.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   id sex age i1 i2 i3 i4 i5 i6 i7 i8 i9 i10 i11 i12 burnoutTot stress job.satis</span></span>
+<span id="cb42-5"><a href="initial-considerations.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  1   0  34  4  3  4  2  3  4  3  4  4   4   4   4         34     88        48</span></span>
+<span id="cb42-6"><a href="initial-considerations.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2   0  38  2  2  4  3  4  2  3  2  3   3   4   3         28     79        53</span></span>
+<span id="cb42-7"><a href="initial-considerations.html#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  3   1  43  2  5  5  2  4  2  2  5  2   3   3   1         22     82        68</span></span>
+<span id="cb42-8"><a href="initial-considerations.html#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  4   1  37  3  3  2  4  4  3  3  2  3   4   3   3         33     89        54</span></span>
+<span id="cb42-9"><a href="initial-considerations.html#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  5   0  43  2  2  4  3  3  1  3  4  3   2   4   2         23     76        51</span></span>
+<span id="cb42-10"><a href="initial-considerations.html#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  6   1  35  3  3  4  3  3  3  3  3  3   3   4   2         29     83        47</span></span>
+<span id="cb42-11"><a href="initial-considerations.html#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   coping.skills contract</span></span>
+<span id="cb42-12"><a href="initial-considerations.html#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1            71        2</span></span>
+<span id="cb42-13"><a href="initial-considerations.html#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2            82        2</span></span>
+<span id="cb42-14"><a href="initial-considerations.html#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 3            56        3</span></span>
+<span id="cb42-15"><a href="initial-considerations.html#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 4            64        1</span></span>
+<span id="cb42-16"><a href="initial-considerations.html#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 5            73        3</span></span>
+<span id="cb42-17"><a href="initial-considerations.html#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 6            74        3</span></span>
+<span id="cb42-18"><a href="initial-considerations.html#cb42-18" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(burnout.dat)</span>
+<span id="cb42-19"><a href="initial-considerations.html#cb42-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 510  20</span></span>
+<span id="cb42-20"><a href="initial-considerations.html#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(burnout.dat)</span>
+<span id="cb42-21"><a href="initial-considerations.html#cb42-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;id&quot;            &quot;sex&quot;           &quot;age&quot;           &quot;i1&quot;           </span></span>
+<span id="cb42-22"><a href="initial-considerations.html#cb42-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] &quot;i2&quot;            &quot;i3&quot;            &quot;i4&quot;            &quot;i5&quot;           </span></span>
+<span id="cb42-23"><a href="initial-considerations.html#cb42-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] &quot;i6&quot;            &quot;i7&quot;            &quot;i8&quot;            &quot;i9&quot;           </span></span>
+<span id="cb42-24"><a href="initial-considerations.html#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] &quot;i10&quot;           &quot;i11&quot;           &quot;i12&quot;           &quot;burnoutTot&quot;   </span></span>
+<span id="cb42-25"><a href="initial-considerations.html#cb42-25" aria-hidden="true" tabindex="-1"></a><span class="do">## [17] &quot;stress&quot;        &quot;job.satis&quot;     &quot;coping.skills&quot; &quot;contract&quot;</span></span></code></pre></div>
+<ul>
+<li><strong>Subsetting</strong>: To generate the correlation or structure matrix (<strong>P</strong>), we only need the 12 items of the Job Burnout Scale. For this reason, we are going to subset the data set to select the items 1 to 12 using the function <code>select()</code> from the package <a href="https://dplyr.tidyverse.org" target="_blank"><strong>dplyr</strong></a>. The resulting 12 covariates will be stored in a new R object named <code>burnout</code>.</li>
+</ul>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="initial-considerations.html#cb43-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-2"><a href="initial-considerations.html#cb43-2" aria-hidden="true" tabindex="-1"></a>burnout <span class="ot">&lt;-</span> burnout.dat <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a href="initial-considerations.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(i1<span class="sc">:</span>i12)</span>
+<span id="cb43-4"><a href="initial-considerations.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">headTail</span>(burnout)</span>
+<span id="cb43-5"><a href="initial-considerations.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="do">##      i1  i2  i3  i4  i5  i6  i7  i8  i9 i10 i11 i12</span></span>
+<span id="cb43-6"><a href="initial-considerations.html#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     4   3   4   2   3   4   3   4   4   4   4   4</span></span>
+<span id="cb43-7"><a href="initial-considerations.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2   2   4   3   4   2   3   2   3   3   4   3</span></span>
+<span id="cb43-8"><a href="initial-considerations.html#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     2   5   5   2   4   2   2   5   2   3   3   1</span></span>
+<span id="cb43-9"><a href="initial-considerations.html#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     3   3   2   4   4   3   3   2   3   4   3   3</span></span>
+<span id="cb43-10"><a href="initial-considerations.html#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ... ... ... ... ... ... ... ... ... ... ... ... ...</span></span>
+<span id="cb43-11"><a href="initial-considerations.html#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 507   2   2   2   4   2   2   2   4   3   2   3   4</span></span>
+<span id="cb43-12"><a href="initial-considerations.html#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 508   1   3   5   2   2   1   3   4   3   4   1   2</span></span>
+<span id="cb43-13"><a href="initial-considerations.html#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 509   2   4   2   4   4   2   4   4   5   4   3   4</span></span>
+<span id="cb43-14"><a href="initial-considerations.html#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 510   4   4   4   4   4   2   4   2   5   4   5   2</span></span>
+<span id="cb43-15"><a href="initial-considerations.html#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(burnout)</span>
+<span id="cb43-16"><a href="initial-considerations.html#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 510  12</span></span>
+<span id="cb43-17"><a href="initial-considerations.html#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(burnout)</span>
+<span id="cb43-18"><a href="initial-considerations.html#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;i1&quot;  &quot;i2&quot;  &quot;i3&quot;  &quot;i4&quot;  &quot;i5&quot;  &quot;i6&quot;  &quot;i7&quot;  &quot;i8&quot;  &quot;i9&quot;  &quot;i10&quot; &quot;i11&quot; &quot;i12&quot;</span></span></code></pre></div>
+<ul>
+<li><strong>Reverse scoring</strong>: We need to reverse the scoring of the two items that were negatively worded (<code>i3</code> and <code>i8</code>). First, we will create a new vector (<code>new</code>) after selecting all the rows and only the columns of the items named <code>i3</code> and <code>i8</code>. The vector named <code>new</code> is the result of subtracting a value of <code>6</code> to the scores of two items that range from <code>1</code> to <code>5</code>. Consequently, a score of <code>1</code> will be transformed into a score of <code>5</code> (i.e., <code>6 - 1 = 5</code>) and a score of <code>5</code> will be transformed into a score of <code>1</code> (i.e., <code>6 - 5 = 1</code>). After reverse scoring the two items included in the vector <code>new</code>, we will substitute the original items <code>i3</code> and <code>i8</code> included in our data set with the new ones stored in the R object <code>new</code>. As usual, you can inspect the result using the function <code>head()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="initial-considerations.html#cb44-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-2"><a href="initial-considerations.html#cb44-2" aria-hidden="true" tabindex="-1"></a>new <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">-</span> burnout[ , <span class="fu">c</span>(<span class="st">&#39;i3&#39;</span>, <span class="st">&#39;i8&#39;</span>)]</span>
+<span id="cb44-3"><a href="initial-considerations.html#cb44-3" aria-hidden="true" tabindex="-1"></a>burnout[ , <span class="fu">c</span>(<span class="st">&#39;i3&#39;</span>, <span class="st">&#39;i8&#39;</span>)] <span class="ot">&lt;-</span> new</span>
+<span id="cb44-4"><a href="initial-considerations.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(burnout)</span>
+<span id="cb44-5"><a href="initial-considerations.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   i1 i2 i3 i4 i5 i6 i7 i8 i9 i10 i11 i12</span></span>
+<span id="cb44-6"><a href="initial-considerations.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  4  3  2  2  3  4  3  2  4   4   4   4</span></span>
+<span id="cb44-7"><a href="initial-considerations.html#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2  2  2  3  4  2  3  4  3   3   4   3</span></span>
+<span id="cb44-8"><a href="initial-considerations.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  2  5  1  2  4  2  2  1  2   3   3   1</span></span>
+<span id="cb44-9"><a href="initial-considerations.html#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  3  3  4  4  4  3  3  4  3   4   3   3</span></span>
+<span id="cb44-10"><a href="initial-considerations.html#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  2  2  2  3  3  1  3  2  3   2   4   2</span></span>
+<span id="cb44-11"><a href="initial-considerations.html#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  3  3  2  3  3  3  3  3  3   3   4   2</span></span></code></pre></div>
+</div>
+<div id="generating-the-correlation-matrix" class="section level3 hasAnchor" number="13.3.2">
+<h3><span class="header-section-number">13.3.2</span> Generating the correlation matrix<a href="initial-considerations.html#generating-the-correlation-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To conduct EFA, we can use the covariance or the correlation matrices. Here, we will use the correlation matrix (<strong>P</strong>; also called structure matrix). The function <code>cor()</code> generates the correlation matrix that we will store in the R object <code>corre</code>. In the first argument of the function <code>cor()</code>, we will input the data set that only includes the items. Although the second argument allows us to select among three different correlation methods (<code>pearson</code>, <code>kendall</code>, and <code>spearman</code>), the default option (<code>pearson</code>) is the one we need.</p>
+<p>We will use the function <code>na.omit()</code> to avoid having missing observations. If these missing cases are not explicitly excluded from the analyses, we won't be able to generate the correlation matrix. To inspect the correlation matrix in the <em>console</em> simply recall the R object <code>corre</code>. The correlation matrix displayed below was produced with the package <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf" target="_blank"><strong>stargazer</strong></a> using the function <code>stargazer()</code> (Hlavac, 2018).</p>
+<div style="margin-bottom:40px;">
+
+</div>
+<div class="alert alert-danger hints-alert">
+<div class="hints-icon">
+<i class="fa fa-exclamation-triangle fa-2x fa-pull-right fa-border" aria-hidden="true"></i>
+</div>
+<h4 class="alert-heading">
+<strong>CAUTION!</strong>
+</h4>
+<p style="color: Black">
+We used the function <code>stargazer()</code> from the package <strong>stargazer</strong> within the Rmarkdown environment to produce a more appealing correlation matrix to the reader. It is important to set the argument <code>results = 'asis'</code> in the Rmarkdown code chunk to generate text as raw Markdown content.
+</p>
+</div>
+<div style="margin-bottom:60px;">
+
+</div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="initial-considerations.html#cb45-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-2"><a href="initial-considerations.html#cb45-2" aria-hidden="true" tabindex="-1"></a>corre <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">na.omit</span>(burnout))</span>
+<span id="cb45-3"><a href="initial-considerations.html#cb45-3" aria-hidden="true" tabindex="-1"></a>stargazer<span class="sc">::</span><span class="fu">stargazer</span>(corre, <span class="at">type =</span> <span class="st">&#39;html&#39;</span>, <span class="at">rownames =</span> T, <span class="at">summary =</span> F,</span>
+<span id="cb45-4"><a href="initial-considerations.html#cb45-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">header =</span> F, <span class="at">font.size =</span> <span class="st">&#39;Large&#39;</span>,</span>
+<span id="cb45-5"><a href="initial-considerations.html#cb45-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">column.sep.width =</span> <span class="st">&#39;7pt&#39;</span>, <span class="at">align =</span> T,</span>
+<span id="cb45-6"><a href="initial-considerations.html#cb45-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="st">&quot;Job Burnout Scale&#39;s Correlation Matrix.&quot;</span>)</span></code></pre></div>
+<table style="text-align:center">
+<caption>
+<strong>Job Burnout Scale's Correlation Matrix.</strong>
+</caption>
+<tr>
+<td colspan="13" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+i1
+</td>
+<td>
+i2
+</td>
+<td>
+i3
+</td>
+<td>
+i4
+</td>
+<td>
+i5
+</td>
+<td>
+i6
+</td>
+<td>
+i7
+</td>
+<td>
+i8
+</td>
+<td>
+i9
+</td>
+<td>
+i10
+</td>
+<td>
+i11
+</td>
+<td>
+i12
+</td>
+</tr>
+<tr>
+<td colspan="13" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td>
+i1
+</td>
+<td>
+1
+</td>
+<td>
+0.47
+</td>
+<td>
+0.28
+</td>
+<td>
+0.31
+</td>
+<td>
+0.30
+</td>
+<td>
+0.58
+</td>
+<td>
+0.20
+</td>
+<td>
+0.46
+</td>
+<td>
+0.23
+</td>
+<td>
+0.46
+</td>
+<td>
+0.03
+</td>
+<td>
+0.24
+</td>
+</tr>
+<tr>
+<td>
+i2
+</td>
+<td>
+0.47
+</td>
+<td>
+1
+</td>
+<td>
+0.33
+</td>
+<td>
+0.31
+</td>
+<td>
+0.38
+</td>
+<td>
+0.37
+</td>
+<td>
+0.27
+</td>
+<td>
+0.31
+</td>
+<td>
+0.26
+</td>
+<td>
+0.43
+</td>
+<td>
+0.13
+</td>
+<td>
+0.24
+</td>
+</tr>
+<tr>
+<td>
+i3
+</td>
+<td>
+0.28
+</td>
+<td>
+0.33
+</td>
+<td>
+1
+</td>
+<td>
+0.45
+</td>
+<td>
+0.22
+</td>
+<td>
+0.40
+</td>
+<td>
+0.31
+</td>
+<td>
+0.27
+</td>
+<td>
+0.34
+</td>
+<td>
+0.28
+</td>
+<td>
+0.07
+</td>
+<td>
+0.13
+</td>
+</tr>
+<tr>
+<td>
+i4
+</td>
+<td>
+0.31
+</td>
+<td>
+0.31
+</td>
+<td>
+0.45
+</td>
+<td>
+1
+</td>
+<td>
+0.27
+</td>
+<td>
+0.46
+</td>
+<td>
+0.37
+</td>
+<td>
+0.19
+</td>
+<td>
+0.44
+</td>
+<td>
+0.27
+</td>
+<td>
+0.19
+</td>
+<td>
+0.08
+</td>
+</tr>
+<tr>
+<td>
+i5
+</td>
+<td>
+0.30
+</td>
+<td>
+0.38
+</td>
+<td>
+0.22
+</td>
+<td>
+0.27
+</td>
+<td>
+1
+</td>
+<td>
+0.31
+</td>
+<td>
+0.41
+</td>
+<td>
+0.20
+</td>
+<td>
+0.45
+</td>
+<td>
+0.44
+</td>
+<td>
+0.26
+</td>
+<td>
+0.19
+</td>
+</tr>
+<tr>
+<td>
+i6
+</td>
+<td>
+0.58
+</td>
+<td>
+0.37
+</td>
+<td>
+0.40
+</td>
+<td>
+0.46
+</td>
+<td>
+0.31
+</td>
+<td>
+1
+</td>
+<td>
+0.24
+</td>
+<td>
+0.38
+</td>
+<td>
+0.30
+</td>
+<td>
+0.40
+</td>
+<td>
+0.11
+</td>
+<td>
+0.13
+</td>
+</tr>
+<tr>
+<td>
+i7
+</td>
+<td>
+0.20
+</td>
+<td>
+0.27
+</td>
+<td>
+0.31
+</td>
+<td>
+0.37
+</td>
+<td>
+0.41
+</td>
+<td>
+0.24
+</td>
+<td>
+1
+</td>
+<td>
+0.06
+</td>
+<td>
+0.68
+</td>
+<td>
+0.23
+</td>
+<td>
+0.41
+</td>
+<td>
+0.11
+</td>
+</tr>
+<tr>
+<td>
+i8
+</td>
+<td>
+0.46
+</td>
+<td>
+0.31
+</td>
+<td>
+0.27
+</td>
+<td>
+0.19
+</td>
+<td>
+0.20
+</td>
+<td>
+0.38
+</td>
+<td>
+0.06
+</td>
+<td>
+1
+</td>
+<td>
+0.11
+</td>
+<td>
+0.45
+</td>
+<td>
+-0.11
+</td>
+<td>
+0.23
+</td>
+</tr>
+<tr>
+<td>
+i9
+</td>
+<td>
+0.23
+</td>
+<td>
+0.26
+</td>
+<td>
+0.34
+</td>
+<td>
+0.44
+</td>
+<td>
+0.45
+</td>
+<td>
+0.30
+</td>
+<td>
+0.68
+</td>
+<td>
+0.11
+</td>
+<td>
+1
+</td>
+<td>
+0.27
+</td>
+<td>
+0.41
+</td>
+<td>
+0.15
+</td>
+</tr>
+<tr>
+<td>
+i10
+</td>
+<td>
+0.46
+</td>
+<td>
+0.43
+</td>
+<td>
+0.28
+</td>
+<td>
+0.27
+</td>
+<td>
+0.44
+</td>
+<td>
+0.40
+</td>
+<td>
+0.23
+</td>
+<td>
+0.45
+</td>
+<td>
+0.27
+</td>
+<td>
+1
+</td>
+<td>
+0.06
+</td>
+<td>
+0.31
+</td>
+</tr>
+<tr>
+<td>
+i11
+</td>
+<td>
+0.03
+</td>
+<td>
+0.13
+</td>
+<td>
+0.07
+</td>
+<td>
+0.19
+</td>
+<td>
+0.26
+</td>
+<td>
+0.11
+</td>
+<td>
+0.41
+</td>
+<td>
+-0.11
+</td>
+<td>
+0.41
+</td>
+<td>
+0.06
+</td>
+<td>
+1
+</td>
+<td>
+0.04
+</td>
+</tr>
+<tr>
+<td>
+i12
+</td>
+<td>
+0.24
+</td>
+<td>
+0.24
+</td>
+<td>
+0.13
+</td>
+<td>
+0.08
+</td>
+<td>
+0.19
+</td>
+<td>
+0.13
+</td>
+<td>
+0.11
+</td>
+<td>
+0.23
+</td>
+<td>
+0.15
+</td>
+<td>
+0.31
+</td>
+<td>
+0.04
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td colspan="13" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<div style="margin-bottom:40px;">
+
+</div>
+<p>After generating the correlation matrix stored in <code>corre</code>, we will compute the <strong>Kaiser-Meyer-Olkin (KMO) test of factorial adequacy</strong>. To have a structure matrix appropriate for factor analysis, the overall KMO index should be greater than .80 and never below .70. The overall measure of sampling adequacy (MSA) was .85. Consequently, we can proceed with the factor analysis.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="initial-considerations.html#cb46-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-2"><a href="initial-considerations.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">KMO</span>(corre)</span>
+<span id="cb46-3"><a href="initial-considerations.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Kaiser-Meyer-Olkin factor adequacy</span></span>
+<span id="cb46-4"><a href="initial-considerations.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call: KMO(r = corre)</span></span>
+<span id="cb46-5"><a href="initial-considerations.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Overall MSA =  0.85</span></span>
+<span id="cb46-6"><a href="initial-considerations.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="do">## MSA for each item = </span></span>
+<span id="cb46-7"><a href="initial-considerations.html#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   i1   i2   i3   i4   i5   i6   i7   i8   i9  i10  i11  i12 </span></span>
+<span id="cb46-8"><a href="initial-considerations.html#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.84 0.90 0.87 0.87 0.89 0.85 0.80 0.85 0.80 0.88 0.82 0.87</span></span></code></pre></div>
+</div>
+<div id="exploring-the-data-using-descriptive-statistics-and-data-visualizations" class="section level3 hasAnchor" number="13.3.3">
+<h3><span class="header-section-number">13.3.3</span> Exploring the data using descriptive statistics and data visualizations<a href="initial-considerations.html#exploring-the-data-using-descriptive-statistics-and-data-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The function <code>skim()</code> from the package <a href="https://github.com/ropensci/skimr" target="_blank"><strong>skimr</strong></a> provides a good summary of the items (i.e., the location, dispersion, and the form of the distribution).</p>
+<div style="margin-bottom:30px;">
+
+</div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="initial-considerations.html#cb47-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-2"><a href="initial-considerations.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(burnout)</span></code></pre></div>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+<span id="tab:descriptive1">Table 13.3: </span>Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+burnout
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+510
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+i1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.73
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▃▇▅▅▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.36
+</td>
+<td style="text-align:right;">
+1.08
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▁▅▅▇▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.92
+</td>
+<td style="text-align:right;">
+1.36
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▅▇▃▇▅
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.10
+</td>
+<td style="text-align:right;">
+1.25
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▃▆▅▇▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.29
+</td>
+<td style="text-align:right;">
+1.09
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▁▃▃▇▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.46
+</td>
+<td style="text-align:right;">
+1.15
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▅▇▃▃▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.34
+</td>
+<td style="text-align:right;">
+1.11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▁▅▆▇▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.78
+</td>
+<td style="text-align:right;">
+1.19
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▂▇▃▅▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.64
+</td>
+<td style="text-align:right;">
+1.03
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▁▂▅▇▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.57
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▁▂▃▇▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i11
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.71
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▁▂▃▇▅
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i12
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.63
+</td>
+<td style="text-align:right;">
+1.04
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▁▂▃▇▃
+</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-bottom:40px;">
+
+</div>
+<p>The function <code>skim_with()</code> from the package <strong>skimr</strong> enables us to specify our preferred list of descriptive statistics. We can also set the names of those statistics (e.g., we can display the APA abbreviation <code>Mdn</code> instead of <code>median</code>) or add other relevant descriptive statistics such as the <em>Median Absolute Deviation</em> (MAD).</p>
+<div style="margin-bottom:30px;">
+
+</div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="initial-considerations.html#cb48-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-2"><a href="initial-considerations.html#cb48-2" aria-hidden="true" tabindex="-1"></a>my.summary <span class="ot">&lt;-</span> <span class="fu">skim_with</span>(<span class="at">numeric =</span> <span class="fu">sfl</span>(<span class="at">M =</span> mean, <span class="at">SD =</span> sd,</span>
+<span id="cb48-3"><a href="initial-considerations.html#cb48-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">Mdn =</span> median, <span class="at">MAD =</span> mad,</span>
+<span id="cb48-4"><a href="initial-considerations.html#cb48-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">Histogram =</span> inline_hist), <span class="at">append =</span> F)</span>
+<span id="cb48-5"><a href="initial-considerations.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">my.summary</span>(burnout)</span></code></pre></div>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+<span id="tab:descriptive2">Table 13.4: </span>Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+burnout
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+510
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+M
+</th>
+<th style="text-align:right;">
+SD
+</th>
+<th style="text-align:right;">
+Mdn
+</th>
+<th style="text-align:right;">
+MAD
+</th>
+<th style="text-align:left;">
+Histogram
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+i1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.73
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▃▇▁▅▁▅▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.36
+</td>
+<td style="text-align:right;">
+1.08
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▁▅▁▅▁▇▁▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.92
+</td>
+<td style="text-align:right;">
+1.36
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▅▇▁▃▁▇▁▅
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.10
+</td>
+<td style="text-align:right;">
+1.25
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▃▆▁▅▁▇▁▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.29
+</td>
+<td style="text-align:right;">
+1.09
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▁▃▁▃▁▇▁▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.46
+</td>
+<td style="text-align:right;">
+1.15
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▅▇▁▃▁▃▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.34
+</td>
+<td style="text-align:right;">
+1.11
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▁▅▁▆▁▇▁▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.78
+</td>
+<td style="text-align:right;">
+1.19
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▂▇▁▃▁▅▁▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.64
+</td>
+<td style="text-align:right;">
+1.03
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▁▂▁▅▁▇▁▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.57
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▁▂▁▃▁▇▁▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i11
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.71
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▁▂▁▃▁▇▁▅
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i12
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.63
+</td>
+<td style="text-align:right;">
+1.04
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.48
+</td>
+<td style="text-align:left;">
+▁▂▁▃▁▇▁▃
+</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-bottom:40px;">
+
+</div>
+<p>We use data visualization techniques to inspect relationships and patterns of association among items. For example, the function <code>cor.plot()</code> from the package <a href="http://personality-project.org/r/psych/psych-manual.pdf" target="_blank"><strong>psych</strong></a> (Revelle, 2018) shows a heatmap with red colors related to negative correlations and blue colors aimed at displaying the positive correlations. The functions <code>corrplot.mixed()</code> from the package <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html" target="_blank"><strong>corrplot</strong></a> or <code>pairs.panels()</code> from the package <strong>psych</strong> provide a lot of possibilities to visualize the correlation matrix stored in our R object named <code>corre</code> (see Figures 13.4, 13.5, and 13.6).</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="initial-considerations.html#cb49-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-2"><a href="initial-considerations.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.plot</span>(corre)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:descriptive3"></span>
+<img src="LDSwR_files/figure-html/descriptive3-1.png" alt="A correlation plot with heatmap." width="100%" />
+<p class="caption">
+Figure 13.4: A correlation plot with heatmap.
+</p>
+</div>
+<p>You can add and modify as many arguments as you wish. For example, in the function <code>corrplot.mixed()</code>, <code>number.cex</code> reveals the character expansion value that enables the modification of the size of the numbers appearing in the plot, whereas <code>tl.cex</code> changes the size of the text labels (i.e., the names of the items that are displayed on the main diagonal of the correlation plot).</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="initial-considerations.html#cb50-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-2"><a href="initial-considerations.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(corre, <span class="at">number.cex =</span> <span class="fl">0.95</span>, <span class="at">tl.col =</span> <span class="st">&#39;orange4&#39;</span>, <span class="at">tl.cex =</span> <span class="fl">1.3</span>,</span>
+<span id="cb50-3"><a href="initial-considerations.html#cb50-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">upper =</span> <span class="st">&#39;square&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:descriptive4"></span>
+<img src="LDSwR_files/figure-html/descriptive4-1.png" alt="Mixed methods to visualize a correlation matrix." width="100%" />
+<p class="caption">
+Figure 13.5: Mixed methods to visualize a correlation matrix.
+</p>
+</div>
+<p>The function <code>pairs.panels()</code> displays a scatter plot of matrices (SPLOM), with histograms on the main diagonal, and bivariate scatter plots and Pearson's correlations below and above the main diagonal. This plot works well with a small number of covariates.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="initial-considerations.html#cb51-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-2"><a href="initial-considerations.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(corre, <span class="at">hist.col =</span> <span class="st">&#39;#00AFBB&#39;</span>, <span class="at">cex.cor =</span> <span class="fl">1.10</span>, <span class="at">cex.labels =</span> <span class="fl">0.90</span>,</span>
+<span id="cb51-3"><a href="initial-considerations.html#cb51-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">upper =</span> <span class="st">&#39;square&#39;</span>, <span class="at">lm =</span> <span class="cn">TRUE</span>, <span class="at">show.points =</span> <span class="cn">TRUE</span>, <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb51-4"><a href="initial-considerations.html#cb51-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">density =</span> T, <span class="at">ci =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:descriptive5"></span>
+<img src="LDSwR_files/figure-html/descriptive5-1.png" alt="A scatter plot of matrices (SPLOM), with bivariate scatter plots, histograms, and Pearson's correlation." width="100%" />
+<p class="caption">
+Figure 13.6: A scatter plot of matrices (SPLOM), with bivariate scatter plots, histograms, and Pearson's correlation.
+</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-factor-analysis-efa.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factor-extraction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/13-EFA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["LDSwR.pdf", "LDSwR.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"toc": true,
+"toc_float": true,
+"toc_depth": 2
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -2,7 +2,9 @@
 
 
 
-```{r setup3, include=FALSE}
+
+
+```{r setup03, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60),
                       warning=FALSE, message=FALSE, tidy=F)
 ```
@@ -12,7 +14,8 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 <div style="margin-bottom:40px;">
 </div>
 
-><left>**LEARNING OUTCOMES**</left>
+
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
 ><div style="margin-bottom:30px;">
 ></div>
 >- Identify the capabilities of R and RStudio's environment and appraise their functionality.
@@ -22,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 
 
 
-<div style="margin-bottom:60px;">
+<div style="margin-bottom:70px;">
 </div>
 
 
@@ -338,7 +341,39 @@ One important contribution of the package **dplyr** is that it provides a “gra
 </div>
 
 
-### Data wrangling with *dplyr*
+
+
+### The package **tidyr**
+
+
+The package [**tidyr**](https://tidyr.tidyverse.org){target='_blank'} was also developed by Hadley Wickham and colleagues. The package **tidyr** was created to tidy data; i.e., every vector column represents a variable, every row includes information of one participant/observation, and cells include a single value. The package **tidyr** is widely used to transform data frames from wide to long format and viceversa. This process involving the reshaping of data relies on pivoting the data set to collapse several columns into fewer columns (`pivot_longer()`) to generate a long-format data set, or to expand a few columns into more columns (`pivot_wider()`) to create a wide-format data set.
+
+Let's select the first four observations of the simulated data set `affective.dis`, a wide-format data set in which participant's responses were entered in a single row and multiple columns. We will use the function `slice_sample()` from the package **dplyr** to subset *n* random rows, rather than using the function `filter()` that requires setting conditions to keep some rows while dropping others (e.g., `filter(sex == 'female')`).
+
+
+```{r, tidyr1}
+
+affective.wide1 <- affective.dis %>% 
+  slice_sample(n = 5)
+
+affective.wide1
+
+```
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+XXXXXX
+
+
+TODO!!
+
+XXXXXX
+
+
+
+## Data wrangling with the **tidyverse**
 
 
 First of all, we need to load the **tidyverse** that includes a suite of packages such as **dplyr**, **tidyr**, or **ggplot2**. If we are not loading the **tidyverse** or any of its packages, we will need to upload the package **magrittr** to use the pipe operator.
@@ -372,7 +407,7 @@ affective.dis %>%
 
 
 
-Sometimes, we are interested in using pipes to make sequential operations in our data sets, but the final goal is not to produce an output, but to modify a data set and to keep those changes. In these cases, we will use the assignment operator to save these changes into the same R object or into a different one. For example, in the following R code, (1) we will drop the variable *year* because it is a constant, (2) we will transform the variable *treatment* into a factor---assigning labels to its three experimental conditions, (3) we will move the variables *sex* and *age* to the second and third column respectively and the variable *satis* after the variable *life.satis*, (4) instead of overwriting the new data set on the former R object `affective.dis`, we will assign the new data set to the R object `affective.dis2`, and (5) we will reorder the rows of the new data set from the first (`id = 1`) to the last (`id = 36`) participant.
+Sometimes, we are interested in using pipes to make sequential operations in our data sets, but the final goal is not to produce an output, but to modify a data set and to keep those changes. In these cases, we will use the assignment operator to save these changes into the same R object or into a different one. For example, in the following R code, (1) we will drop the variable *year* because it is a constant, (2) we will transform the variable *treatment* into a factor—assigning labels to its three experimental conditions, (3) we will move the variables *sex* and *age* to the second and third column respectively and the variable *satis* after the variable *life.satis*, (4) instead of overwriting the new data set on the former R object `affective.dis`, we will assign the new data set to the R object `affective.dis2`, (5) we will rename the variable *friends* to convey that the information stored in that vector column is about the number of friends (*n.friends*) that each participant has, and (6) we will reorder the rows of the new data set from the first (`id = 1`) to the last (`id = 36`) participant.
 
 
 ```{r, tidyverse3}
@@ -385,6 +420,7 @@ affective.dis2 <- affective.dis %>%
                                       'CBT'))) %>%
   relocate(sex, age, .after = id) %>%
   relocate(satis, .after = life.satis) %>%
+  rename(n.friends = friends) %>% 
   arrange(id)
 
 affective.dis2
@@ -396,29 +432,6 @@ affective.dis2
 </div>
 
 
-
-### The package **tidyr**
-
-
-The package [**tidyr**](https://tidyr.tidyverse.org){target='_blank'} was also developed by Hadley Wickham and colleagues. The package **tidyr** was created to tidy data; i.e., every vector column represents a variable, every row includes information of one participant/observation, and cells include a single value. The package **tidyr** is widely used to transform data frames from wide to long format and viceversa. This process involving the reshaping of data relies on pivoting the data set to collapse several columns into fewer columns (`pivot_longer()`) to generate a long-format data set, or to expand a few columns into more columns (`pivot_wider()`) to create a wide-format data set.
-
-Let's select the first four observations of the simulated data set `affective.dis`, a wide-format data set in which participant's responses were entered in a single row and multiple columns. We will use the function `slice_sample()` from the package **dplyr** to subset *n* random rows, rather than using the function `filter()` that requires setting conditions to keep some rows while dropping others (e.g., `filter(sex == 'female')`).
-
-
-```{r, tidyr1}
-
-affective.wide1 <- affective.dis %>% 
-  slice_sample(n = 5)
-
-affective.wide1
-
-```
-
-
-<div style="margin-bottom:50px;">
-</div>
-
-XXXXXX
 
 
 
@@ -451,17 +464,6 @@ Xie, Y., Allaire, J. J., & Grolemund, G. (2019). [*R Markdown: The definite guid
 
 <div style="margin-bottom:50px;">
 </div>
-
-<h2>
-  <div style="text-align: center;">
-  <span style="color:DarkRed">END OF SESSION 1</span>
-  </h2>
-
-<div style="margin-bottom:50px;">
-</div>
-
-
-
 
 
 

@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 <div style="margin-bottom:40px;">
 </div>
 
-><left>**LEARNING OUTCOMES**</left>
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
 ><div style="margin-bottom:30px;">
 ></div>
 >- Identify the capabilities of R and RStudio's environment and appraise their functionality.
@@ -25,20 +25,13 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60
 </div>
 
 
+XXXXXXX
 
-**R** is a programming language
-
-
-## Footnotes
-
-Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
-
-## Citations
-
-Reference items in your bibliography file(s) using `@key`.
-
-For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
-Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
+TODO!!
 
 
-The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
+XXXXXXX
+
+
+
+

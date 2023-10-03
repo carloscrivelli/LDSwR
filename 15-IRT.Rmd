@@ -1,0 +1,675 @@
+# Introduction to Item Response Theory
+
+
+
+```{r setup15, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, tidy.opts=list(width.cutoff=60),
+                      warning=FALSE, message=FALSE, tidy=F)
+```
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+><center><h1 style="font-size:160%; color: #000000">**LEARNING OUTCOMES**</h1></center>
+><div style="margin-bottom:30px;">
+></div>
+>-  Identify the key assumptions of Classical Test Theory (CTT) and Item Response Theory (IRT), critically evaluating CTT’s limitations.
+>-  Distinguish the relevant features of the different IRT models for dichotomous and polytomous data.
+>-  Explain the parameters bj, aj, and cj used in logistic models and appraise the visualizations displaying these parameters in Item Characteristic Curves (ICCs).
+>-  Evaluate the reliability of items and tests by inspecting the Item Information Functions (IIFs) and the Test Information Functions
+(TIFs).
+
+
+<div style="margin-bottom:70px;">
+</div>
+
+
+
+In Chapter 12 (*Scale development*), we emphasized the importance of inspecting the psychometric quality of the scale once we have pre-tested our initial pool of items. To do so, we rely on four key psychometric principles: validity, reliability, fairness, and comparability (Mislevy, Wilson, Ercikan, & Chudowsky, 2003). Guided by these principles, we evaluate the original scale and usually reduce the initial pool of items, retaining the best items that enhance the psychometric quality of the scale. After this quality control process, the remaining items are field tested with its corresponding iterative psychometric quality checks.
+
+Classical Test Theory (CTT) has been (and still is) profusely applied in scale development. However, in some fields (e.g., educational assessment) this psychometric model has become problematic, generating much needed alternatives taking the form of different models under the framework of Item Response Theory (IRT). Although the antecedents of IRT can be traced back to Thurstone's measurement model, its development and expansion flourished in the 1960s thanks to pioneers Frederic Lord, Melvin Novick, and Georg Rasch (Bock, 1997).
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+<div class="alert alert-info hints-alert">
+  <div class="hints-icon"><i class="fa fa-info-circle fa-2x fa-pull-right fa-border" aria-hidden="true"></i></div>
+  <h4 class="alert-heading">**Limitations of Classical Test Theory (CTT)**</h4>
+<ul><ul type = 'square' style="color: Black">
+<li>CTT assumes a linear relationship between the latent variable and the observed scores. This linear trend is hardly observed in real life</li>
+<li>Test statistics (e.g., reliability, standard error of measurement) depend on the sample and population being measured. Global test statistics are sensible to the variability of the participants' responses</li>
+<li>CTT does not provide a theoretical model for the responses given to the items. We cannot evaluate the responses of one respondent as a function of the level of ability or trait for a given item. Consequently, the level of analysis in CTT is the overall test, not the individual items</li>
+<li>It is recommended to develop scales with a large number of items to sample the universe of items measuring a psychological construct. Consequently, larger scales are more reliable than shorter ones</li>
+<li>Item statistics (e.g., difficulty, discrimination) depend on the sample and population being measured. For example, item difficulty will be higher when the respondents are above the average. Likewise, discrimination indexes tend to be higher in samples with higher variability because they are estimated using correlation coefficients</li>
+<li>In CTT, tests' standard error of measurement is consistent across an entire sample or population. Thus, regardless of the raw test score (e.g., high, low), the standard error of measurement for each score will remain the same</li>
+<li>CTT is well suited for test scores produced by respondents with an average ability or trait. However, for extremes scores, CTT is problematic</li>
+  <ul></ul>
+</div>
+
+
+<div style="margin-bottom:60px;">
+</div>
+
+
+
+## Item Response Theory (IRT)
+
+Item Response Theory (IRT) refers to an array of structural models that establish a formalized mathematical relationship between the response to a specific item and the level of ability/trait of the respondent (Crocker & Algina, 1986; DeVellis, 2017). IRT models assume that respondents' behaviors, when answering to one item, can be explained using one or more latent variables (i.e., unobserved traits or abilities). Consequently, respondents' scores in one ability test (e.g., a Spanish grammar test) will be a function of the underlying respondents' ability or trait (e.g., their knowledge of Spanish grammar).
+
+IRT focuses on the properties of individual items, rather than the overall scale. Interestingly, every respondent and item can be located at a certain point of the trait ($\theta$). To do so, the scale has to be unidimensional (i.e., one ability/trait is enough to explain the results of the respondents and the relationships among the items). Despite this, later developments in test theory has allow for the development of multidimensional IRT (**m**IRT) models.
+
+IRT's item and test statistics (e.g., parameters, test information function and its standard error) differ greatly from Classical Test Theory statistics (e.g., item-test correlation, coefficient alpha). IRT allows us to overcome most of the problems that CTT faces (e.g., shorter tests can be more reliable than longer tests). As a trade-off, IRT is less flexible than CTT regarding the model's underlying assumptions. Likewise, IRT requires a large number of respondents in order to properly estimate the items' parameters and the Test Information Function (Table 15.1).
+
+The last interesting feature of IRT models regards to the score distributions. In CTT, interval scale properties are satisfied with normal score distributions and linearity assumptions, whereas in IRT the relationship between ability/trait level and the probability to endorse the item is monotonic (i.e., a non-linear increasing function that usually fits into exponential models).
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Table1501a, eval = TRUE, include = F, echo = F}
+
+
+Tab1501 <- data.frame(feat = c('Model', 'Level of analysis',
+                               'Relationship item-trait', 'Assumptions',
+                               'Item statistics', 'Sample size'),
+              ctt = c('Linear', 'Test', 'Not specified', 'Weak',
+                      'Point-biserial correlation', '*N* = 200 — 500'),
+              irt = c('Non linear (monotonic)', 'Item',
+                      'Item Characteristic Curve (ICC)', 'Strong',
+                      'Parameters $a_{j}$, $b_{j}$, $c_{j}$, and Information function',
+                      '*N* > 800'))
+
+names(Tab1501) <- c('Features', 'CTT', 'IRT')
+
+```
+
+
+
+```{r, Table1501b, eval = TRUE, include = T, echo = F, out.width = '100%', fig.align = 'center'}
+
+library(kableExtra)
+library(dplyr)
+knitr::kable(Tab1501, format = 'html', booktabs = T, align = 'l',
+             linesep = '', escape = F,
+  caption = 'Differences between Classical Test Theory and Item Response Theory') %>%
+  kable_styling(full_width = T, font_size = 14,
+                bootstrap_options = c('striped',
+                                      'responsive')) %>%
+  row_spec(0, background = '#E1FAFF') %>%
+  footnote(general_title = '**Note.**',
+           general = 'CTT = Classical Test Theory. IRT = Item Response Theory.',
+           footnote_as_chunk = TRUE,
+           escape = F)
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+
+## Item Characteristic Curve (ICC)
+
+The probability of being correct on one item will be a monotonically increasing function of ability ($\theta$), whereas the probability of endorsing an attitude item (i.e., polytomous item) will be a single peaked function of the level of that attitude (Revelle, 2023).
+
+The monotonically increasing function is called *Item Characteristic Curve* (ICC). It combines the proportion of correct responses in a given item (see $P(\theta)$ in the y-axis) with the ability/trait level (see $\theta$ in the x-axis).
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Fig1501,  echo = FALSE}
+
+opar <- par(no.readonly = T)
+
+par(lab = c(7, 10, 3))
+
+theta <- seq(-3, 3, .1)
+b1 <- 0
+a1 <- 2.2
+P1 <- 1 / (1 + exp(-a1 * (theta - b1)))
+plot(theta, P1, type = 'l', xlim = c(-3, 3), ylim = c(0, 1), lwd = 4, col = 'red',
+     xlab = expression(paste('Ability/Trait (' ,theta, ')')),
+     ylab = 'Probability of correct response')
+thetai1 <- b1
+pthetai1 <- 1 / (1 + exp(-a1 * (thetai1 - b1)))
+vliney1 <- seq(0, pthetai1, .01)
+vlinex1 <- b1 + vliney1 * 0
+lines(vlinex1, vliney1, lty = 2, lwd = 2, col = 'red')
+
+abline(h = .5, col = 'blue', lwd = 2, lty = 2)
+
+par(opar)
+
+```
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+IRT's item statistics are the Item Characteristic Curve's parameters. These parameters depend on the IRT model being used. For example, a two-parameter logistic model (2PLM) will estimate the item's *difficulty* ($b_{j}$) and *discrimination* ($a_{j}$).
+
+
+### Example: Depression scores
+
+Let's imagine that we want to estimate the level of depression of 30 respondents using one dichotomous item (i.e., *I do not enjoy going out with my friends anymore*). Respondents may agree or disagree with the statement of this item. We assume that respondents agreeing with the previous statement are experiencing a major depressive episode (Table 15.2).
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Table1502a, eval = TRUE, include = F, echo = F}
+
+id <- 1:30
+depression <- c(4, 4, 4, 5, 5, 5, 5, 6, 6, 7, 7, 8, 8, 8, 9, 9, 9, 9, 9,
+                10, 10, 10, 10, 10, 11, 11, 11, 12, 12, 14)
+agree <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
+           1, 1, 0, 1, 1, 1, 1, 1, 1, 1)
+Tab1502 <- data.frame(id, depression, agree); Tab1502
+
+my.modelDepression <- glm(formula = agree ~ depression,
+                          data = Tab1502, family = binomial)
+summary(my.modelDepression)
+
+range(Tab1502$depression)
+xdepression <- seq(3, 15, 0.01)
+ydepression <- predict(my.modelDepression, list(depression = xdepression),
+                       type = 'response')
+
+```
+
+
+```{r, Table1502b, eval = TRUE, include = T, echo = F, out.width = '100%', fig.align = 'center'}
+
+library(kableExtra)
+library(dplyr)
+
+names(Tab1502) <- c('Respondent', 'Level of depression', 'Agreement with the item')
+knitr::kable(Tab1502, format = 'html', booktabs = T, align = 'l', linesep = '', escape = F,
+  caption = 'Responses to an Item as a Function of the Level of Depression') %>%
+  kable_styling(full_width = F, font_size = 14,
+                bootstrap_options = c('striped', 'responsive')) %>%
+  row_spec(0, background = '#E1FAFF') %>%
+  footnote(general_title = '**Note.**',
+           general = 'Item: *I do not enjoy going out with my friends anymore*.',
+           footnote_as_chunk = TRUE,
+           escape = F)
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+If we plot the values displayed in Table 15.2, we will find that a monotonic distribution represents the probability of respondents agreeing with the item "I do not enjoy going out with my friends anymore" given their level of depression. Figure 15.2 shows that there is a 50% chance of agreeing with the item at levels of depression close to 10 ($\theta$ = 9.51).
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Fig1502, eval = TRUE, echo = FALSE, out.width = '100%', fig.align = 'center'}
+
+names(Tab1502) <- c('id', 'depression', 'agree')
+plot(Tab1502$depression, Tab1502$agree, pch = 19, col = 'darkblue', cex = 1.3,
+     xlab = expression(paste('Level of depression (' , theta, ')')),
+     ylab = 'Probability of responding', cex.lab = 1.3)
+lines(xdepression, ydepression, lwd = 3) 
+abline(h = 0.5, lty = 2, col = 'red3')
+abline(v = 9.51, lty = 2, col = 'red3')
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+## IRT Models
+
+IRT models can be classified as a function of the trait being measured (ability versus personality/person-center), the response format (dichotomous versus polytomous items), and the number of parameters (1P versus 2P versus 3P...). Table 15.3 lists the most popular unidimensional IRT models.
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Table1503a, eval = TRUE, include = F, echo = F}
+
+Tab1503 <- data.frame(Dichotomous = c('Rasch model (1P)', '1-Parameter logistic model (1PLM)',
+                              '2-Parameter logistic model (2PLM)',
+                              '3-Parameter logistic model (3PLM)',
+                              '4-Parameter logistic model (4PLM)'),
+              Polytomous = c('Partial credit model (PCM)', 'Rating scale model (RSM)',
+                             'Generalized partial credit model (GPCM)',
+                             'Graded response model (GRM)',
+                             'Nominal response model (NRM)'))
+  
+```
+
+
+```{r, Table1503b, eval = TRUE, include = T, echo = F, out.width = '100%', fig.align = 'center'}
+
+library(kableExtra)
+library(dplyr)
+knitr::kable(Tab1503, format = 'html', booktabs = T, align = 'l', linesep = '', escape = F,
+  caption = 'Unidimensional Item Response Theory (IRT) models') %>%
+  kable_styling(full_width = T, font_size = 14,
+                bootstrap_options = c('striped', 'responsive')) %>%
+  add_header_above(c('Item response' = 2), background = '#EFEFEF') %>% 
+  row_spec(0, background = '#E1FAFF')
+  
+```
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+It is beyond the scope of this chapter to cover non-parametric models (e.g., Mokken), 4PL or 5PL models (e.g., unfolding), complex polytomous models (e.g., GRM, NRM), or IRT multidimensional models for simple or bifactor structures (Ostini & Nering, 2006; Paek & Cole, 2020; Revelle, 2023).  For this reason, only some of the most popular IRT models (i.e., 1PLM, 2PLM, 3PLM) will be briefly described in the following subsection.
+
+
+## Parameters
+
+The most common parameters used in logistic models are item difficulty ($b_{j}$), discrimination ($a_{j}$), and guessing ($c_{j}$).
+
+In addition to the values estimated for every parameter, IRT models allow us to graphically inspect these parameters using the *Item Characteristic Curve* (ICC). ICC plots place the location of respondents' level of ability/trait in the x-axis and the probability of endorsing the item in the y-axis.
+
+
+### Item difficulty ($b_{j}$)
+
+Item difficulty ($b_{j}$) shows the location of the item along the continuum of ability/trait ($\theta_{i}$). Thus, $b_{j}$ allows us to estimate the difficulty of every item. Items endorsed or correctly answered with a probability of 0.50 corresponding to high values of $\theta_{i}$ should be considered difficult items. In other words, an endorsement of 50% in a given item requiring high levels of ability means that the item is very difficult.
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Fig1503, eval = TRUE, echo = FALSE, out.width = '100%', fig.align = 'center'}
+
+opar <- par(no.readonly = T)
+
+par(lab = c(7, 10, 3))
+
+theta <- seq(-3, 3, .1)
+b1 <- 1
+a1 <- 1.2
+P1 <- 1 / (1 + exp(-a1 * (theta - b1)))
+b2 <- -1
+a2 <- 1.2
+P2 <- 1 / (1 + exp(-a2 * (theta - b2)))
+plot(theta, P1, type = 'l', xlim = c(-3, 3), ylim = c(0, 1), lwd = 4,
+     col = 'red', xlab = expression(paste('Ability/Trait (' ,theta, ')')),
+     ylab = 'Probability of correct response')
+lines(theta, P2, type = 'l', xlim = c(-3, 3), ylim = c(0, 1), lwd = 4,
+      col = 'darkgreen', xlab = expression(paste('Ability/Trait (' ,theta, ')')),
+     ylab = 'Probability of correct response',
+     main = '1 Parameter Logistic Model (1PL)')
+thetai1 <- b1
+pthetai1 <- 1 / (1 + exp(-a1 * (thetai1 - b1)))
+vliney1 <- seq(0, pthetai1, .01)
+vlinex1 <- b1 + vliney1 * 0
+lines(vlinex1, vliney1, lty = 2, lwd = 2, col = 'red')
+thetai2 <- b2
+pthetai2 <- 1 / (1 + exp(-a2 * (thetai2 - b2)))
+vliney2 <- seq(0, pthetai2, .01)
+vlinex2 <- b2 + vliney2 * 0
+lines(vlinex2, vliney2, lty = 2, lwd = 2, col = 'darkgreen')
+
+abline(h = .5, col = 'blue', lwd = 2, lty = 2)
+
+text(-2.1, 0.56, 'difficulty (b) = -1', col = 'darkgreen',
+     cex = 1.2)
+text(2.3, 0.56, 'difficulty (b) = 1', col = 'red',
+     cex = 1.2)
+
+par(opar)
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+### Item discrimination ($a_{j}$)
+
+Item discrimination ($a_{j}$) refers to the ability of an item to discriminate (i.e., differentiate) among respondents with different levels of ability/trait ($\theta_{i}$). Consequently, items with larger discrimination values (e.g., $a_{j} = 6$) show larger slopes.
+
+In all 1 Parameter IRT models, $a_{j}$ is fixed for all items. Thus, the discrimination parameter is set to 1 in the 1P Rasch model, whereas it is estimated from the data in the 1PLM.
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Fig1504, eval = TRUE, echo = FALSE, out.width = '100%', fig.align = 'center'}
+
+opar <- par(no.readonly = T)
+
+par(lab = c(7, 10, 3))
+
+theta <- seq(-3, 3, .1)
+b1 <- 0
+a1 <- 6
+P1 <- 1 / (1 + exp(-a1 * (theta - b1)))
+b2 <- 0
+a2 <- 0.8
+P2 <- 1 / (1 + exp(-a2 * (theta - b2)))
+plot(theta, P1, type = 'l', xlim = c(-3, 3), ylim = c(0, 1), lwd = 4,
+     col = 'red', xlab = expression(paste('Ability/Trait (' ,theta, ')')),
+     ylab = 'Probability of correct response')
+lines(theta, P2, type = 'l', xlim = c(-3, 3), ylim = c(0, 1), lwd = 4,
+     col = 'darkgreen', xlab = expression(paste('Ability/Trait (' ,theta, ')')),
+     ylab = 'Probability of correct response',
+     main = '2 Parameter Logistic Model (2PL)')
+thetai1 <- b1
+pthetai1 <- 1 / (1 + exp(-a1 * (thetai1 - b1)))
+vliney1 <- seq(0, pthetai1, .01)
+vlinex1 <- b1 + vliney1 * 0
+lines(vlinex1, vliney1, lty = 2, lwd = 2, col = 'red')
+thetai2 <- b2
+pthetai2 <- 1 / (1 + exp(-a2 * (thetai2 - b2)))
+vliney2 <- seq(0, pthetai2, .01)
+vlinex2 <- b2 + vliney2 * 0
+lines(vlinex2, vliney2, lty = 2, lwd = 2, col = 'darkgreen')
+
+abline(h = .5, col = 'blue', lwd = 2, lty = 2)
+
+text(-1.5, 0.8, 'discrimination (a) = 6', col = 'red', cex = 1.2)
+text(-1.5, 0.72, 'difficulty (b) = 0', col = 'red', cex = 1.2)
+text(1.6, 0.28, 'discrimination (a) = 0.8', col = 'darkgreen', cex = 1.2)
+text(1.6, 0.2, 'difficulty (b) = 0', col = 'darkgreen', cex = 1.2)
+
+par(opar)
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+### Guessing ($c_{j}$)
+
+The guessing or pseudo-chance parameter ($c_{j}$) estimates the likelihood that a given respondent will select the right answer (i.e., ability tests) due to chance.
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+
+```{r, Fig1505, eval = TRUE, echo = FALSE, out.width = '100%', fig.align = 'center'}
+
+opar <- par(no.readonly = T)
+
+par(lab = c(7, 10, 3))
+
+theta <- seq(-3, 3, .1)
+b1 <- 0
+a1 <- 2.2
+c <- 0.2
+P1 <- c + (1- c) * (1 / (1 + exp(-a1 * (theta - b1))))
+b2 <- 0
+a2 <- 2.2
+c2<- 0
+P1 <- c + (1- c) * (1 / (1 + exp(-a2 * (theta - b2))))
+plot(theta, P1, type = 'l', xlim = c(-3, 3), ylim = c(0, 1), lwd = 4, col = 'red',
+     xlab = expression(paste('Ability/Trait (' ,theta, ')')),
+     ylab = 'Probability of correct response')
+lines(theta, P2, type = 'l', xlim = c(-3, 3), ylim = c(0, 1), lwd = 4,
+     col = 'darkgreen', xlab = expression(paste('Ability/Trait (' ,theta, ')')),
+     ylab = 'Probability of correct response',
+     main = '3 Parameter Logistic Model (3PL)')
+thetai1 <- b1
+pthetai1 <- c + (1- c) * (1 / (1 + exp(-a1 * (thetai1 - b1))))
+vliney1 <- seq(0, pthetai1, .01)
+vlinex1 <- b1 + vliney1 * 0
+lines(vlinex1, vliney1, lty = 2, lwd = 2, col = 'red')
+
+thetai2 <- b2
+pthetai2 <- c + (1- c) * (1 / (1 + exp(-a2 * (thetai2 - b2))))
+vliney2 <- seq(0, pthetai2, .01)
+vlinex2 <- b2 + vliney2 * 0
+lines(vlinex2, vliney2, lty = 2, lwd = 2, col = 'darkgreen')
+
+abline(h = .5, col = 'blue', lwd = 2, lty = 2)
+
+text(-1.9, 0.4, 'guessing (c) = 0.2', col = 'red', cex = 1.2)
+text(-1.5, 0.05, 'guessing (c) = 0', col = 'darkgreen', cex = 1.2)
+
+
+par(opar)
+
+```
+
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+
+## The Information Function
+
+In psychometrics, the concept of *information* is related to the idea of precision with which a given ability/trait level ($\theta$) can be estimated. The amount of information ($I$) is inversely related to the size of the variability of the estimates around the value of a parameter ($\sigma^{2}$) (Baker & Kim, 2017).
+
+<div style="margin-bottom:30px;">
+</div>
+
+$$\\I\ = \frac{1}{\sigma^{2}}$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+Thus, if the amount of information is small, the ability/trait cannot be estimated with precision (i.e., there will be a large variability of the estimates around the 'true' value of the parameter). In sum, the information function will show us how well each ability/trait level ($\theta$) is being estimated.
+
+
+### Item Information Function
+
+Table 15.4 shows the parameter estimates computed on the 5-item test LSAT6 (Law School Admission Test, section 6) using a 2PL model (Chalmers, 2012; Thissen, 1982). Consequently, the additional parameters computed in 3PL (i.e., guessing) and 4PL (i.e., innatention) models were automatically constrained to `0` (i.e., no guessing) and `1` (i.e., no innatention) respectively.
+
+Table 15.4 shows that `item 3` is the most difficult item to answer ($b_{j} = -0.28$) and the one that discriminates the most ($a_{j} = 0.89$) between respondents with abilities above and below $b_{j} = -0.28$. In contrast, `item 5` is one of the easiest items of the test ($b_{j} = -3.12$) and it is also the least discriminant item ($a_{j} = 0.66$).
+
+<div style="margin-bottom:30px;">
+</div>
+
+```{r, Table1504a, eval = TRUE, include = F, echo = F}
+
+rm(list=ls())
+set.seed(1234)
+
+library(mirt)
+
+
+      ## Loading a dataset: LSAT6
+
+dat.lsat6 <- expand.table(LSAT6)
+head(dat.lsat6)
+dim(dat.lsat6)
+
+Tab1504.mod.2pl <- mirt(dat.lsat6, model = 1, itemtype = '2PL', SE = T)
+coef.Tab1504 <- coef(Tab1504.mod.2pl, IRTpars = T, simplify = T)
+areainfo(Tab1504.mod.2pl, c(-4, 4))
+
+rownames(coef.Tab1504$items) <- c()
+Item <- paste('i', 1:5, sep = '')
+coef.items.Tab1504 <- data.frame(Item, coef.Tab1504$items)
+                    
+```
+
+
+```{r, Table1504b, eval = TRUE, include = T, echo = F, out.width = '100%', fig.align = 'center'}
+
+library(kableExtra)
+library(dplyr)
+knitr::kable(coef.items.Tab1504, format = 'html', booktabs = T,
+             align = 'l', linesep = '', digits = 2,
+             caption = 'Parameter estimation of the LSAT6 dataset using a 2PL model',
+             col.names = c('Item', '$a_{j}$', '$b_{j}$', '$c_{j}$', '$u_{j}$'),
+             escape = F) %>%
+  add_header_above(c('', 'Parameters' = 4), background = '#EFEFEF') %>%
+  kable_styling(full_width = T, font_size = 14,
+                bootstrap_options = c('striped', 'responsive')) %>%
+  row_spec(0, background = '#E1FAFF') %>%
+    footnote(general_title = '**Note.**',
+           general = '$a_{j}$ = Discrimination. $b_{j}$ = Difficulty. $c_{j}$ = Guessing. $u_{j}$ = Inattention.',
+           footnote_as_chunk = TRUE,
+           escape = F)
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+Based on the estimated parameters for every item of a given test, we can compute and plot the amount of information (i.e., the precision to measure an ability level) provided by every item. It is important to note that the amount of information will have its peak on the item's difficulty parameter ($b_{j}$), decreasing the amount of information that the item provides with the departure from the $b_{j}$ estimate.
+
+Relying on the LSAT6 parameter estimates (see Table 4), we can compute the Item Information Function (IIF) for all items using the following equation:
+
+<div style="margin-bottom:30px;">
+</div>
+
+$$\\I_{j}(\theta)\ = \ a^{2}_{j}\ P_{j}(\theta)\ Q_{j}(\theta)$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+The previous equation is suited for 2PLM. For 1PLM, we will fix the discrimination parameter ($a_{j} = 1$) in order to simplify the equation.
+
+<div style="margin-bottom:30px;">
+</div>
+
+$$\\I_{j}(\theta)\ = \ P_{j}(\theta)\ Q_{j}(\theta)$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+We can also plot the Item Information Function (IIF) of individual items separately or plot the item information tracelines of several items into a single graphic. In the following plot, we can observe that `item 3` is highly informative; its peak is close to $I_{j}(\theta) = 0.20$. Be aware that `item 3` is highly informative around the ability levels above and below zero ($b_{j} = -0.28$). However, `item 1` will be a better candidate than `item 3` if we require an informative item for lower levels of ability (e.g., $\theta = -3$).
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+```{r, Fig1506, eval = TRUE, echo = FALSE, out.width = '100%', fig.align = 'center'}
+
+plot(Tab1504.mod.2pl, lwd = 3, main = 'Item Information Functions',
+     type = 'infotrace', facet_items = FALSE)
+
+```
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+
+### Test Information Function
+
+
+The Test Information Function (TIF; $I(\theta)$) can be defined as the sum of the item information functions of a test. As it is a function, the information (i.e., precision) of a test varies with every value of $\theta$.
+
+<div style="margin-bottom:30px;">
+</div>
+
+$$\\I(\theta)\ = \ \displaystyle\sum_{j=1}^{J}\ I_{j}(\theta)$$
+
+<div style="margin-bottom:40px;">
+</div>
+
+
+The value that the TIF yields depends on: (1) the number of items, (2) the parameters $a_{j}$ (i.e., discrimination) and $c_{j}$ (i.e., guessing), and (3) the proximity between $\theta$ and $b_{j}$. It is important to consider that the concept of Test Information cannot be fully understood without its reciprocal: the Standard Error of the estimate of the ability/trait ($SE(\theta)$).
+
+<div style="margin-bottom:30px;">
+</div>
+
+$$\\SE(\theta)\ = \ \frac{1}{\sqrt{I(\theta)}}$$
+
+
+<div style="margin-bottom:40px;">
+</div>
+
+A test would be best for estimating the ability/trait of the respondents whose $\theta$ scores fall near the peak of the Test Information Function. Precision of the estimates will decrease when departing from that peak. However, the precision of the test won't be appropriate for $\theta$ values located below and above the thresholds in which the tracelines of $I(\theta)$ and $SE(\theta)$ converge.
+
+
+
+<div style="margin-bottom:30px;">
+</div>
+
+```{r, Fig1507, eval = TRUE, echo = FALSE, out.width = '100%', fig.align = 'center'}
+
+plot(Tab1504.mod.2pl, which.items = 1:5, main = 'Test Information and Test Standard Errors', type = 'infoSE', facet_items = FALSE, lwd = 4)
+
+```
+
+
+
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+
+
+## References
+
+
+<div style="margin-bottom:20px;">
+</div>
+
+Andrich, D. (1988). *Rasch models for measurement*. SAGE.
+
+Baker, F. B., & Kim, S. -H. (2017). *The basics of Item Response Theory using R*. Springer.
+
+Bock, R. D. (1997). [A brief history of item response theory.](https://citeseerx.ist.psu.edu/viewdoc/download?repid=rep1&type=pdf&doi=10.1.1.465.5140){target="_blank"} *Educational Measurement: Issues and Practice*, *16*, 21—33.
+
+Chalmers R. P. (2012). mirt: A Multidimensional Item Response Theory Package for the R environment. *Journal of Statistical Software*, *48*(6), 1—29.
+
+Crocker, L., & Algina, J. (1986). *Introduction to classical and modern test theory*. Holt, Rinehart, & Winston.
+
+DeVellis, R. F. (2017). *Scale development: Theory and applications* (4th ed.). SAGE.
+
+Mislevy, R. J., Wilson, M. R., Ercikan, K., & Chudowsky, N. (2003). Psychometric principles in student assessment. In D. Stufflebeam & T. Kellagham (Eds.), *International handbook of educational evaluation* (pp. 489—532). Kluwer Academic Press. 
+
+Muraki, E. (1992). A generalized partial credit model: Application of an EM algorithm. *Applied Psychological Measurement*, *14*(1), 59—71.
+
+Ostini, R., & Nering, M. L. (2006). *Polytomous item response theory models*. SAGE.
+
+Paek, I., & Cole, K. (2020). *Using R for Item Response Theory model applications*. Routledge.
+
+Revelle, W. (2023). [*An introduction to psychometric theory with applications in R*.](http://www.personality-project.org/r/book/Chapter8.pdf){target="_blank"}
+
+Samejima, F. (1969). *Estimation of latent ability using a response pattern of graded scores*. Psychometric Society.
+
+Thissen, D. (1982). Marginal maximum likelihood estimation for the one-parameter logistic model. *Psychometrika*, *47*, 175—186.
+
+
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+
+

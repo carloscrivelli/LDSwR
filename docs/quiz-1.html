@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10.6 Quiz | Learning Data Science with R</title>
+  <meta name="description" content="10.6 Quiz | Learning Data Science with R" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10.6 Quiz | Learning Data Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10.6 Quiz | Learning Data Science with R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="references-4.html"/>
+<link rel="next" href="appenA.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.9000/grViz.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/LDSwR_transp.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-introduction"><i class="fa fa-check"></i>(PART) Introduction</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="the-credibility-of-science.html"><a href="the-credibility-of-science.html"><i class="fa fa-check"></i><b>0.1</b> The credibility of Science</a></li>
+<li class="chapter" data-level="0.2" data-path="questionable-scientific-practices.html"><a href="questionable-scientific-practices.html"><i class="fa fa-check"></i><b>0.2</b> Questionable scientific practices</a></li>
+<li class="chapter" data-level="0.3" data-path="the-credibility-crisis.html"><a href="the-credibility-crisis.html"><i class="fa fa-check"></i><b>0.3</b> The credibility crisis</a></li>
+<li class="chapter" data-level="0.4" data-path="threats-to-the-quality-of-the-scientific-process.html"><a href="threats-to-the-quality-of-the-scientific-process.html"><i class="fa fa-check"></i><b>0.4</b> Threats to the quality of the scientific process</a></li>
+<li class="chapter" data-level="0.5" data-path="open-data.html"><a href="open-data.html"><i class="fa fa-check"></i><b>0.5</b> Open Data</a></li>
+<li class="chapter" data-level="0.6" data-path="fair-data.html"><a href="fair-data.html"><i class="fa fa-check"></i><b>0.6</b> FAIR Data</a></li>
+<li class="chapter" data-level="0.7" data-path="contributorship-credit.html"><a href="contributorship-credit.html"><i class="fa fa-check"></i><b>0.7</b> Contributorship (CRediT)</a></li>
+<li class="chapter" data-level="0.8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>0.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-is-rstudio.html"><a href="what-is-rstudio.html"><i class="fa fa-check"></i><b>1.1</b> What is RStudio?</a></li>
+<li class="chapter" data-level="1.2" data-path="lets-get-started.html"><a href="lets-get-started.html"><i class="fa fa-check"></i><b>1.2</b> Let's get started!</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="lets-get-started.html"><a href="lets-get-started.html#running-a-line-of-code"><i class="fa fa-check"></i><b>1.2.1</b> Running a line of code</a></li>
+<li class="chapter" data-level="1.2.2" data-path="lets-get-started.html"><a href="lets-get-started.html#adding-comments-on-r-scripts"><i class="fa fa-check"></i><b>1.2.2</b> Adding comments on R scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html"><i class="fa fa-check"></i><b>1.3</b> Starting a session in RStudio</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-global-options"><i class="fa fa-check"></i><b>1.3.1</b> Setting the global options</a></li>
+<li class="chapter" data-level="1.3.2" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#first-lines-of-code"><i class="fa fa-check"></i><b>1.3.2</b> First lines of code</a></li>
+<li class="chapter" data-level="1.3.3" data-path="starting-a-session-in-rstudio.html"><a href="starting-a-session-in-rstudio.html#setting-the-working-directory"><i class="fa fa-check"></i><b>1.3.3</b> Setting the working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html"><i class="fa fa-check"></i><b>1.4</b> R objects and functions</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#functions"><i class="fa fa-check"></i><b>1.4.1</b> Functions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#r-objects"><i class="fa fa-check"></i><b>1.4.2</b> R objects</a></li>
+<li class="chapter" data-level="1.4.3" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#applying-functions-to-objects"><i class="fa fa-check"></i><b>1.4.3</b> Applying functions to objects</a></li>
+<li class="chapter" data-level="1.4.4" data-path="r-objects-and-functions.html"><a href="r-objects-and-functions.html#getting-help"><i class="fa fa-check"></i><b>1.4.4</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>1.5</b> Packages</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="packages.html"><a href="packages.html#loading-r-packages"><i class="fa fa-check"></i><b>1.5.1</b> Loading R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html"><i class="fa fa-check"></i><b>1.6</b> Importing and exporting data</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#loading-data"><i class="fa fa-check"></i><b>1.6.1</b> Loading data</a></li>
+<li class="chapter" data-level="1.6.2" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exporting-data"><i class="fa fa-check"></i><b>1.6.2</b> Exporting data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>1.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>2</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html"><i class="fa fa-check"></i><b>2.1</b> Indexing and subsetting</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-columns-variables"><i class="fa fa-check"></i><b>2.1.1</b> Selecting columns (variables)</a></li>
+<li class="chapter" data-level="2.1.2" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-rows-observations"><i class="fa fa-check"></i><b>2.1.2</b> Selecting rows (observations)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="indexing-and-subsetting.html"><a href="indexing-and-subsetting.html#selecting-rows-and-columns-conditional-subsetting"><i class="fa fa-check"></i><b>2.1.3</b> Selecting rows and columns (conditional subsetting)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="adding-new-data-to-a-data-frame.html"><a href="adding-new-data-to-a-data-frame.html"><i class="fa fa-check"></i><b>2.2</b> Adding new data to a data frame</a></li>
+<li class="chapter" data-level="2.3" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html"><i class="fa fa-check"></i><b>2.3</b> Renaming, recoding, and sorting data</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#renaming"><i class="fa fa-check"></i><b>2.3.1</b> Renaming</a></li>
+<li class="chapter" data-level="2.3.2" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#recoding"><i class="fa fa-check"></i><b>2.3.2</b> Recoding</a></li>
+<li class="chapter" data-level="2.3.3" data-path="renaming-recoding-and-sorting-data.html"><a href="renaming-recoding-and-sorting-data.html#sorting"><i class="fa fa-check"></i><b>2.3.3</b> Sorting</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="the-tidyverse.html"><a href="the-tidyverse.html"><i class="fa fa-check"></i><b>2.4</b> The <strong>tidyverse</strong></a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-pipe"><i class="fa fa-check"></i><b>2.4.1</b> The pipe (%&gt;%)</a></li>
+<li class="chapter" data-level="2.4.2" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-dplyr"><i class="fa fa-check"></i><b>2.4.2</b> The package <strong>dplyr</strong></a></li>
+<li class="chapter" data-level="2.4.3" data-path="the-tidyverse.html"><a href="the-tidyverse.html#the-package-tidyr"><i class="fa fa-check"></i><b>2.4.3</b> The package <strong>tidyr</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-wrangling-with-the-tidyverse.html"><a href="data-wrangling-with-the-tidyverse.html"><i class="fa fa-check"></i><b>2.5</b> Data wrangling with the <strong>tidyverse</strong></a></li>
+<li class="chapter" data-level="2.6" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>2.6</b> References</a></li>
+<li class="chapter" data-level="2.7" data-path="quiz.html"><a href="quiz.html"><i class="fa fa-check"></i><b>2.7</b> Quiz</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="descriptive-statistics-and-data-visualization.html"><a href="descriptive-statistics-and-data-visualization.html"><i class="fa fa-check"></i><b>3</b> Descriptive Statistics and Data Visualization</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="footnotes.html"><a href="footnotes.html"><i class="fa fa-check"></i><b>3.1</b> Footnotes</a></li>
+<li class="chapter" data-level="3.2" data-path="citations.html"><a href="citations.html"><i class="fa fa-check"></i><b>3.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-modeling"><i class="fa fa-check"></i>(PART) Modeling</a>
+<ul>
+<li class="chapter" data-level="3.3" data-path="some-common-statistical-models.html"><a href="some-common-statistical-models.html"><i class="fa fa-check"></i><b>3.3</b> Some common statistical models</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="linear-models-i.html"><a href="linear-models-i.html"><i class="fa fa-check"></i><b>4</b> Linear Models I</a></li>
+<li class="chapter" data-level="5" data-path="linear-models-ii.html"><a href="linear-models-ii.html"><i class="fa fa-check"></i><b>5</b> Linear Models II</a></li>
+<li class="chapter" data-level="6" data-path="linear-models-iii.html"><a href="linear-models-iii.html"><i class="fa fa-check"></i><b>6</b> Linear Models III</a></li>
+<li class="chapter" data-level="7" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>7</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="8" data-path="categorical-data-analysis.html"><a href="categorical-data-analysis.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="categorical-data.html"><a href="categorical-data.html"><i class="fa fa-check"></i><b>8.1</b> Categorical data</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="categorical-data.html"><a href="categorical-data.html#binomial-and-multinomial-data"><i class="fa fa-check"></i><b>8.1.1</b> Binomial and multinomial data</a></li>
+<li class="chapter" data-level="8.1.2" data-path="categorical-data.html"><a href="categorical-data.html#ordinal-data"><i class="fa fa-check"></i><b>8.1.2</b> Ordinal data</a></li>
+<li class="chapter" data-level="8.1.3" data-path="categorical-data.html"><a href="categorical-data.html#counts"><i class="fa fa-check"></i><b>8.1.3</b> Counts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="dealing-with-categorical-variables-in-r.html"><a href="dealing-with-categorical-variables-in-r.html"><i class="fa fa-check"></i><b>8.2</b> Dealing with categorical variables in R</a></li>
+<li class="chapter" data-level="8.3" data-path="research-questions-with-categorical-data.html"><a href="research-questions-with-categorical-data.html"><i class="fa fa-check"></i><b>8.3</b> Research questions with categorical data</a></li>
+<li class="chapter" data-level="8.4" data-path="references-3.html"><a href="references-3.html"><i class="fa fa-check"></i><b>8.4</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>9</b> Linear Mixed Models</a></li>
+<li class="part"><span><b>I Psychometrics</b></span></li>
+<li class="chapter" data-level="10" data-path="scale-development.html"><a href="scale-development.html"><i class="fa fa-check"></i><b>10</b> Scale Development</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="reflective-and-formative-indicators.html"><a href="reflective-and-formative-indicators.html"><i class="fa fa-check"></i><b>10.1</b> Reflective and formative indicators</a></li>
+<li class="chapter" data-level="10.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html"><i class="fa fa-check"></i><b>10.2</b> Classification of scales of measurement</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#nominal-scale"><i class="fa fa-check"></i><b>10.2.1</b> Nominal scale</a></li>
+<li class="chapter" data-level="10.2.2" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ordinal-scale"><i class="fa fa-check"></i><b>10.2.2</b> Ordinal scale</a></li>
+<li class="chapter" data-level="10.2.3" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#interval-scale"><i class="fa fa-check"></i><b>10.2.3</b> Interval scale</a></li>
+<li class="chapter" data-level="10.2.4" data-path="classification-of-scales-of-measurement.html"><a href="classification-of-scales-of-measurement.html#ratio-scale"><i class="fa fa-check"></i><b>10.2.4</b> Ratio scale</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="test-theory.html"><a href="test-theory.html"><i class="fa fa-check"></i><b>10.3</b> Test theory</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="test-theory.html"><a href="test-theory.html#what-is-a-test"><i class="fa fa-check"></i><b>10.3.1</b> What is a test?</a></li>
+<li class="chapter" data-level="10.3.2" data-path="test-theory.html"><a href="test-theory.html#classification-of-psychological-tests"><i class="fa fa-check"></i><b>10.3.2</b> Classification of psychological tests</a></li>
+<li class="chapter" data-level="10.3.3" data-path="test-theory.html"><a href="test-theory.html#measurement-error"><i class="fa fa-check"></i><b>10.3.3</b> Measurement error</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="scale-development-1.html"><a href="scale-development-1.html"><i class="fa fa-check"></i><b>10.4</b> Scale development</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="scale-development-1.html"><a href="scale-development-1.html#purpose-of-the-test"><i class="fa fa-check"></i><b>10.4.1</b> Purpose of the test</a></li>
+<li class="chapter" data-level="10.4.2" data-path="scale-development-1.html"><a href="scale-development-1.html#administration-restrictions"><i class="fa fa-check"></i><b>10.4.2</b> Administration restrictions</a></li>
+<li class="chapter" data-level="10.4.3" data-path="scale-development-1.html"><a href="scale-development-1.html#defining-the-domain"><i class="fa fa-check"></i><b>10.4.3</b> Defining the domain</a></li>
+<li class="chapter" data-level="10.4.4" data-path="scale-development-1.html"><a href="scale-development-1.html#test-specification-blueprint"><i class="fa fa-check"></i><b>10.4.4</b> Test specification (blueprint)</a></li>
+<li class="chapter" data-level="10.4.5" data-path="scale-development-1.html"><a href="scale-development-1.html#draft-the-initial-pool-of-items-review-them-and-pilot-them"><i class="fa fa-check"></i><b>10.4.5</b> Draft the initial pool of items, review them, and pilot them</a></li>
+<li class="chapter" data-level="10.4.6" data-path="scale-development-1.html"><a href="scale-development-1.html#psychometric-principles-reliability-validity-comparability-and-fairness"><i class="fa fa-check"></i><b>10.4.6</b> Psychometric principles: Reliability, validity, comparability, and fairness</a></li>
+<li class="chapter" data-level="10.4.7" data-path="scale-development-1.html"><a href="scale-development-1.html#field-test-and-the-development-of-guidelines-for-administration-scoring-and-interpretation-of-test-scores"><i class="fa fa-check"></i><b>10.4.7</b> Field test and the development of guidelines for administration, scoring, and interpretation of test scores</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i><b>10.5</b> References</a></li>
+<li class="chapter" data-level="10.6" data-path="quiz-1.html"><a href="quiz-1.html"><i class="fa fa-check"></i><b>10.6</b> Quiz</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="appenA.html"><a href="appenA.html"><i class="fa fa-check"></i><b>A</b> Software</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="appenA1.html"><a href="appenA1.html"><i class="fa fa-check"></i><b>A.1</b> Installation of R and RStudio</a></li>
+<li class="chapter" data-level="A.2" data-path="appenA2.html"><a href="appenA2.html"><i class="fa fa-check"></i><b>A.2</b> Installation of R packages</a></li>
+<li class="chapter" data-level="A.3" data-path="appenA3.html"><a href="appenA3.html"><i class="fa fa-check"></i><b>A.3</b> Packages used in this book</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning Data Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="quiz-1" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Quiz<a href="quiz-1.html#quiz-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div style="margin-bottom:20px;">
+
+</div>
+<pre><code>## 
+## &lt;style&gt;
+## :root {
+##     --incorrect: #983E82;
+##     --incorrect_alpha: #983E82;
+##     --correct: rgb(0, 255, 0);
+##     --correct_alpha: rgba(0, 255, 0, 0.25);
+##     --highlight: #467AAC;
+## }
+##   .webex-incorrect, input.webex-solveme.webex-incorrect,
+##   .webex-radiogroup label.webex-incorrect {
+##     border: 2px dotted var(--incorrect);
+##     background-color: var(--incorrect_alpha);
+##   }
+##   .webex-correct, input.webex-solveme.webex-correct,
+##   .webex-radiogroup label.webex-correct {
+##     border: 2px dotted var(--correct);
+##     background-color: var(--correct_alpha);
+##   }
+##   .webex-box, .webex-solution.open {
+##     border: 2px solid var(--highlight);n  }
+##   .webex-solution button, .webex-check-button {
+##     background-color: var(--highlight);
+##   }
+## &lt;/style&gt;</code></pre>
+<p>XXXX</p>
+<p><strong>Q1.</strong> I am going to learn a lot: <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select></p>
+What function loads a package that is already on your computer? <select class='webex-select'><option value='blank'></option><option value=''>install.package</option><option value=''>install.packages</option><option value='answer'>library</option><option value=''>libraries</option></select>
+<style>
+:root {
+    --incorrect: #983E82;
+    --incorrect_alpha: #983E82;
+    --correct: rgb(0, 255, 0);
+    --correct_alpha: rgba(0, 255, 0, 0.25);
+    --highlight: #467AAC;
+}
+  .webex-incorrect, input.webex-solveme.webex-incorrect,
+  .webex-radiogroup label.webex-incorrect {
+    border: 2px dotted var(--incorrect);
+    background-color: var(--incorrect_alpha);
+  }
+  .webex-correct, input.webex-solveme.webex-correct,
+  .webex-radiogroup label.webex-correct {
+    border: 2px dotted var(--correct);
+    background-color: var(--correct_alpha);
+  }
+  .webex-box, .webex-solution.open {
+    border: 2px solid var(--highlight);n  }
+  .webex-solution button, .webex-check-button {
+    background-color: var(--highlight);
+  }
+</style>
+<div class="webex-check webex-box">
+<ol style="list-style-type: decimal">
+<li>What is <span class="math inline">\(1+1\)</span>?
+<select class='webex-select'><option value='blank'></option><option value=''>One</option><option value='answer'>Two</option><option value=''>Three</option></select></li>
+<li>What is <span class="math inline">\(1+2\)</span>?
+<input class='webex-solveme nospaces ignorecase' size='5' data-answer='["3","three"]'/></li>
+<li>Is <span class="math inline">\(2 + 2=4\)</span>?
+<select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select></li>
+<li>Which one of these is FALSE?
+<div id="radio_PZVELOIEFP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PZVELOIEFP" value=""></input> <span>The inventor of the fairy floss machine was a dentist</span></label><label><input type="radio" autocomplete="off" name="radio_PZVELOIEFP" value=""></input> <span>Barack Obama has won two Grammy awards</span></label><label><input type="radio" autocomplete="off" name="radio_PZVELOIEFP" value="answer"></input> <span>Once a year all of Wikipedia is printed, and placed in a vault in Norway.</span></label>
+</div></li>
+</ol>
+</div>
+
+</div>
+<!-- </div> -->
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="references-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appenA.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/12-ScaleDev.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["LDSwR.pdf", "LDSwR.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"toc": true,
+"toc_float": true,
+"toc_depth": 2
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

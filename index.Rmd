@@ -37,7 +37,7 @@ Upon successful completion of this book, students should be able to:
 
 This book is intended to be a handbook used in psychology undergraduate (e.g., in 3rd-year optional modules) and postgraduate (e.g., MRes, MSc Psychological Research Methods) provisions interested in teaching data science with R for psychologists. Each chapter could be delivered in 1-2 hour sessions, with most of the content of the book aligned with a 13-week term delivery.
 
-It is recommended to install **R**, **RStudio**, and the required R packages to work on the examples of this book. Please, read the software installation guidelines before reading the book (Appendix \@ref(appenA)).
+It is recommended to install **R**, **RStudio**, and the required R packages to work on the examples of this book. Please, read the software installation guidelines before reading the book (Appendix \@ref(appenA1)).
 
 
 ## About the Author {-}
